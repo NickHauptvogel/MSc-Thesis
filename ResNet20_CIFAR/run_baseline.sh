@@ -1,10 +1,11 @@
 #!/bin/bash
 
-# Use conda
-#conda activate TF_GPU_2_1
 #export NVIDIA_VISIBLE_DEVICES=all
 #export CUDA_VISIBLE_DEVICES=0
 #export NVIDIA_DRIVER_CAPABILITIES=compute,utility
+#SBATCH -o ~/MSc-Thesis/ResNet20_CIFAR/sbatch.out
+#SBATCH --time=1-00:00:00
+#SBATCH --exclude=hendrixgpu[07-13]fl
 
 nvidia-smi
 
