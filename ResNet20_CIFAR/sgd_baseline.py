@@ -103,8 +103,7 @@ print(configuration)
 # Save configuration to json
 fn = os.path.join(save_dir, model_name + '_config.json')
 with open(fn, 'w') as f:
-    json.dump(configuration, f)
-
+    json.dump(configuration, f, indent=4)
 # Load the CIFAR10 data.
 (x_train, y_train), (x_test, y_test) = cifar10.load_data()
 
@@ -472,4 +471,4 @@ print('Test accuracy:', scores[1])
 # Save as dictionary
 fn = os.path.join(save_dir, model_name + '_scores.json')
 with open(fn, 'w') as f:
-    json.dump({'test_loss': scores[0], 'test_accuracy': scores[1]}, f)
+    json.dump({'test_loss': scores[0], 'test_accuracy': scores[1]}, f, indent=4)
