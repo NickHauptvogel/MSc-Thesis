@@ -88,7 +88,7 @@ for ensemble_size in range(2, max_ensemble_size + 1):
     ensemble_better = np.mean(ensemble_acc > [accs[i] for i in indices])
     ensemble_fractions.append((ensemble_size, ensemble_better))
     # Fraction of members where the ensemble is better
-    print('Fraction of ensemble members where the ensemble is better:', )
+    print('Fraction of ensemble members where the ensemble is better:', ensemble_better)
 
 # Plot the results
 plt.figure()
