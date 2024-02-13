@@ -96,7 +96,7 @@ plt.plot(*zip(*ensemble_accs))
 plt.xlabel('Ensemble size')
 plt.ylabel('Accuracy')
 plt.title('Ensemble accuracy')
-plt.savefig('ensemble_accuracy.pdf')
+plt.savefig(os.path.join(folder, 'ensemble_accs.pdf'))
 plt.show()
 
 plt.figure()
@@ -104,7 +104,7 @@ plt.plot(*zip(*ensemble_fractions))
 plt.xlabel('Ensemble size')
 plt.ylabel('Fraction')
 plt.title('Fraction of ensemble members where the ensemble is better')
-plt.savefig('ensemble_fractions.pdf')
+plt.savefig(os.path.join(folder, 'ensemble_fractions.pdf'))
 plt.show()
 
 
