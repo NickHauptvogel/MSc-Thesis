@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 import pickle
 
 # Configuration
-max_ensemble_size = 11
-folder = 'results/11_independent/'
+max_ensemble_size = 30
+folder = 'results/30_independent/'
 
 num_classes = 10
 # Subtracting pixel mean improves accuracy
