@@ -472,5 +472,8 @@ print('Test accuracy:', scores[1])
 scores = {'test_loss': scores[0], 'test_accuracy': scores[1], 'history': history.history}
 # Save as dictionary
 fn = os.path.join(save_dir, model_name + '_scores.json')
+# Change all np.float32 to float
+for k, v in scores['history'].items():
+    scores['history'][k] = [float(x) for x in v]
 with open(fn, 'w') as f:
-    json.dump({'test_loss': scores[0], 'test_accuracy': scores[1]}, f, indent=4)
+    json.dump(scores, f, indent=4)
