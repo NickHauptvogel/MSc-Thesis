@@ -23,8 +23,8 @@ parser.add_argument('--id', type=int, default=1, help='ID of experiment')
 parser.add_argument('--batch_size', type=int, default=128, help='batch size')
 parser.add_argument('--epochs', type=int, default=200, help='number of epochs')
 parser.add_argument('--validation_split', type=float, default=0.1, help='validation split')
-parser.add_argument('--checkpointing', type=bool, default=True, help='save best model with validation accuracy')
-parser.add_argument('--data_augmentation', type=bool, default=True, help='perform data augmentation')
+parser.add_argument('--checkpointing', action='store_true', help='save the best model during training')
+parser.add_argument('--data_augmentation', action='store_true', help='use data augmentation')
 # 0.1 in other implementations
 parser.add_argument('--augm_shift', type=float, default=4, help='augmentation shift (px for >1 or fraction <1)')
 # 1e-3 in other implementations
@@ -34,7 +34,7 @@ parser.add_argument('--l2_reg', type=float, default=0.002, help='l2 regularizati
 # Adam in other implementations
 parser.add_argument('--optimizer', type=str, default='sgd', help='optimizer')
 parser.add_argument('--momentum', type=float, default=0.9, help='momentum for SGD')
-parser.add_argument('--nesterov', type=bool, default=True, help='use nesterov momentum')
+parser.add_argument('--nesterov', action='store_true', help='use Nesterov momentum')
 
 args = parser.parse_args()
 

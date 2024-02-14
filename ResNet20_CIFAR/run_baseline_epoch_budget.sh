@@ -25,7 +25,8 @@ do
         --id="${SLURM_ARRAY_TASK_ID}_$i" \
         --epochs=$budget \
         --validation_split=0 \
-        --checkpointing=False
+        --data_augmentation \
+        --nesterov
         #--augm_shift=0.1 \
         #--initial_lr=1e-3 \
         #--l2_reg=1e-4 \
