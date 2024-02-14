@@ -1,4 +1,5 @@
 import numpy as np
+import tensorflow as tf
 from keras.datasets import cifar10
 from keras.models import load_model
 import os
@@ -29,7 +30,7 @@ if subtract_pixel_mean:
 print(x_test.shape[0], 'test samples')
 
 # Check whether predictions are already saved
-if not os.path.exists(os.path.join(folder, 'all_predictions.npy')):
+if not os.path.exists(os.path.join(folder, 'all_predictions.pkl')):
     # Get all subdirectories
     subdirs = [f.path for f in os.scandir(folder) if f.is_dir()]
     # Shuffle the subdirectories
@@ -54,10 +55,10 @@ if not os.path.exists(os.path.join(folder, 'all_predictions.npy')):
             break
 
     # Predict
-    y_pred = np.zeros((x_test.shape[0], len(models)), dtype=int)
+    y_pred = np.zeros((x_test.shape[0], len(models), num_classes), dtype=np.float32)
     for i, model in enumerate(models):
         print('Predicting with model', i+1, 'of', len(models))
-        y_pred[:, i] = np.argmax(model.predict(x_test, verbose=1), axis=1)
+        y_pred[:, i, :] = model.predict(x_test)
 
     # Save the predictions of all models as well as models
     with open(os.path.join(folder, 'all_predictions.pkl'), 'wb') as f:
@@ -72,39 +73,65 @@ else:
     with open(os.path.join(folder, 'accs.pkl'), 'rb') as f:
         accs = pickle.load(f)
 
-ensemble_accs = []
-ensemble_fractions = []
+ensemble_accs_mean = []
+ensemble_accs_std = []
+ensemble_losses_mean = []
+ensemble_losses_std = []
 for ensemble_size in range(2, max_ensemble_size + 1):
-    # Choose randomly ensemble_size integers from 0 to len(models)
-    indices = np.random.choice(len(accs), ensemble_size, replace=False)
-    subset_y_pred = y_pred[:, indices]
-    # Majority voting (mode of the predictions)
-    subset_y_pred = np.array([np.argmax(np.bincount(subset_y_pred[i, :])) for i in range(subset_y_pred.shape[0])])
+    ensemble_accs = []
+    ensemble_losses = []
+    for i in range(20):
+        # Choose randomly ensemble_size integers from 0 to len(models)
+        indices = np.random.choice(len(accs), ensemble_size, replace=False)
+        subset_y_pred = y_pred[:, indices, :]
+        # Get majority vote
+        subset_y_pred_argmax = np.argmax(subset_y_pred, axis=2)
+        # Majority voting (mode of the predictions)
+        subset_y_pred_vote = np.array([np.argmax(np.bincount(subset_y_pred_argmax[i, :])) for i in range(subset_y_pred_argmax.shape[0])], dtype=int)
 
-    # Evaluate the predictions with accuracy
-    ensemble_acc = np.mean(subset_y_pred == y_test[:, 0])
-    ensemble_accs.append((ensemble_size, ensemble_acc))
-    print('Accuracy:', ensemble_acc, 'with', ensemble_size, 'models')
-    ensemble_better = np.mean(ensemble_acc > [accs[i] for i in indices])
-    ensemble_fractions.append((ensemble_size, ensemble_better))
-    # Fraction of members where the ensemble is better
-    print('Fraction of ensemble members where the ensemble is better:', ensemble_better)
+        # Evaluate the predictions with accuracy
+        ensemble_acc = np.mean(subset_y_pred_vote == y_test[:, 0])
+        ensemble_accs.append(ensemble_acc)
+        # Get categorical cross-entropy
+        ensemble_loss = tf.keras.losses.categorical_crossentropy(tf.one_hot(y_test[:, 0], num_classes), subset_y_pred).numpy()
+
+    ensemble_accs_mean.append((ensemble_size, np.mean(ensemble_accs)))
+    ensemble_accs_std.append((ensemble_size, np.std(ensemble_accs)))
+    print('Mean Accuracy:', np.round(np.mean(ensemble_accs), 3), 'with', ensemble_size, 'models')
+    ensemble_losses_mean.append((ensemble_size, np.mean(ensemble_losses)))
+    ensemble_losses_std.append((ensemble_size, np.std(ensemble_losses)))
+    print('Mean Loss:', np.round(np.mean(ensemble_losses), 3), 'with', ensemble_size, 'models')
 
 # Plot the results
-plt.figure()
-plt.plot(*zip(*ensemble_accs))
+plt.figure(figsize=(6, 4))
+plt.plot(*zip(*ensemble_accs_mean), label='Mean accuracy')
+# Std as area around the mean
+plt.fill_between(np.array(ensemble_accs_mean)[:, 0], np.array(ensemble_accs_mean)[:, 1] - np.array(ensemble_accs_std)[:, 1],
+                 np.array(ensemble_accs_mean)[:, 1] + np.array(ensemble_accs_std)[:, 1], alpha=0.3, label='±1σ')
 plt.xlabel('Ensemble size')
 plt.ylabel('Accuracy')
-plt.title('Ensemble accuracy')
+plt.ylim(0.9, 0.95)
+# Horizontal line for the accuracy of the best model
+plt.axhline(max(accs), color='orange', linestyle='--', label='Best individual model')
+# Horizontal line for accuracy of Wen et al. (2020), interpolated from the figure at 0.9363
+plt.axhline(0.9363, color='grey', linestyle='--', label='Wenzel et al. (2020)')
+plt.title('Ensemble accuracy (w. hyperparameters as in Wenzel et al. (2020))')
+plt.grid()
+# Legend lower right
+plt.legend(loc='lower right')
 plt.savefig(os.path.join(folder, 'ensemble_accs.pdf'))
 plt.show()
 
-plt.figure()
-plt.plot(*zip(*ensemble_fractions))
+plt.figure(figsize=(6, 4))
+plt.plot(*zip(*ensemble_losses_mean), label='Mean loss')
+# Std as area around the mean
+plt.fill_between(np.array(ensemble_losses_mean)[:, 0], np.array(ensemble_losses_mean)[:, 1] - np.array(ensemble_losses_std)[:, 1],
+                 np.array(ensemble_losses_mean)[:, 1] + np.array(ensemble_losses_std)[:, 1], alpha=0.3, label='±1σ')
 plt.xlabel('Ensemble size')
-plt.ylabel('Fraction')
-plt.title('Fraction of ensemble members where the ensemble is better')
-plt.savefig(os.path.join(folder, 'ensemble_fractions.pdf'))
+plt.ylabel('Categorical cross-entropy')
+plt.title('Ensemble loss (w. hyperparameters as in Wenzel et al. (2020))')
+plt.grid()
+# Legend lower right
+plt.legend(loc='lower right')
+plt.savefig(os.path.join(folder, 'ensemble_losses.pdf'))
 plt.show()
-
-
