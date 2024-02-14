@@ -30,6 +30,7 @@ parser.add_argument('--initial_lr', type=float, default=0.1, help='initial learn
 # 1e-4 in other implementations
 parser.add_argument('--l2_reg', type=float, default=0.002, help='l2 regularization')
 # Adam in other implementations
+parser.add_argument('--optimizer', type=str, default='sgd', help='optimizer')
 parser.add_argument('--momentum', type=float, default=0.9, help='momentum for SGD')
 parser.add_argument('--nesterov', type=bool, default=True, help='use nesterov momentum')
 
@@ -46,6 +47,7 @@ data_augmentation = args.data_augmentation
 augm_shift = args.augm_shift
 initial_lr = args.initial_lr
 l2_reg = args.l2_reg
+optimizer = args.optimizer
 momentum = args.momentum
 nesterov = args.nesterov
 num_classes = 10
@@ -374,9 +376,15 @@ if version == 2:
 else:
     model = resnet_v1(input_shape=input_shape, depth=depth)
 
+if optimizer == 'adam':
+    optimizer_ = Adam(learning_rate=lr_schedule(0))
+elif optimizer == 'sgd':
+    optimizer_ = SGD(learning_rate=lr_schedule(0), momentum=momentum, nesterov=nesterov)
+else:
+    raise ValueError('Unknown optimizer')
+
 model.compile(loss='categorical_crossentropy',
-              optimizer=SGD(learning_rate=lr_schedule(0), momentum=momentum, nesterov=nesterov),
-              #optimizer=Adam(learning_rate=lr_schedule(0)),
+              optimizer=optimizer_,
               metrics=['accuracy'])
 #model.summary()
 print(model_type)

@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt
 import pickle
 
 # Configuration
+folder = 'results/30_independent_wenzel_hyperparams/'
 max_ensemble_size = 30
-folder = 'results/30_independent/'
 
 num_classes = 10
 # Subtracting pixel mean improves accuracy
