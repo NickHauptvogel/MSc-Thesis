@@ -392,7 +392,7 @@ print(model_type)
 # Prepare callbacks for model saving and for learning rate adjustment.
 checkpoint = ModelCheckpoint(filepath=filepath,
                              monitor='val_accuracy',
-                             verbose=1,
+                             verbose=0,
                              save_best_only=True)
 
 lr_scheduler = LearningRateScheduler(lr_schedule)
@@ -402,7 +402,7 @@ lr_reducer = ReduceLROnPlateau(factor=np.sqrt(0.1),
                                patience=5,
                                min_lr=0.5e-6)
 
-tqdm_callback = TqdmCallback(verbose=1)
+tqdm_callback = TqdmCallback(verbose=0)
 
 callbacks = [checkpoint, lr_reducer, lr_scheduler, tqdm_callback]
 
@@ -474,7 +474,7 @@ else:
 
 
 # Score trained model.
-scores = model.evaluate(x_test, y_test, verbose=1)
+scores = model.evaluate(x_test, y_test, verbose=0)
 print('Test loss:', scores[0])
 print('Test accuracy:', scores[1])
 scores = {'test_loss': scores[0], 'test_accuracy': scores[1], 'history': history.history}
