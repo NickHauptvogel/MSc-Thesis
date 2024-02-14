@@ -38,6 +38,7 @@ if not os.path.exists(os.path.join(folder, 'all_predictions.pkl')):
     # Load the models
     models = []
     accs = []
+    losses = []
     for subdir in subdirs:
         # Find the model file
         model_file = [f.path for f in os.scandir(subdir) if f.name.endswith('.h5')][0]
@@ -49,8 +50,10 @@ if not os.path.exists(os.path.join(folder, 'all_predictions.pkl')):
         with open(score_file, 'r') as f:
             scores = json.load(f)
             test_acc = scores['test_accuracy']
+            test_loss = scores['test_loss']
         models.append(model)
         accs.append(test_acc)
+        losses.append(test_loss)
         if len(models) == max_ensemble_size:
             break
 
@@ -65,6 +68,8 @@ if not os.path.exists(os.path.join(folder, 'all_predictions.pkl')):
         pickle.dump(y_pred, f)
     with open(os.path.join(folder, 'accs.pkl'), 'wb') as f:
         pickle.dump(accs, f)
+    with open(os.path.join(folder, 'losses.pkl'), 'wb') as f:
+        pickle.dump(losses, f)
 
 else:
     # Load the predictions
@@ -72,6 +77,8 @@ else:
         y_pred = pickle.load(f)
     with open(os.path.join(folder, 'accs.pkl'), 'rb') as f:
         accs = pickle.load(f)
+    with open(os.path.join(folder, 'losses.pkl'), 'rb') as f:
+        losses = pickle.load(f)
 
 ensemble_accs_mean = []
 ensemble_accs_std = []
@@ -84,6 +91,8 @@ for ensemble_size in range(2, max_ensemble_size + 1):
         # Choose randomly ensemble_size integers from 0 to len(models)
         indices = np.random.choice(len(accs), ensemble_size, replace=False)
         subset_y_pred = y_pred[:, indices, :]
+        # Get mean prediction (TODO: Check if this is correct)
+        subset_y_pred_ensemble = np.mean(subset_y_pred, axis=1)
         # Get majority vote
         subset_y_pred_argmax = np.argmax(subset_y_pred, axis=2)
         # Majority voting (mode of the predictions)
@@ -92,8 +101,8 @@ for ensemble_size in range(2, max_ensemble_size + 1):
         # Evaluate the predictions with accuracy
         ensemble_acc = np.mean(subset_y_pred_vote == y_test[:, 0])
         ensemble_accs.append(ensemble_acc)
-        # Get categorical cross-entropy
-        ensemble_loss = tf.keras.losses.categorical_crossentropy(tf.one_hot(y_test[:, 0], num_classes), subset_y_pred).numpy()
+        ensemble_loss = tf.keras.losses.CategoricalCrossentropy()(tf.one_hot(y_test[:, 0], num_classes), subset_y_pred_ensemble).numpy()
+        ensemble_losses.append(ensemble_loss)
 
     ensemble_accs_mean.append((ensemble_size, np.mean(ensemble_accs)))
     ensemble_accs_std.append((ensemble_size, np.std(ensemble_accs)))
@@ -127,11 +136,15 @@ plt.plot(*zip(*ensemble_losses_mean), label='Mean loss')
 # Std as area around the mean
 plt.fill_between(np.array(ensemble_losses_mean)[:, 0], np.array(ensemble_losses_mean)[:, 1] - np.array(ensemble_losses_std)[:, 1],
                  np.array(ensemble_losses_mean)[:, 1] + np.array(ensemble_losses_std)[:, 1], alpha=0.3, label='±1σ')
+# Horizontal line for the loss of the best model
+plt.axhline(min(losses), color='orange', linestyle='--', label='Best individual model')
+# Horizontal line for loss of Wen et al. (2020), interpolated from the figure at 0.217
+plt.axhline(0.217, color='grey', linestyle='--', label='Wenzel et al. (2020)')
 plt.xlabel('Ensemble size')
 plt.ylabel('Categorical cross-entropy')
 plt.title('Ensemble loss (w. hyperparameters as in Wenzel et al. (2020))')
 plt.grid()
-# Legend lower right
-plt.legend(loc='lower right')
+# Legend upper right
+plt.legend(loc='upper right')
 plt.savefig(os.path.join(folder, 'ensemble_losses.pdf'))
 plt.show()
