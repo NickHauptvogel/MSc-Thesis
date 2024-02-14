@@ -11,10 +11,12 @@
 nvidia-smi
 
 # Run experiment
-printf "\n\n* * * Run SGD for seed = $SLURM_ARRAY_TASK_ID. * * *\n\n\n"
+printf "\n\n* * * Run SGD for ID = $SLURM_ARRAY_TASK_ID. * * *\n\n\n"
 python -m sgd_baseline \
-    --seed=${SLURM_ARRAY_TASK_ID} \
-    --augm_shift=0.1 \
-    --initial_lr=1e-3 \
-    --l2_reg=1e-4 \
-    --optimizer=adam
+    --id=${SLURM_ARRAY_TASK_ID} \
+    #--augm_shift=0.1 \
+    #--initial_lr=1e-3 \
+    #--l2_reg=1e-4 \
+    #--optimizer=adam \
+    --validation_split=0.1 \
+    --checkpointing=True

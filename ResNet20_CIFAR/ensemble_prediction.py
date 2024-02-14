@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import pickle
 
 # Configuration
-folder = 'results/30_independent_wenzel_hyperparams/'
+folder = 'results/30_independent_tutorial_hyperparameters/'
 max_ensemble_size = 30
 
 num_classes = 10
