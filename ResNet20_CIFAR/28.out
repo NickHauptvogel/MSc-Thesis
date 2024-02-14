@@ -1,0 +1,281 @@
+Wed Feb 14 16:22:54 2024       
++---------------------------------------------------------------------------------------+
+| NVIDIA-SMI 535.104.05             Driver Version: 535.104.05   CUDA Version: 12.2     |
+|-----------------------------------------+----------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
+|                                         |                      |               MIG M. |
+|=========================================+======================+======================|
+|   0  NVIDIA TITAN Xp                Off | 00000000:03:00.0 Off |                  N/A |
+| 50%   70C    P2              68W / 250W |      0MiB / 12288MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+                                                                                         
++---------------------------------------------------------------------------------------+
+| Processes:                                                                            |
+|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
+|        ID   ID                                                             Usage      |
+|=======================================================================================|
+|  No running processes found                                                           |
++---------------------------------------------------------------------------------------+
+
+
+* * * Run SGD for seed = 28. * * *
+
+
+2024-02-14 16:22:55.527100: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-02-14 16:23:02.253659: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-02-14 16:23:02.255100: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2024-02-14 16:23:02.297284: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:03:00.0 name: NVIDIA TITAN Xp computeCapability: 6.1
+coreClock: 1.582GHz coreCount: 30 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 510.07GiB/s
+2024-02-14 16:23:02.297320: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-02-14 16:23:02.315539: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-02-14 16:23:02.315594: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-02-14 16:23:02.336461: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-02-14 16:23:02.362041: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-02-14 16:23:02.382819: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-02-14 16:23:02.388297: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-02-14 16:23:02.401392: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-02-14 16:23:02.401997: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-02-14 16:23:02.402075: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-02-14 16:23:03.781822: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-02-14 16:23:03.782329: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-02-14 16:23:03.782772: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:03:00.0 name: NVIDIA TITAN Xp computeCapability: 6.1
+coreClock: 1.582GHz coreCount: 30 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 510.07GiB/s
+2024-02-14 16:23:03.782806: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-02-14 16:23:03.782840: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-02-14 16:23:03.782860: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-02-14 16:23:03.782878: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-02-14 16:23:03.782896: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-02-14 16:23:03.782915: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-02-14 16:23:03.782933: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-02-14 16:23:03.782952: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-02-14 16:23:03.783402: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-02-14 16:23:03.783438: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-02-14 16:23:04.618039: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
+2024-02-14 16:23:04.618113: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
+2024-02-14 16:23:04.618124: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
+2024-02-14 16:23:04.619396: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11217 MB memory) -> physical GPU (device: 0, name: NVIDIA TITAN Xp, pci bus id: 0000:03:00.0, compute capability: 6.1)
+{'seed': 28, 'batch_size': 128, 'epochs': 200, 'data_augmentation': True, 'augm_shift': 0.1, 'initial_lr': 0.001, 'l2_reg': 0.0001, 'optimizer': 'adam', 'momentum': 0.9, 'nesterov': True, 'model': 'ResNet20v1', 'tf_version': '2.4.1', 'keras_version': '2.4.3', 'GPU': 'NVIDIA TITAN Xp'}
+x_train shape: (50000, 32, 32, 3)
+50000 train samples
+10000 test samples
+y_train shape: (50000, 1)
+Learning rate:  0.001
+ResNet20v1
+0epoch [00:00, ?epoch/s]  0%|          | 0/200 [00:00<?, ?epoch/s]2024-02-14 16:23:05.449732: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2024-02-14 16:23:05.461722: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2200060000 Hz
+2024-02-14 16:23:07.863959: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-02-14 16:23:08.098286: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-02-14 16:23:08.988307: W tensorflow/stream_executor/gpu/asm_compiler.cc:63] Running ptxas --version returned 256
+2024-02-14 16:23:09.028809: W tensorflow/stream_executor/gpu/redzone_allocator.cc:314] Internal: ptxas exited with non-zero error code 256, output: 
+Relying on driver to perform ptx compilation. 
+Modify $PATH to customize ptxas location.
+This message will be only logged once.
+  0%|          | 1/200 [00:49<2:43:29, 49.30s/epoch, loss=1.78, accuracy=0.421, val_loss=2.05, val_accuracy=0.382, lr=0.001]  1%|          | 2/200 [01:09<1:45:46, 32.05s/epoch, loss=1.32, accuracy=0.579, val_loss=1.56, val_accuracy=0.538, lr=0.001]  2%|▏         | 3/200 [01:28<1:26:28, 26.34s/epoch, loss=1.13, accuracy=0.65, val_loss=1.83, val_accuracy=0.498, lr=0.001]   2%|▏         | 4/200 [01:48<1:17:28, 23.72s/epoch, loss=1.01, accuracy=0.694, val_loss=1.17, val_accuracy=0.659, lr=0.001]  2%|▎         | 5/200 [02:07<1:12:05, 22.18s/epoch, loss=0.916, accuracy=0.729, val_loss=1.5, val_accuracy=0.572, lr=0.001]  3%|▎         | 6/200 [02:28<1:09:52, 21.61s/epoch, loss=0.846, accuracy=0.754, val_loss=0.985, val_accuracy=0.71, lr=0.001]  4%|▎         | 7/200 [02:48<1:07:50, 21.09s/epoch, loss=0.798, accuracy=0.771, val_loss=0.901, val_accuracy=0.745, lr=0.001]  4%|▍         | 8/200 [03:07<1:05:45, 20.55s/epoch, loss=0.754, accuracy=0.788, val_loss=0.909, val_accuracy=0.742, lr=0.001]  4%|▍         | 9/200 [03:28<1:05:02, 20.43s/epoch, loss=0.719, accuracy=0.801, val_loss=0.907, val_accuracy=0.754, lr=0.001]  5%|▌         | 10/200 [03:47<1:04:05, 20.24s/epoch, loss=0.696, accuracy=0.807, val_loss=0.824, val_accuracy=0.769, lr=0.001]  6%|▌         | 11/200 [04:07<1:03:08, 20.04s/epoch, loss=0.672, accuracy=0.816, val_loss=0.782, val_accuracy=0.785, lr=0.001]  6%|▌         | 12/200 [04:26<1:02:08, 19.83s/epoch, loss=0.647, accuracy=0.824, val_loss=1.06, val_accuracy=0.712, lr=0.001]   6%|▋         | 13/200 [04:46<1:01:26, 19.71s/epoch, loss=0.627, accuracy=0.833, val_loss=0.778, val_accuracy=0.788, lr=0.001]  7%|▋         | 14/200 [05:05<1:01:06, 19.71s/epoch, loss=0.609, accuracy=0.84, val_loss=0.762, val_accuracy=0.794, lr=0.001]   8%|▊         | 15/200 [05:25<1:00:37, 19.66s/epoch, loss=0.59, accuracy=0.844, val_loss=0.744, val_accuracy=0.799, lr=0.001]  8%|▊         | 16/200 [05:45<1:00:13, 19.64s/epoch, loss=0.577, accuracy=0.85, val_loss=0.746, val_accuracy=0.803, lr=0.001]  8%|▊         | 17/200 [06:04<1:00:07, 19.71s/epoch, loss=0.566, accuracy=0.853, val_loss=0.73, val_accuracy=0.81, lr=0.001]   9%|▉         | 18/200 [06:24<59:22, 19.58s/epoch, loss=0.552, accuracy=0.86, val_loss=0.756, val_accuracy=0.794, lr=0.001]  10%|▉         | 19/200 [06:43<58:49, 19.50s/epoch, loss=0.548, accuracy=0.859, val_loss=0.805, val_accuracy=0.783, lr=0.001] 10%|█         | 20/200 [07:02<58:23, 19.47s/epoch, loss=0.536, accuracy=0.864, val_loss=0.954, val_accuracy=0.758, lr=0.001] 10%|█         | 21/200 [07:22<57:51, 19.40s/epoch, loss=0.525, accuracy=0.87, val_loss=0.754, val_accuracy=0.803, lr=0.001]  11%|█         | 22/200 [07:41<57:25, 19.36s/epoch, loss=0.513, accuracy=0.872, val_loss=0.828, val_accuracy=0.787, lr=0.000316] 12%|█▏        | 23/200 [08:00<57:00, 19.32s/epoch, loss=0.506, accuracy=0.875, val_loss=0.824, val_accuracy=0.783, lr=0.001]    12%|█▏        | 24/200 [08:20<56:39, 19.32s/epoch, loss=0.497, accuracy=0.879, val_loss=0.802, val_accuracy=0.794, lr=0.001] 12%|█▎        | 25/200 [08:39<56:28, 19.36s/epoch, loss=0.487, accuracy=0.88, val_loss=0.674, val_accuracy=0.823, lr=0.001]  13%|█▎        | 26/200 [08:58<56:04, 19.34s/epoch, loss=0.49, accuracy=0.88, val_loss=0.82, val_accuracy=0.791, lr=0.001]   14%|█▎        | 27/200 [09:17<55:35, 19.28s/epoch, loss=0.477, accuracy=0.885, val_loss=0.769, val_accuracy=0.806, lr=0.001] 14%|█▍        | 28/200 [09:37<55:14, 19.27s/epoch, loss=0.481, accuracy=0.885, val_loss=0.771, val_accuracy=0.796, lr=0.001] 14%|█▍        | 29/200 [09:56<54:54, 19.26s/epoch, loss=0.466, accuracy=0.889, val_loss=0.819, val_accuracy=0.795, lr=0.001] 15%|█▌        | 30/200 [10:15<54:47, 19.34s/epoch, loss=0.46, accuracy=0.892, val_loss=0.654, val_accuracy=0.833, lr=0.001]  16%|█▌        | 31/200 [10:35<54:21, 19.30s/epoch, loss=0.453, accuracy=0.894, val_loss=0.751, val_accuracy=0.808, lr=0.001] 16%|█▌        | 32/200 [10:54<53:57, 19.27s/epoch, loss=0.45, accuracy=0.895, val_loss=0.74, val_accuracy=0.82, lr=0.001]    16%|█▋        | 33/200 [11:13<53:36, 19.26s/epoch, loss=0.449, accuracy=0.896, val_loss=0.797, val_accuracy=0.801, lr=0.001] 17%|█▋        | 34/200 [11:32<53:15, 19.25s/epoch, loss=0.45, accuracy=0.895, val_loss=0.728, val_accuracy=0.826, lr=0.001]  18%|█▊        | 35/200 [11:51<52:52, 19.23s/epoch, loss=0.44, accuracy=0.9, val_loss=0.718, val_accuracy=0.821, lr=0.000316] 18%|█▊        | 36/200 [12:11<52:30, 19.21s/epoch, loss=0.435, accuracy=0.9, val_loss=0.74, val_accuracy=0.812, lr=0.001]    18%|█▊        | 37/200 [12:30<52:21, 19.27s/epoch, loss=0.432, accuracy=0.902, val_loss=0.666, val_accuracy=0.839, lr=0.001] 19%|█▉        | 38/200 [12:49<51:55, 19.23s/epoch, loss=0.428, accuracy=0.903, val_loss=0.785, val_accuracy=0.802, lr=0.001] 20%|█▉        | 39/200 [13:08<51:35, 19.23s/epoch, loss=0.426, accuracy=0.906, val_loss=0.754, val_accuracy=0.819, lr=0.001] 20%|██        | 40/200 [13:28<51:17, 19.23s/epoch, loss=0.417, accuracy=0.908, val_loss=0.684, val_accuracy=0.831, lr=0.000316] 20%|██        | 41/200 [13:47<51:15, 19.34s/epoch, loss=0.423, accuracy=0.906, val_loss=0.574, val_accuracy=0.863, lr=0.001]    21%|██        | 42/200 [14:06<50:50, 19.31s/epoch, loss=0.416, accuracy=0.907, val_loss=0.765, val_accuracy=0.812, lr=0.001] 22%|██▏       | 43/200 [14:26<50:27, 19.28s/epoch, loss=0.409, accuracy=0.91, val_loss=0.656, val_accuracy=0.839, lr=0.001]  22%|██▏       | 44/200 [14:45<50:02, 19.25s/epoch, loss=0.408, accuracy=0.911, val_loss=1.06, val_accuracy=0.755, lr=0.001] 22%|██▎       | 45/200 [15:04<49:38, 19.22s/epoch, loss=0.408, accuracy=0.91, val_loss=1.03, val_accuracy=0.763, lr=0.001]  23%|██▎       | 46/200 [15:23<49:16, 19.20s/epoch, loss=0.407, accuracy=0.912, val_loss=0.833, val_accuracy=0.802, lr=0.000316] 24%|██▎       | 47/200 [15:42<48:55, 19.19s/epoch, loss=0.405, accuracy=0.913, val_loss=0.971, val_accuracy=0.767, lr=0.001]    24%|██▍       | 48/200 [16:02<48:36, 19.19s/epoch, loss=0.393, accuracy=0.917, val_loss=0.655, val_accuracy=0.845, lr=0.001] 24%|██▍       | 49/200 [16:21<48:11, 19.15s/epoch, loss=0.402, accuracy=0.914, val_loss=0.745, val_accuracy=0.826, lr=0.001] 25%|██▌       | 50/200 [16:40<47:53, 19.16s/epoch, loss=0.395, accuracy=0.916, val_loss=0.664, val_accuracy=0.841, lr=0.001] 26%|██▌       | 51/200 [16:59<47:30, 19.13s/epoch, loss=0.39, accuracy=0.918, val_loss=0.678, val_accuracy=0.833, lr=0.000316] 26%|██▌       | 52/200 [17:18<47:13, 19.15s/epoch, loss=0.395, accuracy=0.916, val_loss=0.641, val_accuracy=0.853, lr=0.001]   26%|██▋       | 53/200 [17:37<46:54, 19.14s/epoch, loss=0.393, accuracy=0.917, val_loss=0.654, val_accuracy=0.851, lr=0.001] 27%|██▋       | 54/200 [17:56<46:33, 19.14s/epoch, loss=0.393, accuracy=0.918, val_loss=0.851, val_accuracy=0.8, lr=0.001]   28%|██▊       | 55/200 [18:15<46:10, 19.11s/epoch, loss=0.387, accuracy=0.918, val_loss=0.775, val_accuracy=0.814, lr=0.001] 28%|██▊       | 56/200 [18:34<45:52, 19.11s/epoch, loss=0.382, accuracy=0.921, val_loss=0.671, val_accuracy=0.846, lr=0.000316] 28%|██▊       | 57/200 [18:54<45:36, 19.14s/epoch, loss=0.381, accuracy=0.921, val_loss=0.664, val_accuracy=0.848, lr=0.001]    29%|██▉       | 58/200 [19:13<45:30, 19.23s/epoch, loss=0.383, accuracy=0.922, val_loss=0.59, val_accuracy=0.868, lr=0.001]  30%|██▉       | 59/200 [19:32<45:06, 19.20s/epoch, loss=0.376, accuracy=0.923, val_loss=0.701, val_accuracy=0.842, lr=0.001] 30%|███       | 60/200 [19:51<44:46, 19.19s/epoch, loss=0.379, accuracy=0.923, val_loss=0.98, val_accuracy=0.779, lr=0.001]  30%|███       | 61/200 [20:10<44:23, 19.17s/epoch, loss=0.377, accuracy=0.923, val_loss=0.776, val_accuracy=0.825, lr=0.000316] 31%|███       | 62/200 [20:30<44:04, 19.17s/epoch, loss=0.374, accuracy=0.925, val_loss=0.639, val_accuracy=0.852, lr=0.001]    32%|███▏      | 63/200 [20:49<43:42, 19.15s/epoch, loss=0.372, accuracy=0.924, val_loss=0.677, val_accuracy=0.851, lr=0.001] 32%|███▏      | 64/200 [21:08<43:30, 19.20s/epoch, loss=0.377, accuracy=0.924, val_loss=0.601, val_accuracy=0.868, lr=0.001] 32%|███▎      | 65/200 [21:27<43:12, 19.20s/epoch, loss=0.374, accuracy=0.925, val_loss=0.623, val_accuracy=0.857, lr=0.001] 33%|███▎      | 66/200 [21:46<42:48, 19.16s/epoch, loss=0.377, accuracy=0.924, val_loss=0.62, val_accuracy=0.851, lr=0.000316] 34%|███▎      | 67/200 [22:05<42:26, 19.14s/epoch, loss=0.368, accuracy=0.926, val_loss=0.792, val_accuracy=0.82, lr=0.001]    34%|███▍      | 68/200 [22:25<42:05, 19.13s/epoch, loss=0.363, accuracy=0.929, val_loss=0.803, val_accuracy=0.829, lr=0.001] 34%|███▍      | 69/200 [22:44<41:45, 19.13s/epoch, loss=0.365, accuracy=0.927, val_loss=0.663, val_accuracy=0.851, lr=0.001] 35%|███▌      | 70/200 [23:03<41:24, 19.11s/epoch, loss=0.367, accuracy=0.927, val_loss=0.636, val_accuracy=0.856, lr=0.001] 36%|███▌      | 71/200 [23:22<41:04, 19.10s/epoch, loss=0.363, accuracy=0.929, val_loss=0.656, val_accuracy=0.858, lr=0.000316] 36%|███▌      | 72/200 [23:41<40:45, 19.11s/epoch, loss=0.363, accuracy=0.928, val_loss=0.597, val_accuracy=0.864, lr=0.001]    36%|███▋      | 73/200 [24:00<40:26, 19.10s/epoch, loss=0.363, accuracy=0.929, val_loss=0.765, val_accuracy=0.825, lr=0.001] 37%|███▋      | 74/200 [24:19<40:08, 19.11s/epoch, loss=0.362, accuracy=0.928, val_loss=0.963, val_accuracy=0.807, lr=0.001] 38%|███▊      | 75/200 [24:38<39:48, 19.10s/epoch, loss=0.363, accuracy=0.928, val_loss=0.729, val_accuracy=0.84, lr=0.001]  38%|███▊      | 76/200 [24:57<39:30, 19.12s/epoch, loss=0.365, accuracy=0.928, val_loss=0.677, val_accuracy=0.853, lr=0.000316] 38%|███▊      | 77/200 [25:16<39:10, 19.11s/epoch, loss=0.359, accuracy=0.931, val_loss=0.603, val_accuracy=0.868, lr=0.001]    39%|███▉      | 78/200 [25:36<38:49, 19.10s/epoch, loss=0.355, accuracy=0.932, val_loss=0.666, val_accuracy=0.851, lr=0.001] 40%|███▉      | 79/200 [25:55<38:29, 19.09s/epoch, loss=0.361, accuracy=0.93, val_loss=0.741, val_accuracy=0.834, lr=0.001]  40%|████      | 80/200 [26:14<38:11, 19.10s/epoch, loss=0.353, accuracy=0.931, val_loss=0.675, val_accuracy=0.851, lr=0.001] 40%|████      | 81/200 [26:33<37:54, 19.12s/epoch, loss=0.351, accuracy=0.933, val_loss=0.724, val_accuracy=0.845, lr=0.000316] 41%|████      | 82/200 [26:52<37:45, 19.20s/epoch, loss=0.293, accuracy=0.955, val_loss=0.483, val_accuracy=0.897, lr=1e-04]    42%|████▏     | 83/200 [27:12<37:32, 19.26s/epoch, loss=0.269, accuracy=0.963, val_loss=0.477, val_accuracy=0.899, lr=1e-04] 42%|████▏     | 84/200 [27:31<37:12, 19.24s/epoch, loss=0.259, accuracy=0.966, val_loss=0.478, val_accuracy=0.899, lr=1e-04] 42%|████▎     | 85/200 [27:50<36:45, 19.18s/epoch, loss=0.254, accuracy=0.968, val_loss=0.482, val_accuracy=0.898, lr=1e-04] 43%|████▎     | 86/200 [28:09<36:34, 19.25s/epoch, loss=0.249, accuracy=0.969, val_loss=0.475, val_accuracy=0.901, lr=1e-04] 44%|████▎     | 87/200 [28:28<36:10, 19.21s/epoch, loss=0.242, accuracy=0.971, val_loss=0.479, val_accuracy=0.9, lr=1e-04]   44%|████▍     | 88/200 [28:48<35:49, 19.19s/epoch, loss=0.238, accuracy=0.972, val_loss=0.476, val_accuracy=0.901, lr=1e-04] 44%|████▍     | 89/200 [29:07<35:36, 19.25s/epoch, loss=0.234, accuracy=0.973, val_loss=0.484, val_accuracy=0.902, lr=1e-04] 45%|████▌     | 90/200 [29:26<35:21, 19.28s/epoch, loss=0.231, accuracy=0.973, val_loss=0.475, val_accuracy=0.903, lr=1e-04] 46%|████▌     | 91/200 [29:46<35:02, 19.29s/epoch, loss=0.226, accuracy=0.975, val_loss=0.476, val_accuracy=0.906, lr=3.16e-5] 46%|████▌     | 92/200 [30:05<34:37, 19.24s/epoch, loss=0.222, accuracy=0.976, val_loss=0.484, val_accuracy=0.903, lr=1e-04]   46%|████▋     | 93/200 [30:24<34:10, 19.17s/epoch, loss=0.219, accuracy=0.977, val_loss=0.477, val_accuracy=0.903, lr=1e-04] 47%|████▋     | 94/200 [30:43<33:46, 19.12s/epoch, loss=0.218, accuracy=0.977, val_loss=0.48, val_accuracy=0.905, lr=1e-04]  48%|████▊     | 95/200 [31:02<33:23, 19.08s/epoch, loss=0.216, accuracy=0.977, val_loss=0.478, val_accuracy=0.904, lr=1e-04] 48%|████▊     | 96/200 [31:21<33:04, 19.08s/epoch, loss=0.212, accuracy=0.979, val_loss=0.482, val_accuracy=0.903, lr=3.16e-5] 48%|████▊     | 97/200 [31:40<32:49, 19.12s/epoch, loss=0.21, accuracy=0.978, val_loss=0.474, val_accuracy=0.906, lr=1e-04]    49%|████▉     | 98/200 [31:59<32:30, 19.12s/epoch, loss=0.207, accuracy=0.979, val_loss=0.488, val_accuracy=0.902, lr=1e-04] 50%|████▉     | 99/200 [32:18<32:08, 19.10s/epoch, loss=0.206, accuracy=0.979, val_loss=0.484, val_accuracy=0.905, lr=1e-04] 50%|█████     | 100/200 [32:37<31:49, 19.09s/epoch, loss=0.204, accuracy=0.979, val_loss=0.499, val_accuracy=0.899, lr=1e-04] 50%|█████     | 101/200 [32:56<31:25, 19.04s/epoch, loss=0.203, accuracy=0.979, val_loss=0.488, val_accuracy=0.902, lr=1e-04] 51%|█████     | 102/200 [33:15<31:07, 19.06s/epoch, loss=0.197, accuracy=0.982, val_loss=0.479, val_accuracy=0.906, lr=3.16e-5] 52%|█████▏    | 103/200 [33:34<30:49, 19.07s/epoch, loss=0.196, accuracy=0.981, val_loss=0.486, val_accuracy=0.903, lr=1e-04]   52%|█████▏    | 104/200 [33:53<30:30, 19.07s/epoch, loss=0.193, accuracy=0.982, val_loss=0.495, val_accuracy=0.903, lr=1e-04] 52%|█████▎    | 105/200 [34:13<30:12, 19.08s/epoch, loss=0.196, accuracy=0.98, val_loss=0.492, val_accuracy=0.904, lr=1e-04]  53%|█████▎    | 106/200 [34:32<29:54, 19.09s/epoch, loss=0.191, accuracy=0.982, val_loss=0.509, val_accuracy=0.901, lr=1e-04] 54%|█████▎    | 107/200 [34:51<29:35, 19.09s/epoch, loss=0.188, accuracy=0.983, val_loss=0.505, val_accuracy=0.903, lr=3.16e-5] 54%|█████▍    | 108/200 [35:10<29:22, 19.16s/epoch, loss=0.187, accuracy=0.983, val_loss=0.49, val_accuracy=0.907, lr=1e-04]    55%|█████▍    | 109/200 [35:29<29:01, 19.14s/epoch, loss=0.185, accuracy=0.983, val_loss=0.495, val_accuracy=0.905, lr=1e-04] 55%|█████▌    | 110/200 [35:48<28:46, 19.18s/epoch, loss=0.184, accuracy=0.983, val_loss=0.491, val_accuracy=0.907, lr=1e-04] 56%|█████▌    | 111/200 [36:08<28:33, 19.25s/epoch, loss=0.185, accuracy=0.983, val_loss=0.485, val_accuracy=0.908, lr=1e-04] 56%|█████▌    | 112/200 [36:27<28:11, 19.22s/epoch, loss=0.182, accuracy=0.983, val_loss=0.5, val_accuracy=0.904, lr=3.16e-5] 56%|█████▋    | 113/200 [36:46<27:47, 19.17s/epoch, loss=0.179, accuracy=0.984, val_loss=0.5, val_accuracy=0.905, lr=1e-04]   57%|█████▋    | 114/200 [37:05<27:26, 19.15s/epoch, loss=0.177, accuracy=0.984, val_loss=0.498, val_accuracy=0.905, lr=1e-04] 57%|█████▊    | 115/200 [37:24<27:06, 19.13s/epoch, loss=0.175, accuracy=0.986, val_loss=0.508, val_accuracy=0.904, lr=1e-04] 58%|█████▊    | 116/200 [37:43<26:46, 19.12s/epoch, loss=0.174, accuracy=0.985, val_loss=0.507, val_accuracy=0.904, lr=1e-04] 58%|█████▊    | 117/200 [38:02<26:27, 19.12s/epoch, loss=0.175, accuracy=0.985, val_loss=0.488, val_accuracy=0.907, lr=3.16e-5] 59%|█████▉    | 118/200 [38:22<26:10, 19.15s/epoch, loss=0.173, accuracy=0.985, val_loss=0.51, val_accuracy=0.901, lr=1e-04]    60%|█████▉    | 119/200 [38:41<25:50, 19.14s/epoch, loss=0.171, accuracy=0.985, val_loss=0.503, val_accuracy=0.904, lr=1e-04] 60%|██████    | 120/200 [39:00<25:30, 19.13s/epoch, loss=0.17, accuracy=0.986, val_loss=0.501, val_accuracy=0.903, lr=1e-04]  60%|██████    | 121/200 [39:19<25:09, 19.11s/epoch, loss=0.168, accuracy=0.986, val_loss=0.507, val_accuracy=0.902, lr=1e-04] 61%|██████    | 122/200 [39:38<24:49, 19.10s/epoch, loss=0.164, accuracy=0.988, val_loss=0.489, val_accuracy=0.907, lr=3.16e-6] 62%|██████▏   | 123/200 [39:57<24:34, 19.15s/epoch, loss=0.163, accuracy=0.988, val_loss=0.486, val_accuracy=0.908, lr=1e-5]    62%|██████▏   | 124/200 [40:16<24:13, 19.13s/epoch, loss=0.163, accuracy=0.988, val_loss=0.487, val_accuracy=0.907, lr=1e-5] 62%|██████▎   | 125/200 [40:36<23:53, 19.11s/epoch, loss=0.159, accuracy=0.99, val_loss=0.486, val_accuracy=0.908, lr=1e-5]  63%|██████▎   | 126/200 [40:55<23:37, 19.16s/epoch, loss=0.16, accuracy=0.989, val_loss=0.485, val_accuracy=0.909, lr=1e-5] 64%|██████▎   | 127/200 [41:14<23:17, 19.14s/epoch, loss=0.16, accuracy=0.989, val_loss=0.486, val_accuracy=0.907, lr=3.16e-6] 64%|██████▍   | 128/200 [41:33<22:57, 19.14s/epoch, loss=0.16, accuracy=0.989, val_loss=0.485, val_accuracy=0.907, lr=1e-5]    64%|██████▍   | 129/200 [41:52<22:45, 19.23s/epoch, loss=0.158, accuracy=0.99, val_loss=0.485, val_accuracy=0.909, lr=1e-5] 65%|██████▌   | 130/200 [42:12<22:25, 19.22s/epoch, loss=0.158, accuracy=0.99, val_loss=0.485, val_accuracy=0.909, lr=1e-5] 66%|██████▌   | 131/200 [42:31<22:03, 19.19s/epoch, loss=0.159, accuracy=0.989, val_loss=0.485, val_accuracy=0.908, lr=1e-5] 66%|██████▌   | 132/200 [42:50<21:42, 19.15s/epoch, loss=0.158, accuracy=0.99, val_loss=0.486, val_accuracy=0.908, lr=3.16e-6] 66%|██████▋   | 133/200 [43:09<21:21, 19.13s/epoch, loss=0.156, accuracy=0.99, val_loss=0.486, val_accuracy=0.908, lr=1e-5]    67%|██████▋   | 134/200 [43:28<21:02, 19.13s/epoch, loss=0.158, accuracy=0.99, val_loss=0.485, val_accuracy=0.909, lr=1e-5] 68%|██████▊   | 135/200 [43:47<20:43, 19.13s/epoch, loss=0.158, accuracy=0.989, val_loss=0.485, val_accuracy=0.908, lr=1e-5] 68%|██████▊   | 136/200 [44:06<20:25, 19.14s/epoch, loss=0.159, accuracy=0.989, val_loss=0.487, val_accuracy=0.907, lr=1e-5] 68%|██████▊   | 137/200 [44:25<20:02, 19.09s/epoch, loss=0.156, accuracy=0.991, val_loss=0.485, val_accuracy=0.909, lr=3.16e-6] 69%|██████▉   | 138/200 [44:44<19:44, 19.11s/epoch, loss=0.158, accuracy=0.99, val_loss=0.486, val_accuracy=0.908, lr=1e-5]     70%|██████▉   | 139/200 [45:04<19:27, 19.15s/epoch, loss=0.157, accuracy=0.99, val_loss=0.484, val_accuracy=0.91, lr=1e-5]  70%|███████   | 140/200 [45:23<19:08, 19.14s/epoch, loss=0.157, accuracy=0.99, val_loss=0.484, val_accuracy=0.908, lr=1e-5] 70%|███████   | 141/200 [45:42<18:47, 19.10s/epoch, loss=0.157, accuracy=0.99, val_loss=0.485, val_accuracy=0.909, lr=1e-5] 71%|███████   | 142/200 [46:01<18:27, 19.10s/epoch, loss=0.157, accuracy=0.99, val_loss=0.483, val_accuracy=0.908, lr=3.16e-6] 72%|███████▏  | 143/200 [46:20<18:07, 19.08s/epoch, loss=0.155, accuracy=0.991, val_loss=0.485, val_accuracy=0.909, lr=1e-5]   72%|███████▏  | 144/200 [46:39<17:48, 19.08s/epoch, loss=0.156, accuracy=0.99, val_loss=0.486, val_accuracy=0.908, lr=1e-5]  72%|███████▎  | 145/200 [46:58<17:28, 19.07s/epoch, loss=0.155, accuracy=0.99, val_loss=0.486, val_accuracy=0.908, lr=1e-5] 73%|███████▎  | 146/200 [47:17<17:09, 19.07s/epoch, loss=0.156, accuracy=0.99, val_loss=0.488, val_accuracy=0.907, lr=1e-5] 74%|███████▎  | 147/200 [47:36<16:49, 19.06s/epoch, loss=0.155, accuracy=0.991, val_loss=0.488, val_accuracy=0.907, lr=3.16e-6] 74%|███████▍  | 148/200 [47:55<16:31, 19.07s/epoch, loss=0.155, accuracy=0.99, val_loss=0.487, val_accuracy=0.909, lr=1e-5]     74%|███████▍  | 149/200 [48:14<16:12, 19.06s/epoch, loss=0.156, accuracy=0.99, val_loss=0.485, val_accuracy=0.909, lr=1e-5] 75%|███████▌  | 150/200 [48:33<15:52, 19.06s/epoch, loss=0.154, accuracy=0.991, val_loss=0.487, val_accuracy=0.909, lr=1e-5] 76%|███████▌  | 151/200 [48:52<15:34, 19.07s/epoch, loss=0.153, accuracy=0.991, val_loss=0.488, val_accuracy=0.908, lr=1e-5] 76%|███████▌  | 152/200 [49:12<15:16, 19.09s/epoch, loss=0.155, accuracy=0.99, val_loss=0.486, val_accuracy=0.908, lr=3.16e-6] 76%|███████▋  | 153/200 [49:31<14:57, 19.09s/epoch, loss=0.154, accuracy=0.99, val_loss=0.486, val_accuracy=0.908, lr=1e-5]    77%|███████▋  | 154/200 [49:50<14:37, 19.07s/epoch, loss=0.153, accuracy=0.99, val_loss=0.487, val_accuracy=0.908, lr=1e-5] 78%|███████▊  | 155/200 [50:09<14:16, 19.04s/epoch, loss=0.153, accuracy=0.991, val_loss=0.487, val_accuracy=0.907, lr=1e-5] 78%|███████▊  | 156/200 [50:28<13:58, 19.06s/epoch, loss=0.153, accuracy=0.991, val_loss=0.487, val_accuracy=0.908, lr=1e-5] 78%|███████▊  | 157/200 [50:47<13:38, 19.03s/epoch, loss=0.153, accuracy=0.991, val_loss=0.486, val_accuracy=0.908, lr=3.16e-6] 79%|███████▉  | 158/200 [51:06<13:20, 19.06s/epoch, loss=0.152, accuracy=0.991, val_loss=0.487, val_accuracy=0.908, lr=1e-5]    80%|███████▉  | 159/200 [51:25<13:02, 19.08s/epoch, loss=0.153, accuracy=0.99, val_loss=0.488, val_accuracy=0.908, lr=1e-5]  80%|████████  | 160/200 [51:44<12:43, 19.09s/epoch, loss=0.152, accuracy=0.991, val_loss=0.489, val_accuracy=0.908, lr=1e-5] 80%|████████  | 161/200 [52:03<12:23, 19.06s/epoch, loss=0.152, accuracy=0.991, val_loss=0.488, val_accuracy=0.909, lr=1e-5] 81%|████████  | 162/200 [52:22<12:04, 19.07s/epoch, loss=0.152, accuracy=0.991, val_loss=0.488, val_accuracy=0.909, lr=5e-7] 82%|████████▏ | 163/200 [52:41<11:45, 19.06s/epoch, loss=0.151, accuracy=0.992, val_loss=0.488, val_accuracy=0.909, lr=1e-6] 82%|████████▏ | 164/200 [53:00<11:26, 19.06s/epoch, loss=0.151, accuracy=0.991, val_loss=0.487, val_accuracy=0.909, lr=1e-6] 82%|████████▎ | 165/200 [53:19<11:07, 19.06s/epoch, loss=0.152, accuracy=0.991, val_loss=0.488, val_accuracy=0.909, lr=1e-6] 83%|████████▎ | 166/200 [53:38<10:47, 19.05s/epoch, loss=0.152, accuracy=0.991, val_loss=0.488, val_accuracy=0.908, lr=1e-6] 84%|████████▎ | 167/200 [53:57<10:28, 19.04s/epoch, loss=0.151, accuracy=0.991, val_loss=0.487, val_accuracy=0.908, lr=5e-7] 84%|████████▍ | 168/200 [54:17<10:09, 19.06s/epoch, loss=0.153, accuracy=0.99, val_loss=0.488, val_accuracy=0.909, lr=1e-6]  84%|████████▍ | 169/200 [54:36<09:51, 19.06s/epoch, loss=0.15, accuracy=0.992, val_loss=0.489, val_accuracy=0.908, lr=1e-6] 85%|████████▌ | 170/200 [54:55<09:31, 19.06s/epoch, loss=0.152, accuracy=0.991, val_loss=0.489, val_accuracy=0.908, lr=1e-6] 86%|████████▌ | 171/200 [55:14<09:13, 19.08s/epoch, loss=0.151, accuracy=0.991, val_loss=0.489, val_accuracy=0.908, lr=1e-6] 86%|████████▌ | 172/200 [55:33<08:54, 19.10s/epoch, loss=0.151, accuracy=0.992, val_loss=0.486, val_accuracy=0.909, lr=5e-7] 86%|████████▋ | 173/200 [55:52<08:35, 19.11s/epoch, loss=0.151, accuracy=0.991, val_loss=0.488, val_accuracy=0.908, lr=1e-6] 87%|████████▋ | 174/200 [56:11<08:16, 19.11s/epoch, loss=0.154, accuracy=0.99, val_loss=0.489, val_accuracy=0.908, lr=1e-6]  88%|████████▊ | 175/200 [56:30<07:58, 19.13s/epoch, loss=0.151, accuracy=0.992, val_loss=0.487, val_accuracy=0.909, lr=1e-6] 88%|████████▊ | 176/200 [56:49<07:38, 19.11s/epoch, loss=0.15, accuracy=0.992, val_loss=0.487, val_accuracy=0.908, lr=1e-6]  88%|████████▊ | 177/200 [57:09<07:20, 19.13s/epoch, loss=0.151, accuracy=0.991, val_loss=0.487, val_accuracy=0.909, lr=5e-7] 89%|████████▉ | 178/200 [57:28<07:01, 19.16s/epoch, loss=0.15, accuracy=0.992, val_loss=0.488, val_accuracy=0.908, lr=1e-6]  90%|████████▉ | 179/200 [57:47<06:41, 19.14s/epoch, loss=0.151, accuracy=0.992, val_loss=0.488, val_accuracy=0.909, lr=1e-6] 90%|█████████ | 180/200 [58:06<06:22, 19.15s/epoch, loss=0.151, accuracy=0.991, val_loss=0.487, val_accuracy=0.909, lr=1e-6] 90%|█████████ | 181/200 [58:25<06:03, 19.14s/epoch, loss=0.15, accuracy=0.992, val_loss=0.487, val_accuracy=0.908, lr=1e-6]  91%|█████████ | 182/200 [58:44<05:44, 19.14s/epoch, loss=0.15, accuracy=0.992, val_loss=0.488, val_accuracy=0.908, lr=5e-7] 92%|█████████▏| 183/200 [59:03<05:25, 19.12s/epoch, loss=0.152, accuracy=0.991, val_loss=0.488, val_accuracy=0.909, lr=5e-7] 92%|█████████▏| 184/200 [59:23<05:06, 19.13s/epoch, loss=0.151, accuracy=0.991, val_loss=0.488, val_accuracy=0.908, lr=5e-7] 92%|█████████▎| 185/200 [59:42<04:46, 19.13s/epoch, loss=0.151, accuracy=0.992, val_loss=0.487, val_accuracy=0.908, lr=5e-7] 93%|█████████▎| 186/200 [1:00:01<04:27, 19.12s/epoch, loss=0.152, accuracy=0.991, val_loss=0.487, val_accuracy=0.909, lr=5e-7] 94%|█████████▎| 187/200 [1:00:20<04:08, 19.09s/epoch, loss=0.151, accuracy=0.992, val_loss=0.487, val_accuracy=0.908, lr=5e-7] 94%|█████████▍| 188/200 [1:00:39<03:48, 19.08s/epoch, loss=0.151, accuracy=0.991, val_loss=0.487, val_accuracy=0.909, lr=5e-7] 94%|█████████▍| 189/200 [1:00:58<03:30, 19.10s/epoch, loss=0.151, accuracy=0.992, val_loss=0.487, val_accuracy=0.908, lr=5e-7] 95%|█████████▌| 190/200 [1:01:17<03:11, 19.11s/epoch, loss=0.151, accuracy=0.991, val_loss=0.488, val_accuracy=0.909, lr=5e-7] 96%|█████████▌| 191/200 [1:01:36<02:51, 19.11s/epoch, loss=0.151, accuracy=0.991, val_loss=0.488, val_accuracy=0.909, lr=5e-7] 96%|█████████▌| 192/200 [1:01:55<02:32, 19.11s/epoch, loss=0.15, accuracy=0.992, val_loss=0.488, val_accuracy=0.909, lr=5e-7]  96%|█████████▋| 193/200 [1:02:14<02:13, 19.11s/epoch, loss=0.15, accuracy=0.992, val_loss=0.488, val_accuracy=0.909, lr=5e-7] 97%|█████████▋| 194/200 [1:02:34<01:54, 19.11s/epoch, loss=0.152, accuracy=0.991, val_loss=0.489, val_accuracy=0.908, lr=5e-7] 98%|█████████▊| 195/200 [1:02:53<01:35, 19.14s/epoch, loss=0.151, accuracy=0.991, val_loss=0.487, val_accuracy=0.909, lr=5e-7] 98%|█████████▊| 196/200 [1:03:12<01:16, 19.15s/epoch, loss=0.15, accuracy=0.992, val_loss=0.488, val_accuracy=0.909, lr=5e-7]  98%|█████████▊| 197/200 [1:03:31<00:57, 19.14s/epoch, loss=0.151, accuracy=0.991, val_loss=0.488, val_accuracy=0.909, lr=5e-7] 99%|█████████▉| 198/200 [1:03:50<00:38, 19.12s/epoch, loss=0.152, accuracy=0.991, val_loss=0.488, val_accuracy=0.909, lr=5e-7]100%|█████████▉| 199/200 [1:04:09<00:19, 19.14s/epoch, loss=0.15, accuracy=0.992, val_loss=0.488, val_accuracy=0.909, lr=5e-7] 100%|██████████| 200/200 [1:04:28<00:00, 19.14s/epoch, loss=0.15, accuracy=0.992, val_loss=0.489, val_accuracy=0.909, lr=5e-7]100%|██████████| 200/200 [1:04:28<00:00, 19.34s/epoch, loss=0.15, accuracy=0.992, val_loss=0.489, val_accuracy=0.909, lr=5e-7]
+Using real-time data augmentation.
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  0.0001
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-05
+Learning rate:  1e-06
+Learning rate:  1e-06
+Learning rate:  1e-06
+Learning rate:  1e-06
+Learning rate:  1e-06
+Learning rate:  1e-06
+Learning rate:  1e-06
+Learning rate:  1e-06
+Learning rate:  1e-06
+Learning rate:  1e-06
+Learning rate:  1e-06
+Learning rate:  1e-06
+Learning rate:  1e-06
+Learning rate:  1e-06
+Learning rate:  1e-06
+Learning rate:  1e-06
+Learning rate:  1e-06
+Learning rate:  1e-06
+Learning rate:  1e-06
+Learning rate:  1e-06
+Learning rate:  5e-07
+Learning rate:  5e-07
+Learning rate:  5e-07
+Learning rate:  5e-07
+Learning rate:  5e-07
+Learning rate:  5e-07
+Learning rate:  5e-07
+Learning rate:  5e-07
+Learning rate:  5e-07
+Learning rate:  5e-07
+Learning rate:  5e-07
+Learning rate:  5e-07
+Learning rate:  5e-07
+Learning rate:  5e-07
+Learning rate:  5e-07
+Learning rate:  5e-07
+Learning rate:  5e-07
+Learning rate:  5e-07
+Learning rate:  5e-07
+Test loss: 0.48904213309288025
+Test accuracy: 0.9086999893188477
