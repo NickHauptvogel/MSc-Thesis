@@ -1,2 +1,2 @@
 conda create --name TF_KERAS_GPU -y tensorflow-gpu=2.4.1 keras=2.4.3 absl-py tqdm numpy scipy tensorflow-datasets tensorflow-probability pandas matplotlib
-conda create --name TF_KERAS_GPU -y tensorflow=2.4.1 keras=2.4.3 absl-py tqdm numpy scipy tensorflow-datasets tensorflow-probability pandas matplotlib
+conda create --name TF_KERAS_2_4_1 -y tensorflow=2.4.1 keras=2.4.3 absl-py tqdm numpy scipy tensorflow-datasets tensorflow-probability pandas matplotlib

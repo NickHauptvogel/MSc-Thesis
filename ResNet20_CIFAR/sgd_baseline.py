@@ -111,6 +111,7 @@ print(configuration)
 fn = os.path.join(save_dir, model_name + '_config.json')
 with open(fn, 'w') as f:
     json.dump(configuration, f, indent=4)
+
 # Load the CIFAR10 data.
 (x_train, y_train), (x_test, y_test) = cifar10.load_data()
 
@@ -502,10 +503,10 @@ else:
     model.save(filepath)
 
 # Score trained model.
-scores = model.evaluate(x_test, y_test, verbose=0)
-print('Test loss:', scores[0])
-print('Test accuracy:', scores[1])
-scores = {'test_loss': scores[0], 'test_accuracy': scores[1], 'history': history.history}
+score, acc = model.evaluate(x_test, y_test, verbose=0)
+print('Test score:', score)
+print('Test accuracy:', acc)
+scores = {'test_loss': score, 'test_accuracy': acc, 'history': history.history}
 # Save as dictionary
 fn = os.path.join(save_dir, model_name + '_scores.json')
 # Change all np.float32 to float
