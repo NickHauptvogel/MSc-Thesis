@@ -8,6 +8,9 @@
 #SBATCH --gres=gpu:titanx:1
 #SBATCH --array=1-1
 
+# If SLURM_ARRAY_TASK_ID is not set, set it to 1
+: ${SLURM_ARRAY_TASK_ID:=1}
+
 nvidia-smi
 
 # Run experiment
