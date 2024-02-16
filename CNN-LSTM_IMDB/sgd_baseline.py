@@ -66,7 +66,7 @@ validation_split = args.validation_split
 checkpointing = args.checkpointing
 initial_lr = args.initial_lr
 momentum = args.momentum
-nesterov = True #args.nesterov
+nesterov = args.nesterov
 
 '''
 Note:
