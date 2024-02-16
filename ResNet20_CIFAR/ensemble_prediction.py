@@ -10,13 +10,16 @@ import argparse
 
 # Configuration
 parser = argparse.ArgumentParser(description='Ensemble prediction')
-parser.add_argument('--folder', type=str, default='results/30_independent_wenzel_hyperparams_no_checkp/',
+parser.add_argument('--folder', type=str, default='results/30_independent_tutorial_hyperparams_no_checkp/',
                     help='Folder with the models')
 parser.add_argument('--max_ensemble_size', type=int, default=30,
                     help='Maximum ensemble size')
+parser.add_argument('--plot', action='store_true', help='Plot the results')
+
 args = parser.parse_args()
 folder = args.folder
 max_ensemble_size = args.max_ensemble_size
+plot = args.plot
 
 num_classes = 10
 # Subtracting pixel mean improves accuracy
@@ -118,6 +121,16 @@ for ensemble_size in range(2, max_ensemble_size + 1):
     ensemble_losses_std.append((ensemble_size, np.std(ensemble_losses)))
     print('Mean Loss:', np.round(np.mean(ensemble_losses), 3), 'with', ensemble_size, 'models')
 
+# Save the results
+with open(os.path.join(folder, 'ensemble_accs_mean.pkl'), 'wb') as f:
+    pickle.dump(ensemble_accs_mean, f)
+with open(os.path.join(folder, 'ensemble_accs_std.pkl'), 'wb') as f:
+    pickle.dump(ensemble_accs_std, f)
+with open(os.path.join(folder, 'ensemble_losses_mean.pkl'), 'wb') as f:
+    pickle.dump(ensemble_losses_mean, f)
+with open(os.path.join(folder, 'ensemble_losses_std.pkl'), 'wb') as f:
+    pickle.dump(ensemble_losses_std, f)
+
 # Plot the results
 plt.figure(figsize=(6, 4))
 plt.plot(*zip(*ensemble_accs_mean), label='Mean accuracy')
@@ -131,12 +144,14 @@ plt.ylim(0.9, 0.95)
 plt.axhline(max(accs), color='orange', linestyle='--', label='Best individual model')
 # Horizontal line for accuracy of Wen et al. (2020), interpolated from the figure at 0.9363
 plt.axhline(0.9363, color='grey', linestyle='--', label='Wenzel et al. (2020)')
-plt.title('Ensemble accuracy (w. hyperparameters as in Wenzel et al. (2020))')
+plt.title('Ensemble accuracy')
+plt.xticks(np.arange(ensemble_accs_mean[0][0], ensemble_accs_mean[-1][0] + 1, 2))
 plt.grid()
 # Legend lower right
 plt.legend(loc='lower right')
 plt.savefig(os.path.join(folder, 'ensemble_accs.pdf'))
-plt.show()
+if plot:
+    plt.show()
 
 plt.figure(figsize=(6, 4))
 plt.plot(*zip(*ensemble_losses_mean), label='Mean loss')
@@ -149,9 +164,11 @@ plt.axhline(min(losses), color='orange', linestyle='--', label='Best individual 
 plt.axhline(0.217, color='grey', linestyle='--', label='Wenzel et al. (2020)')
 plt.xlabel('Ensemble size')
 plt.ylabel('Categorical cross-entropy')
-plt.title('Ensemble loss (w. hyperparameters as in Wenzel et al. (2020))')
+plt.title('Ensemble loss')
+plt.xticks(np.arange(ensemble_losses_mean[0][0], ensemble_losses_mean[-1][0] + 1, 2))
 plt.grid()
 # Legend upper right
 plt.legend(loc='upper right')
 plt.savefig(os.path.join(folder, 'ensemble_losses.pdf'))
-plt.show()
+if plot:
+    plt.show()

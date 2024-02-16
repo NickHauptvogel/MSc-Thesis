@@ -22,11 +22,12 @@ for i in $(seq 1 $SLURM_ARRAY_TASK_ID)
 do
     printf "\n\n* * * Run SGD for ID = ${SLURM_ARRAY_TASK_ID}_$i. * * *\n\n\n"
     python -m sgd_baseline \
-        --id="${SLURM_ARRAY_TASK_ID}_$i" \
+        # Format the ID as "11_02" with leading zeros
+        --id=$(printf "%02d_%02d" $SLURM_ARRAY_TASK_ID $i) \
         --epochs=$budget \
-        --validation_split=0 \
         --data_augmentation \
-        --nesterov
+        --nesterov \
+        --checkpointing
         #--augm_shift=0.1 \
         #--initial_lr=1e-3 \
         #--l2_reg=1e-4 \
