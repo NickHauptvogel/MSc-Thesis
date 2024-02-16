@@ -5,7 +5,7 @@
 #export NVIDIA_DRIVER_CAPABILITIES=compute,utility
 #SBATCH -o epoch_budget_%a.out
 #SBATCH --time=1-00:00:00
-#SBATCH --gres=gpu:titanx:1
+#SBATCH --gres=gpu:titanrtx:1
 #SBATCH --array=1-20
 
 nvidia-smi
