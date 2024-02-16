@@ -10,7 +10,7 @@ import argparse
 
 # Configuration
 parser = argparse.ArgumentParser(description='Ensemble prediction')
-parser.add_argument('--folder', type=str, default='results/30_independent_tutorial_hyperparameters_no_checkp/',
+parser.add_argument('--folder', type=str, default='results/30_independent_wenzel_hyperparams_no_checkp/',
                     help='Folder with the models')
 parser.add_argument('--max_ensemble_size', type=int, default=30,
                     help='Maximum ensemble size')
