@@ -77,7 +77,7 @@ Only 2 epochs are needed as the dataset is very small.
 # Prepare model saving directory.
 current_date = datetime.now().strftime('%Y%m%d_%H%M%S')
 save_dir = os.path.join(os.getcwd(), 'results', current_date + f'_{experiment_id:02d}')
-model_name = f'{experiment_id:02d}_cifar10_{model_type}'
+model_name = f'{experiment_id:02d}_imdb_{model_type}'
 if not os.path.isdir(save_dir):
     os.makedirs(save_dir)
 filepath = os.path.join(save_dir, model_name + '.h5')

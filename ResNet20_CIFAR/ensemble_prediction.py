@@ -10,7 +10,7 @@ import argparse
 
 # Configuration
 parser = argparse.ArgumentParser(description='Ensemble prediction')
-parser.add_argument('--folder', type=str, default='results/30_independent_tutorial_hyperparams_no_checkp/',
+parser.add_argument('--folder', type=str, default='results/30_independent_wenzel_hyperparams_checkp/',
                     help='Folder with the models')
 parser.add_argument('--max_ensemble_size', type=int, default=30,
                     help='Maximum ensemble size')
@@ -101,7 +101,7 @@ for ensemble_size in range(2, max_ensemble_size + 1):
         # Choose randomly ensemble_size integers from 0 to len(models)
         indices = np.random.choice(len(accs), ensemble_size, replace=False)
         subset_y_pred = y_pred[:, indices, :]
-        # Get mean prediction (TODO: Check if this is correct)
+        # Get mean prediction
         subset_y_pred_ensemble = np.mean(subset_y_pred, axis=1)
         # Get majority vote
         subset_y_pred_argmax = np.argmax(subset_y_pred, axis=2)
