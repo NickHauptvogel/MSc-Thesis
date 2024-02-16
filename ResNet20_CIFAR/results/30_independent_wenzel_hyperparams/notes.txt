@@ -1,2 +1,0 @@
-Stores the best model as .h5 according to test_accuracy: SELECTION BIAS!
-Might have used model after 200 epochs for score at the end of training, but not for prediction (as .h5 was loaded)

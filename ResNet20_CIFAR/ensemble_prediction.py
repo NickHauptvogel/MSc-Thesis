@@ -6,10 +6,17 @@ import os
 import json
 import matplotlib.pyplot as plt
 import pickle
+import argparse
 
 # Configuration
-folder = 'results/30_independent_tutorial_hyperparameters/'
-max_ensemble_size = 30
+parser = argparse.ArgumentParser(description='Ensemble prediction')
+parser.add_argument('--folder', type=str, default='results/30_independent_tutorial_hyperparameters_no_checkp/',
+                    help='Folder with the models')
+parser.add_argument('--max_ensemble_size', type=int, default=30,
+                    help='Maximum ensemble size')
+args = parser.parse_args()
+folder = args.folder
+max_ensemble_size = args.max_ensemble_size
 
 num_classes = 10
 # Subtracting pixel mean improves accuracy
