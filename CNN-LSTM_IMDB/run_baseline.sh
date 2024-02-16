@@ -4,12 +4,12 @@
 #export CUDA_VISIBLE_DEVICES=0
 #export NVIDIA_DRIVER_CAPABILITIES=compute,utility
 #SBATCH -o baseline_%a.out
-#SBATCH --time=02:00:00
-#SBATCH --gres=gpu:titanx:1
-#SBATCH --array=1-1
+#SBATCH --time=00:10:00
+#SBATCH --gres=gpu:titanrtx:1
+#SBATCH --array=1-30
 
 # If SLURM_ARRAY_TASK_ID is not set, set it to 1
-: ${SLURM_ARRAY_TASK_ID:=1}
+#: ${SLURM_ARRAY_TASK_ID:=1}
 
 nvidia-smi
 
