@@ -94,16 +94,16 @@ for ensemble_size in range(2, max_ensemble_size + 1):
     for i in range(20):
         # Choose randomly ensemble_size integers from 0 to len(models)
         indices = np.random.choice(len(accs), ensemble_size, replace=False)
-        subset_y_pred = y_pred[:, indices, :]
+        subset_y_pred = y_pred[:, indices, 0]
         # Get mean prediction
         subset_y_pred_ensemble = np.mean(subset_y_pred, axis=1)
-        # Get majority vote
-        subset_y_pred_argmax = np.argmax(subset_y_pred, axis=2)
-        # Majority voting (mode of the predictions)
+        # Majority voting (mode of the predictions) # METHOD 1
+        subset_y_pred_argmax = (subset_y_pred > 0.5).astype(int)
         subset_y_pred_vote = np.array([np.argmax(np.bincount(subset_y_pred_argmax[i, :])) for i in range(subset_y_pred_argmax.shape[0])], dtype=int)
+        #subset_y_pred_vote = (subset_y_pred_ensemble > 0.5).astype(int) # METHOD 2 ALTERNATIVE
 
         # Evaluate the predictions with accuracy
-        ensemble_acc = np.mean(subset_y_pred_vote == y_test[:, 0])
+        ensemble_acc = np.mean(subset_y_pred_vote == y_test)
         ensemble_accs.append(ensemble_acc)
         ensemble_loss = tf.keras.losses.BinaryCrossentropy()(y_test, subset_y_pred_ensemble).numpy()
         ensemble_losses.append(ensemble_loss)
@@ -133,11 +133,11 @@ plt.fill_between(np.array(ensemble_accs_mean)[:, 0], np.array(ensemble_accs_mean
                  np.array(ensemble_accs_mean)[:, 1] + np.array(ensemble_accs_std)[:, 1], alpha=0.3, label='±1σ')
 plt.xlabel('Ensemble size')
 plt.ylabel('Accuracy')
-plt.ylim(0.9, 0.95)
+plt.ylim(0.80, 0.88)
 # Horizontal line for the accuracy of the best model
 plt.axhline(max(accs), color='orange', linestyle='--', label='Best individual model')
 # Horizontal line for accuracy of Wen et al. (2020), interpolated from the figure at 0.9363
-plt.axhline(0.9363, color='grey', linestyle='--', label='Wenzel et al. (2020)')
+plt.axhline(0.8703, color='grey', linestyle='--', label='Wenzel et al. (2020)')
 plt.title('Ensemble accuracy')
 plt.xticks(np.arange(ensemble_accs_mean[0][0], ensemble_accs_mean[-1][0] + 1, 2))
 plt.grid()
@@ -155,7 +155,7 @@ plt.fill_between(np.array(ensemble_losses_mean)[:, 0], np.array(ensemble_losses_
 # Horizontal line for the loss of the best model
 plt.axhline(min(losses), color='orange', linestyle='--', label='Best individual model')
 # Horizontal line for loss of Wen et al. (2020), interpolated from the figure at 0.217
-plt.axhline(0.217, color='grey', linestyle='--', label='Wenzel et al. (2020)')
+plt.axhline(0.3044, color='grey', linestyle='--', label='Wenzel et al. (2020)')
 plt.xlabel('Ensemble size')
 plt.ylabel('Categorical cross-entropy')
 plt.title('Ensemble loss')
