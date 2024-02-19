@@ -27,7 +27,7 @@ import priorfactory
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--id', type=int, default=1, help='ID of the experiment')
+parser.add_argument('--id', type=str, default='01', help='ID of the experiment')
 parser.add_argument('--batch_size', type=int, default=32, help='batch size')
 parser.add_argument('--epochs', type=int, default=50, help='number of epochs')
 parser.add_argument('--validation_split', type=float, default=0.2, help='validation split')
@@ -76,8 +76,8 @@ Only 2 epochs are needed as the dataset is very small.
 
 # Prepare model saving directory.
 current_date = datetime.now().strftime('%Y%m%d_%H%M%S')
-save_dir = os.path.join(os.getcwd(), 'results', current_date + f'_{experiment_id:02d}')
-model_name = f'{experiment_id:02d}_imdb_{model_type}'
+save_dir = os.path.join(os.getcwd(), 'results', current_date + f'_{experiment_id}')
+model_name = f'{experiment_id}_imdb_{model_type}'
 if not os.path.isdir(save_dir):
     os.makedirs(save_dir)
 filepath = os.path.join(save_dir, model_name + '.h5')

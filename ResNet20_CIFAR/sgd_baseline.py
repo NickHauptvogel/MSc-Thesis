@@ -18,7 +18,7 @@ from datetime import datetime
 import json
 
 parser = argparse.ArgumentParser(description='Train a ResNet on CIFAR-10')
-parser.add_argument('--id', type=int, default=1, help='ID of experiment')
+parser.add_argument('--id', type=str, default='01', help='ID of experiment')
 # 32 in other implementations
 parser.add_argument('--batch_size', type=int, default=128, help='batch size')
 parser.add_argument('--epochs', type=int, default=200, help='number of epochs')
@@ -91,8 +91,8 @@ model_type = 'ResNet%dv%d' % (depth, version)
 
 # Prepare model saving directory.
 current_date = datetime.now().strftime('%Y%m%d_%H%M%S')
-save_dir = os.path.join(os.getcwd(), 'results', current_date + f'_{experiment_id:02d}')
-model_name = f'{experiment_id:02d}_cifar10_{model_type}'
+save_dir = os.path.join(os.getcwd(), 'results', current_date + f'_{experiment_id}')
+model_name = f'{experiment_id}_cifar10_{model_type}'
 if not os.path.isdir(save_dir):
     os.makedirs(save_dir)
 filepath = os.path.join(save_dir, model_name + '.h5')
