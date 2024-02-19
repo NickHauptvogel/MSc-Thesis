@@ -1,0 +1,14 @@
+{
+    "id": 11,
+    "batch_size": 32,
+    "epochs": 50,
+    "validation_split": 0.2,
+    "checkpointing": true,
+    "initial_lr": 0.1,
+    "momentum": 0.98,
+    "nesterov": true,
+    "model": "CNN-LSTM",
+    "tf_version": "2.4.1",
+    "keras_version": "2.4.3",
+    "GPU": "NVIDIA TITAN RTX"
+}
