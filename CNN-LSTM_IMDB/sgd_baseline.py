@@ -22,6 +22,7 @@ import os
 from tqdm.keras import TqdmCallback
 from datetime import datetime
 import json
+import pickle
 
 import priorfactory
 
@@ -188,3 +189,9 @@ for k, v in scores['history'].items():
     scores['history'][k] = [float(x) for x in v]
 with open(fn, 'w') as f:
     json.dump(scores, f, indent=4)
+
+# Save predictions
+y_pred = model.predict(x_test)
+fn = os.path.join(save_dir, model_name + '_predictions.pkl')
+with open(fn, 'wb') as f:
+    pickle.dump(y_pred, f)
