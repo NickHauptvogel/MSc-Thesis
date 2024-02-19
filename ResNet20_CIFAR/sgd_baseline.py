@@ -131,6 +131,7 @@ if subtract_pixel_mean:
 # Split the training data into a training and a validation set
 if validation_split > 0:
     indices = np.arange(x_train.shape[0])
+    # Important: shuffle the indices
     np.random.shuffle(indices)
     x_train = x_train[indices]
     y_train = y_train[indices]

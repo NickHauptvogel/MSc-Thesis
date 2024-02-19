@@ -105,9 +105,12 @@ x_train = sequence.pad_sequences(x_train, maxlen=maxlen)
 x_test = sequence.pad_sequences(x_test, maxlen=maxlen)
 
 # Split the training data into a training and a validation set
-# Not random, as the original paper by Wenzel et al.
 if validation_split > 0:
     indices = np.arange(x_train.shape[0])
+    # Important: shuffle the indices
+    np.random.shuffle(indices) # Not random in the original paper by Wenzel et al.
+    x_train = x_train[indices]
+    y_train = y_train[indices]
     split = int(x_train.shape[0] * (1 - validation_split))
     x_train, x_val = x_train[:split], x_train[split:]
     y_train, y_val = y_train[:split], y_train[split:]
