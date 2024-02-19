@@ -22,8 +22,7 @@ for i in $(seq 1 $SLURM_ARRAY_TASK_ID)
 do
     printf "\n\n* * * Run SGD for ID = ${SLURM_ARRAY_TASK_ID}_$i. * * *\n\n\n"
     python -m sgd_baseline \
-        # ID is a combination of cluster size and model number
-        --id="${SLURM_ARRAY_TASK_ID}_$i" \
+        --id=$(printf "%02d_%02d" $SLURM_ARRAY_TASK_ID $i) \
         --epochs=$budget \
         --data_augmentation \
         --nesterov \
