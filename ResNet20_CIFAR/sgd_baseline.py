@@ -130,7 +130,7 @@ if subtract_pixel_mean:
     x_test -= x_train_mean
 
 # Split the training data into a training and a validation set
-if validation_split > 0:
+if validation_split > 0 or bootstrapping:
     train_indices, val_indices = split_dataset(x_train, validation_split, bootstrap=bootstrapping, random=True)
     x_train, x_val = x_train[train_indices], x_train[val_indices]
     y_train, y_val = y_train[train_indices], y_train[val_indices]

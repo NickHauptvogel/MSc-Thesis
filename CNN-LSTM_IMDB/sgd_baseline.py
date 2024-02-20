@@ -103,7 +103,7 @@ x_train = sequence.pad_sequences(x_train, maxlen=maxlen)
 x_test = sequence.pad_sequences(x_test, maxlen=maxlen)
 
 # Split the training data into a training and a validation set
-if validation_split > 0:
+if validation_split > 0 or bootstrapping:
     train_indices, val_indices = split_dataset(x_train, validation_split, bootstrap=bootstrapping, random=True)
     x_train, x_val = x_train[train_indices], x_train[val_indices]
     y_train, y_val = y_train[train_indices], y_train[val_indices]

@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def split_dataset(train_samples, validation_split, random=True, bootstrap=False):
+def split_dataset(train_samples, validation_split=0.0, random=True, bootstrap=False):
 
     if random:
         indices = np.random.choice(train_samples, train_samples, replace=bootstrap)
