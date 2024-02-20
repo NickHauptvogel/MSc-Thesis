@@ -1,0 +1,18 @@
+{
+    "id": "12_01",
+    "batch_size": 128,
+    "epochs": 125,
+    "validation_split": 0.1,
+    "checkpointing": true,
+    "data_augmentation": true,
+    "augm_shift": 4,
+    "initial_lr": 0.1,
+    "l2_reg": 0.002,
+    "optimizer": "sgd",
+    "momentum": 0.9,
+    "nesterov": true,
+    "model": "ResNet20v1",
+    "tf_version": "2.4.1",
+    "keras_version": "2.4.3",
+    "GPU": "NVIDIA TITAN X (Pascal)"
+}
