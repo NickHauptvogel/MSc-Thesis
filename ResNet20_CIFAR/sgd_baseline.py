@@ -18,6 +18,8 @@ from datetime import datetime
 import json
 import pickle
 
+from dataset_split import split_dataset
+
 parser = argparse.ArgumentParser(description='Train a ResNet on CIFAR-10')
 parser.add_argument('--id', type=str, default='01', help='ID of experiment')
 # 32 in other implementations
@@ -36,6 +38,7 @@ parser.add_argument('--l2_reg', type=float, default=0.002, help='l2 regularizati
 parser.add_argument('--optimizer', type=str, default='sgd', help='optimizer')
 parser.add_argument('--momentum', type=float, default=0.9, help='momentum for SGD')
 parser.add_argument('--nesterov', action='store_true', help='use Nesterov momentum')
+parser.add_argument('--bootstrapping', action='store_true', help='use bootstrapping')
 
 args = parser.parse_args()
 
@@ -56,6 +59,7 @@ l2_reg = args.l2_reg
 optimizer = args.optimizer
 momentum = args.momentum
 nesterov = args.nesterov
+bootstrapping = args.bootstrapping
 num_classes = 10
 
 # Subtracting pixel mean improves accuracy
@@ -108,10 +112,6 @@ if gpu_devices:
   details = tf.config.experimental.get_device_details(gpu_devices[0])
   configuration['GPU'] = details.get('device_name', 'Unknown GPU')
 print(configuration)
-# Save configuration to json
-fn = os.path.join(save_dir, model_name + '_config.json')
-with open(fn, 'w') as f:
-    json.dump(configuration, f, indent=4)
 
 # Load the CIFAR10 data.
 (x_train, y_train), (x_test, y_test) = cifar10.load_data()
@@ -131,14 +131,11 @@ if subtract_pixel_mean:
 
 # Split the training data into a training and a validation set
 if validation_split > 0:
-    indices = np.arange(x_train.shape[0])
-    # Important: shuffle the indices
-    np.random.shuffle(indices)
-    x_train = x_train[indices]
-    y_train = y_train[indices]
-    split = int(x_train.shape[0] * (1 - validation_split))
-    x_train, x_val = x_train[:split], x_train[split:]
-    y_train, y_val = y_train[:split], y_train[split:]
+    train_indices, val_indices = split_dataset(x_train, validation_split, bootstrap=bootstrapping, random=True)
+    x_train, x_val = x_train[train_indices], x_train[val_indices]
+    y_train, y_val = y_train[train_indices], y_train[val_indices]
+    configuration['train_indices'] = train_indices.tolist()
+    configuration['val_indices'] = val_indices.tolist()
 else:
     x_val, y_val = x_test, y_test
     print('Using test set as validation set')
@@ -154,6 +151,10 @@ y_train = keras.utils.to_categorical(y_train, num_classes)
 y_val = keras.utils.to_categorical(y_val, num_classes)
 y_test = keras.utils.to_categorical(y_test, num_classes)
 
+# Save configuration to json
+fn = os.path.join(save_dir, model_name + '_config.json')
+with open(fn, 'w') as f:
+    json.dump(configuration, f, indent=4)
 
 def lr_schedule(epoch):
     """Learning Rate Schedule

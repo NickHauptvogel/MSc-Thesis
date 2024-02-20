@@ -7,7 +7,6 @@ from __future__ import print_function
 
 import keras
 import tensorflow as tf
-import numpy as np
 from keras.preprocessing import sequence
 from keras.callbacks import ModelCheckpoint
 from keras.models import Sequential
@@ -25,7 +24,7 @@ import json
 import pickle
 
 import priorfactory
-
+from dataset_split import split_dataset
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--id', type=str, default='01', help='ID of the experiment')
@@ -36,6 +35,7 @@ parser.add_argument('--checkpointing', action='store_true', help='save the best 
 parser.add_argument('--initial_lr', type=float, default=0.1, help='initial learning rate')
 parser.add_argument('--momentum', type=float, default=0.98, help='momentum for SGD')
 parser.add_argument('--nesterov', action='store_true', help='use Nesterov momentum')
+parser.add_argument('--bootstrapping', action='store_true', help='use bootstrapping')
 
 args = parser.parse_args()
 
@@ -68,6 +68,7 @@ checkpointing = args.checkpointing
 initial_lr = args.initial_lr
 momentum = args.momentum
 nesterov = args.nesterov
+bootstrapping = args.bootstrapping
 
 '''
 Note:
@@ -93,10 +94,6 @@ if gpu_devices:
   details = tf.config.experimental.get_device_details(gpu_devices[0])
   configuration['GPU'] = details.get('device_name', 'Unknown GPU')
 print(configuration)
-# Save configuration to json
-fn = os.path.join(save_dir, model_name + '_config.json')
-with open(fn, 'w') as f:
-    json.dump(configuration, f, indent=4)
 
 print('Loading data...')
 (x_train, y_train), (x_test, y_test) = imdb.load_data(num_words=max_features)
@@ -107,14 +104,11 @@ x_test = sequence.pad_sequences(x_test, maxlen=maxlen)
 
 # Split the training data into a training and a validation set
 if validation_split > 0:
-    indices = np.arange(x_train.shape[0])
-    # Important: shuffle the indices
-    np.random.shuffle(indices) # Not random in the original paper by Wenzel et al.
-    x_train = x_train[indices]
-    y_train = y_train[indices]
-    split = int(x_train.shape[0] * (1 - validation_split))
-    x_train, x_val = x_train[:split], x_train[split:]
-    y_train, y_val = y_train[:split], y_train[split:]
+    train_indices, val_indices = split_dataset(x_train, validation_split, bootstrap=bootstrapping, random=True)
+    x_train, x_val = x_train[train_indices], x_train[val_indices]
+    y_train, y_val = y_train[train_indices], y_train[val_indices]
+    configuration['train_indices'] = train_indices.tolist()
+    configuration['val_indices'] = val_indices.tolist()
 else:
     x_val, y_val = x_test, y_test
     print('Using test set as validation set')
@@ -125,6 +119,11 @@ print(len(x_test), 'test sequences')
 print('x_train shape:', x_train.shape)
 print('x_val shape:', x_val.shape)
 print('x_test shape:', x_test.shape)
+
+# Save configuration to json
+fn = os.path.join(save_dir, model_name + '_config.json')
+with open(fn, 'w') as f:
+    json.dump(configuration, f, indent=4)
 
 reg_weight = 1.0 / x_train.shape[0]
 pfac = priorfactory.GaussianPriorFactory(prior_stddev=1.0,
