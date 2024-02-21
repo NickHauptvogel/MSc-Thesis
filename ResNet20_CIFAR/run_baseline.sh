@@ -16,7 +16,9 @@ python -m sgd_baseline \
     --id=${SLURM_ARRAY_TASK_ID} \
     --data_augmentation \
     --nesterov \
-    --checkpointing
+    --bootstrapping \
+    --validation_split=0
+    #--checkpointing \
     #--augm_shift=0.1 \
     #--initial_lr=1e-3 \
     #--l2_reg=1e-4 \

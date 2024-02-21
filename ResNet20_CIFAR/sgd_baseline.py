@@ -18,6 +18,10 @@ from datetime import datetime
 import json
 import pickle
 
+# Add parent directory to path
+import sys
+sys.path.append('..')
+
 from dataset_split import split_dataset
 
 parser = argparse.ArgumentParser(description='Train a ResNet on CIFAR-10')
@@ -131,7 +135,7 @@ if subtract_pixel_mean:
 
 # Split the training data into a training and a validation set
 if validation_split > 0 or bootstrapping:
-    train_indices, val_indices = split_dataset(x_train, validation_split, bootstrap=bootstrapping, random=True)
+    train_indices, val_indices = split_dataset(x_train.shape[0], validation_split, bootstrap=bootstrapping, random=True)
     x_train, x_val = x_train[train_indices], x_train[val_indices]
     y_train, y_val = y_train[train_indices], y_train[val_indices]
     configuration['train_indices'] = train_indices.tolist()
