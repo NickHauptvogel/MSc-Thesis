@@ -1,4 +1,5 @@
 from __future__ import print_function
+
 import tensorflow as tf
 import keras
 from keras.layers import Dense, Conv2D, BatchNormalization, Activation
@@ -11,8 +12,8 @@ from keras.regularizers import l2
 from keras.models import Model
 from keras.datasets import cifar10
 import numpy as np
-import os
 import argparse
+import os
 from tqdm.keras import TqdmCallback
 from datetime import datetime
 import json
@@ -24,8 +25,10 @@ sys.path.append('..')
 
 from dataset_split import split_dataset
 
-parser = argparse.ArgumentParser(description='Train a ResNet on CIFAR-10')
-parser.add_argument('--id', type=str, default='01', help='ID of experiment')
+parser = argparse.ArgumentParser()
+parser.add_argument('--id', type=str, default='01', help='ID of the experiment')
+parser.add_argument('--seed', type=int, default=1, help='random seed')
+parser.add_argument('--out_folder', type=str, default='results', help='output folder')
 # 32 in other implementations
 parser.add_argument('--batch_size', type=int, default=128, help='batch size')
 parser.add_argument('--epochs', type=int, default=200, help='number of epochs')
@@ -47,12 +50,15 @@ parser.add_argument('--bootstrapping', action='store_true', help='use bootstrapp
 args = parser.parse_args()
 
 # Random seed
-seed = 1
+seed = args.seed
 tf.random.set_seed(seed)
+np.random.seed(seed)
 
 # Training parameters
+out_folder = args.out_folder
+os.makedirs(out_folder, exist_ok=True)
 experiment_id = args.id
-batch_size = args.batch_size  # orig paper trained all networks with batch_size=128
+batch_size = args.batch_size
 epochs = args.epochs
 validation_split = args.validation_split
 checkpointing = args.checkpointing
@@ -100,7 +106,7 @@ model_type = 'ResNet%dv%d' % (depth, version)
 
 # Prepare model saving directory.
 current_date = datetime.now().strftime('%Y%m%d_%H%M%S')
-save_dir = os.path.join(os.getcwd(), 'results', current_date + f'_{experiment_id}')
+save_dir = os.path.join(os.getcwd(), out_folder, current_date + f'_{experiment_id}')
 model_name = f'{experiment_id}_cifar10_{model_type}'
 if not os.path.isdir(save_dir):
     os.makedirs(save_dir)

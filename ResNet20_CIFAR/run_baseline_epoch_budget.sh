@@ -23,6 +23,7 @@ do
     printf "\n\n* * * Run SGD for ID = ${SLURM_ARRAY_TASK_ID}_$i. * * *\n\n\n"
     python -m sgd_baseline \
         --id=$(printf "%02d_%02d" $SLURM_ARRAY_TASK_ID $i) \
+        --seed=$i \
         --epochs=$budget \
         --data_augmentation \
         --nesterov \

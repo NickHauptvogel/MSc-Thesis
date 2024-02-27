@@ -2,28 +2,31 @@ import os
 
 
 def sort_out_files():
-
-    folder = 'ResNet20_CIFAR/results/epoch_budget_checkp'
-    out_files_folder = 'ResNet20_CIFAR'
+    target_folder = 'CNN-LSTM_IMDB/results/30_independent_wenzel_bootstr'
+    out_files_folder = 'CNN-LSTM_IMDB'
 
     # Get all .out files in out_files_folder
     out_files = [f for f in os.listdir(out_files_folder) if f.endswith('.out')]
     # Get all subdirectories in folder
-    subdirs = [f.path for f in os.scandir(folder) if f.is_dir()]
+    subdirs = [f.path for f in os.scandir(target_folder) if f.is_dir()]
 
     for out_file in out_files:
         print(out_file)
         # Get the experiment id
         experiment_id = int(out_file.split('_')[-1].replace('.out', ''))
         # Find the subdirectory with the same experiment id
-        subdir = [f for f in subdirs if f.endswith(f'{experiment_id:02d}')][0]
+        subdir = [f for f in subdirs if f.endswith(f'{experiment_id:02d}')]
+        if len(subdir) == 0:
+            # If the experiment id is not found, try again with a single digit
+            subdir = [f for f in subdirs if f.endswith(f'{experiment_id}')]
+        subdir = subdir[0]
         # Move the .out file to the subdirectory
         os.rename(os.path.join(out_files_folder, out_file), os.path.join(subdir, out_file))
 
 
 def sort_epoch_budget_folders():
-    target_folder = 'ResNet20_CIFAR/results/epoch_budget_checkp'
-    current_folder = 'ResNet20_CIFAR/results'
+    target_folder = 'ResNet20_CIFAR/results/30_independent_wenzel_no_checkp_bootstr'
+    current_folder = 'ResNet20_CIFAR'
 
     # Get all subdirectories in current_folder that start with 2024
     subdirs = [f.path for f in os.scandir(current_folder) if f.is_dir() and f.name.startswith('2024')]

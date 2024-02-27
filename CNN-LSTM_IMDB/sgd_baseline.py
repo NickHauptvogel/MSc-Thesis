@@ -5,8 +5,8 @@ Gets to 0.8498 test accuracy after 2 epochs. 41s/epoch on K520 GPU.
 '''
 from __future__ import print_function
 
-import keras
 import tensorflow as tf
+import keras
 from keras.preprocessing import sequence
 from keras.callbacks import ModelCheckpoint
 from keras.models import Sequential
@@ -16,6 +16,7 @@ from keras.layers import LSTM
 from keras.layers import Conv1D, MaxPooling1D
 from keras.optimizers import SGD
 from keras.datasets import imdb
+import numpy as np
 import argparse
 import os
 from tqdm.keras import TqdmCallback
@@ -23,15 +24,17 @@ from datetime import datetime
 import json
 import pickle
 
+import priorfactory
 # Add parent directory to path
 import sys
 sys.path.append('..')
 
-import priorfactory
 from dataset_split import split_dataset
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--id', type=str, default='01', help='ID of the experiment')
+parser.add_argument('--seed', type=int, default=1, help='random seed')
+parser.add_argument('--out_folder', type=str, default='results', help='output folder')
 parser.add_argument('--batch_size', type=int, default=32, help='batch size')
 parser.add_argument('--epochs', type=int, default=50, help='number of epochs')
 parser.add_argument('--validation_split', type=float, default=0.2, help='validation split')
@@ -44,8 +47,9 @@ parser.add_argument('--bootstrapping', action='store_true', help='use bootstrapp
 args = parser.parse_args()
 
 # Random seed
-seed = 1
+seed = args.seed
 tf.random.set_seed(seed)
+np.random.seed(seed)
 
 model_type = 'CNN-LSTM'
 
@@ -64,6 +68,8 @@ lstm_output_size = 70
 
 # Training
 map_regularization = True
+out_folder = args.out_folder
+os.makedirs(out_folder, exist_ok=True)
 experiment_id = args.id
 batch_size = args.batch_size
 epochs = args.epochs
@@ -82,7 +88,7 @@ Only 2 epochs are needed as the dataset is very small.
 
 # Prepare model saving directory.
 current_date = datetime.now().strftime('%Y%m%d_%H%M%S')
-save_dir = os.path.join(os.getcwd(), 'results', current_date + f'_{experiment_id}')
+save_dir = os.path.join(os.getcwd(), out_folder, current_date + f'_{experiment_id}')
 model_name = f'{experiment_id}_imdb_{model_type}'
 if not os.path.isdir(save_dir):
     os.makedirs(save_dir)

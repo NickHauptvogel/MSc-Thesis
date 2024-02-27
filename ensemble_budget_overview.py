@@ -37,7 +37,7 @@ ensemble_accs_mean = []
 ensemble_accs_std = []
 ensemble_losses_mean = []
 ensemble_losses_std = []
-for subdir in [os.path.join(folder, str(i)) for i in range(2, max_ensemble_size + 1)]:
+for subdir in [os.path.join(folder, f"{i:02d}") for i in range(2, max_ensemble_size + 1)]:
     # Load ensemble_accs and ensemble_losses
     with open(os.path.join(subdir, 'ensemble_accs_mean.pkl'), 'rb') as f:
         mean = pickle.load(f)

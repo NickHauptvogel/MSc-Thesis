@@ -1,0 +1,57 @@
+Wed Feb 21 15:50:25 2024       
++---------------------------------------------------------------------------------------+
+| NVIDIA-SMI 545.23.08              Driver Version: 545.23.08    CUDA Version: 12.3     |
+|-----------------------------------------+----------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
+|                                         |                      |               MIG M. |
+|=========================================+======================+======================|
+|   0  NVIDIA TITAN RTX               Off | 00000000:B1:00.0 Off |                  N/A |
+| 41%   28C    P8              15W / 280W |      0MiB / 24576MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+                                                                                         
++---------------------------------------------------------------------------------------+
+| Processes:                                                                            |
+|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
+|        ID   ID                                                             Usage      |
+|=======================================================================================|
+|  No running processes found                                                           |
++---------------------------------------------------------------------------------------+
+
+
+* * * Run SGD for ID = 5. * * *
+
+
+2024-02-21 15:50:26.663635: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-02-21 15:50:34.364996: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-02-21 15:50:34.366635: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2024-02-21 15:50:34.401860: E tensorflow/stream_executor/cuda/cuda_driver.cc:328] failed call to cuInit: CUDA_ERROR_NOT_INITIALIZED: initialization error
+2024-02-21 15:50:34.401902: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:169] retrieving CUDA diagnostic information for host: hendrixgpu06fl.unicph.domain
+2024-02-21 15:50:34.401908: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:176] hostname: hendrixgpu06fl.unicph.domain
+2024-02-21 15:50:34.402005: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:200] libcuda reported version is: 545.23.8
+2024-02-21 15:50:34.402026: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:204] kernel reported version is: 545.23.8
+2024-02-21 15:50:34.402032: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:310] kernel version seems to match DSO: 545.23.8
+<__array_function__ internals>:5: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:159: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_train, y_train = np.array(xs[:idx]), np.array(labels[:idx])
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:160: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_test, y_test = np.array(xs[idx:]), np.array(labels[idx:])
+2024-02-21 15:50:39.576036: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 AVX512F FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-02-21 15:50:39.576887: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+{'id': '5', 'batch_size': 32, 'epochs': 50, 'validation_split': 0.0, 'checkpointing': False, 'initial_lr': 0.1, 'momentum': 0.98, 'nesterov': True, 'bootstrapping': True, 'model': 'CNN-LSTM', 'tf_version': '2.4.1', 'keras_version': '2.4.3'}
+Loading data...
+Pad sequences (samples x time)
+25000 train sequences
+9117 validation sequences
+25000 test sequences
+x_train shape: (25000, 100)
+x_val shape: (9117, 100)
+x_test shape: (25000, 100)
+CNN-LSTM
+0epoch [00:00, ?epoch/s]  0%|          | 0/50 [00:00<?, ?epoch/s]2024-02-21 15:50:39.968091: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2024-02-21 15:50:39.979631: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2800000000 Hz
+  2%|▏         | 1/50 [00:15<12:43, 15.58s/epoch, loss=0.565, accuracy=0.675, val_loss=0.418, val_accuracy=0.807]  4%|▍         | 2/50 [00:28<11:20, 14.19s/epoch, loss=0.354, accuracy=0.843, val_loss=0.437, val_accuracy=0.829]  6%|▌         | 3/50 [00:42<10:45, 13.74s/epoch, loss=0.296, accuracy=0.879, val_loss=0.422, val_accuracy=0.816]  8%|▊         | 4/50 [00:55<10:26, 13.63s/epoch, loss=0.283, accuracy=0.882, val_loss=0.512, val_accuracy=0.814] 10%|█         | 5/50 [01:08<10:02, 13.39s/epoch, loss=0.477, accuracy=0.762, val_loss=0.656, val_accuracy=0.625] 12%|█▏        | 6/50 [01:21<09:43, 13.25s/epoch, loss=0.673, accuracy=0.587, val_loss=0.729, val_accuracy=0.5]   14%|█▍        | 7/50 [01:35<09:35, 13.38s/epoch, loss=0.689, accuracy=0.556, val_loss=0.721, val_accuracy=0.5] 16%|█▌        | 8/50 [01:48<09:21, 13.36s/epoch, loss=0.68, accuracy=0.578, val_loss=0.679, val_accuracy=0.587] 18%|█▊        | 9/50 [02:01<09:05, 13.30s/epoch, loss=0.69, accuracy=0.548, val_loss=0.702, val_accuracy=0.5]   20%|██        | 10/50 [02:15<08:54, 13.37s/epoch, loss=0.696, accuracy=0.539, val_loss=0.7, val_accuracy=0.531] 22%|██▏       | 11/50 [02:28<08:40, 13.35s/epoch, loss=0.704, accuracy=0.523, val_loss=0.933, val_accuracy=0.5] 24%|██▍       | 12/50 [02:41<08:26, 13.34s/epoch, loss=0.703, accuracy=0.53, val_loss=0.685, val_accuracy=0.5]  26%|██▌       | 13/50 [02:55<08:14, 13.35s/epoch, loss=0.711, accuracy=0.531, val_loss=0.741, val_accuracy=0.5] 28%|██▊       | 14/50 [03:08<08:04, 13.46s/epoch, loss=0.703, accuracy=0.531, val_loss=0.68, val_accuracy=0.564] 30%|███       | 15/50 [03:22<07:54, 13.56s/epoch, loss=0.702, accuracy=0.546, val_loss=0.688, val_accuracy=0.574] 32%|███▏      | 16/50 [03:36<07:42, 13.60s/epoch, loss=0.698, accuracy=0.545, val_loss=0.734, val_accuracy=0.5]   34%|███▍      | 17/50 [03:49<07:28, 13.60s/epoch, loss=0.699, accuracy=0.542, val_loss=0.799, val_accuracy=0.5] 36%|███▌      | 18/50 [04:03<07:15, 13.62s/epoch, loss=0.702, accuracy=0.534, val_loss=0.682, val_accuracy=0.556] 38%|███▊      | 19/50 [04:17<07:01, 13.59s/epoch, loss=0.701, accuracy=0.543, val_loss=0.696, val_accuracy=0.546] 40%|████      | 20/50 [04:30<06:47, 13.59s/epoch, loss=0.702, accuracy=0.532, val_loss=0.882, val_accuracy=0.514] 42%|████▏     | 21/50 [04:44<06:32, 13.54s/epoch, loss=0.703, accuracy=0.53, val_loss=0.713, val_accuracy=0.5]    44%|████▍     | 22/50 [04:57<06:19, 13.54s/epoch, loss=0.704, accuracy=0.522, val_loss=0.772, val_accuracy=0.521] 46%|████▌     | 23/50 [05:10<06:00, 13.35s/epoch, loss=0.705, accuracy=0.516, val_loss=0.716, val_accuracy=0.5]   48%|████▊     | 24/50 [05:23<05:44, 13.24s/epoch, loss=0.707, accuracy=0.51, val_loss=0.746, val_accuracy=0.5]  50%|█████     | 25/50 [05:37<05:34, 13.37s/epoch, loss=0.708, accuracy=0.514, val_loss=0.73, val_accuracy=0.515] 52%|█████▏    | 26/50 [05:50<05:23, 13.46s/epoch, loss=0.706, accuracy=0.52, val_loss=0.69, val_accuracy=0.5]    54%|█████▍    | 27/50 [06:04<05:09, 13.47s/epoch, loss=0.706, accuracy=0.527, val_loss=0.686, val_accuracy=0.547] 56%|█████▌    | 28/50 [06:17<04:52, 13.30s/epoch, loss=0.704, accuracy=0.528, val_loss=0.694, val_accuracy=0.5]   58%|█████▊    | 29/50 [06:29<04:32, 13.00s/epoch, loss=0.704, accuracy=0.535, val_loss=0.697, val_accuracy=0.522] 60%|██████    | 30/50 [06:42<04:19, 12.95s/epoch, loss=0.702, accuracy=0.536, val_loss=0.738, val_accuracy=0.5]   62%|██████▏   | 31/50 [06:55<04:09, 13.14s/epoch, loss=0.704, accuracy=0.531, val_loss=0.688, val_accuracy=0.5] 64%|██████▍   | 32/50 [07:08<03:53, 12.96s/epoch, loss=0.708, accuracy=0.524, val_loss=0.715, val_accuracy=0.545] 66%|██████▌   | 33/50 [07:21<03:40, 12.95s/epoch, loss=0.706, accuracy=0.53, val_loss=0.68, val_accuracy=0.559]   68%|██████▊   | 34/50 [07:33<03:25, 12.84s/epoch, loss=0.704, accuracy=0.539, val_loss=0.758, val_accuracy=0.5] 70%|███████   | 35/50 [07:46<03:10, 12.72s/epoch, loss=0.709, accuracy=0.524, val_loss=0.944, val_accuracy=0.5] 72%|███████▏  | 36/50 [07:59<02:58, 12.73s/epoch, loss=0.707, accuracy=0.525, val_loss=0.69, val_accuracy=0.5]  74%|███████▍  | 37/50 [08:12<02:46, 12.81s/epoch, loss=0.706, accuracy=0.525, val_loss=0.687, val_accuracy=0.5] 76%|███████▌  | 38/50 [08:25<02:35, 12.98s/epoch, loss=0.706, accuracy=0.521, val_loss=0.813, val_accuracy=0.5] 78%|███████▊  | 39/50 [08:38<02:23, 13.09s/epoch, loss=0.706, accuracy=0.525, val_loss=0.931, val_accuracy=0.5] 80%|████████  | 40/50 [08:52<02:11, 13.13s/epoch, loss=0.708, accuracy=0.522, val_loss=0.701, val_accuracy=0.546] 82%|████████▏ | 41/50 [09:05<01:59, 13.26s/epoch, loss=0.705, accuracy=0.534, val_loss=0.684, val_accuracy=0.563] 84%|████████▍ | 42/50 [09:19<01:46, 13.32s/epoch, loss=0.705, accuracy=0.533, val_loss=0.688, val_accuracy=0.553] 86%|████████▌ | 43/50 [09:32<01:33, 13.30s/epoch, loss=0.708, accuracy=0.531, val_loss=0.693, val_accuracy=0.559] 88%|████████▊ | 44/50 [09:46<01:20, 13.41s/epoch, loss=0.703, accuracy=0.535, val_loss=0.685, val_accuracy=0.559] 90%|█████████ | 45/50 [09:59<01:07, 13.47s/epoch, loss=0.704, accuracy=0.541, val_loss=0.693, val_accuracy=0.507] 92%|█████████▏| 46/50 [10:13<00:53, 13.49s/epoch, loss=0.712, accuracy=0.507, val_loss=0.721, val_accuracy=0.503] 94%|█████████▍| 47/50 [10:26<00:40, 13.41s/epoch, loss=0.715, accuracy=0.499, val_loss=1.11, val_accuracy=0.5]    96%|█████████▌| 48/50 [10:39<00:26, 13.30s/epoch, loss=0.712, accuracy=0.51, val_loss=0.807, val_accuracy=0.5] 98%|█████████▊| 49/50 [10:51<00:13, 13.05s/epoch, loss=0.709, accuracy=0.515, val_loss=0.801, val_accuracy=0.5]100%|██████████| 50/50 [11:04<00:00, 12.97s/epoch, loss=0.714, accuracy=0.506, val_loss=0.789, val_accuracy=0.5]100%|██████████| 50/50 [11:04<00:00, 13.30s/epoch, loss=0.714, accuracy=0.506, val_loss=0.789, val_accuracy=0.5]
+Test score: 0.7894575595855713
+Test accuracy: 0.5
