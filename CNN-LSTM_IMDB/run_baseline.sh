@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Declare output folder as variable
-out_folder="CNN-LSTM_IMDB/results/sgd_baseline"
+folder="CNN-LSTM_IMDB/"
+out_folder="results/sgd_baseline"
 max_ensemble_size=30
 
 #export NVIDIA_VISIBLE_DEVICES=all
@@ -32,9 +33,10 @@ python -m sgd_baseline \
 # If id is last id in array, run ensemble prediction
 if [ $SLURM_ARRAY_TASK_ID -eq $max_ensemble_size ]
 then
+    cd ..
     printf "\n\n* * * Run Prediction for ensemble = $SLURM_ARRAY_TASK_ID. * * *\n\n\n"
     python -m ensemble_prediction \
-        --folder=$out_folder \
+        --folder=$(printf "%s%s" $folder $out_folder) \
         --max_ensemble_size=$SLURM_ARRAY_TASK_ID \
         --use_case="imdb"
 fi
