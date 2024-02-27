@@ -43,6 +43,7 @@ parser.add_argument('--initial_lr', type=float, default=0.1, help='initial learn
 parser.add_argument('--momentum', type=float, default=0.98, help='momentum for SGD')
 parser.add_argument('--nesterov', action='store_true', help='use Nesterov momentum')
 parser.add_argument('--bootstrapping', action='store_true', help='use bootstrapping')
+parser.add_argument('--map_optimizer', action='store_true', help='use MAP optimizer instead of MLE')
 
 args = parser.parse_args()
 
@@ -67,7 +68,6 @@ pool_size = 4
 lstm_output_size = 70
 
 # Training
-map_regularization = True
 out_folder = args.out_folder
 os.makedirs(out_folder, exist_ok=True)
 experiment_id = args.id
@@ -79,6 +79,7 @@ initial_lr = args.initial_lr
 momentum = args.momentum
 nesterov = args.nesterov
 bootstrapping = args.bootstrapping
+map_optimizer = args.map_optimizer
 
 '''
 Note:
@@ -135,22 +136,37 @@ fn = os.path.join(save_dir, model_name + '_config.json')
 with open(fn, 'w') as f:
     json.dump(configuration, f, indent=4)
 
-reg_weight = 1.0 / x_train.shape[0]
-pfac = priorfactory.GaussianPriorFactory(prior_stddev=1.0,
-                                             weight=reg_weight)
+if map_optimizer:
+    reg_weight = 1.0 / x_train.shape[0]
+    print('Using MAP optimizer with reg_weight: ', str(reg_weight))
+    pfac = priorfactory.GaussianPriorFactory(prior_stddev=1.0, weight=reg_weight)
+    model = Sequential()
+    model.add(pfac(Embedding(max_features, embedding_size, input_length=maxlen)))
+    model.add(Dropout(0.25))
+    model.add(pfac(Conv1D(filters,
+                          kernel_size,
+                          padding='valid',
+                          activation='relu',
+                          strides=1)))
+    model.add(MaxPooling1D(pool_size=pool_size))
+    model.add(pfac(LSTM(lstm_output_size)))
+    model.add(pfac(Dense(1)))
+    model.add(Activation('sigmoid'))
 
-model = Sequential()
-model.add(Embedding(max_features, embedding_size, input_length=maxlen))
-model.add(Dropout(0.25))
-model.add(Conv1D(filters,
-                 kernel_size,
-                 padding='valid',
-                 activation='relu',
-                 strides=1))
-model.add(MaxPooling1D(pool_size=pool_size))
-model.add(LSTM(lstm_output_size))
-model.add(Dense(1))
-model.add(Activation('sigmoid'))
+else:
+    print('Using MLE optimizer')
+    model = Sequential()
+    model.add(Embedding(max_features, embedding_size, input_length=maxlen))
+    model.add(Dropout(0.25))
+    model.add(Conv1D(filters,
+                     kernel_size,
+                     padding='valid',
+                     activation='relu',
+                     strides=1))
+    model.add(MaxPooling1D(pool_size=pool_size))
+    model.add(LSTM(lstm_output_size))
+    model.add(Dense(1))
+    model.add(Activation('sigmoid'))
 
 optimizer_ = SGD(learning_rate=initial_lr, momentum=momentum, nesterov=nesterov)
 

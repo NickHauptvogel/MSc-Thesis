@@ -2,8 +2,8 @@
 
 # Declare output folder as variable
 folder="CNN-LSTM_IMDB/"
-out_folder="results/sgd_baseline"
-max_ensemble_size=30
+out_folder="results/50_independent_wenzel_no_bootstr"
+max_ensemble_size=50
 
 #export NVIDIA_VISIBLE_DEVICES=all
 #export CUDA_VISIBLE_DEVICES=0
@@ -27,8 +27,10 @@ python -m sgd_baseline \
     --seed=$SLURM_ARRAY_TASK_ID \
     --out_folder=$out_folder \
     --nesterov \
-    --bootstrapping \
-    --validation_split=0
+    --checkpointing \
+    --validation_split=0.2 \
+    --map_optimizer
+
 
 # If id is last id in array, run ensemble prediction
 if [ $SLURM_ARRAY_TASK_ID -eq $max_ensemble_size ]

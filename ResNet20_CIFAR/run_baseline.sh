@@ -2,8 +2,8 @@
 
 # Declare output folder as variable
 folder="ResNet20_CIFAR/"
-out_folder="results/sgd_baseline"
-max_ensemble_size=30
+out_folder="results/50_independent_wenzel_no_checkp_no_bootstr"
+max_ensemble_size=50
 
 #export NVIDIA_VISIBLE_DEVICES=all
 #export CUDA_VISIBLE_DEVICES=0
@@ -28,8 +28,8 @@ python -m sgd_baseline \
     --out_folder=$out_folder \
     --data_augmentation \
     --nesterov \
-    --bootstrapping \
-    --validation_split=0
+    --validation_split=0.1
+    #--bootstrapping \
     #--checkpointing \
     #--augm_shift=0.1 \
     #--initial_lr=1e-3 \
