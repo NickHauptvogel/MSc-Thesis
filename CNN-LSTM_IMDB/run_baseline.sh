@@ -1,5 +1,10 @@
 #!/bin/bash
 
+#SBATCH -o baseline_%a.out
+#SBATCH --time=00:20:00
+#SBATCH --gres=gpu:titanx:1
+#SBATCH --array=1-50
+
 # Declare output folder as variable
 folder="CNN-LSTM_IMDB/"
 out_folder="results/50_independent_wenzel_no_bootstr"
@@ -8,10 +13,6 @@ max_ensemble_size=50
 #export NVIDIA_VISIBLE_DEVICES=all
 #export CUDA_VISIBLE_DEVICES=0
 #export NVIDIA_DRIVER_CAPABILITIES=compute,utility
-#SBATCH -o baseline_%a.out
-#SBATCH --time=00:20:00
-#SBATCH --gres=gpu:titanx:1
-#SBATCH --array=1-$max_ensemble_size
 
 # If SLURM_ARRAY_TASK_ID is not set, set it to 1
 if [ -z ${SLURM_ARRAY_TASK_ID+x} ]; then
