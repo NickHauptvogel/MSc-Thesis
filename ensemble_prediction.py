@@ -23,7 +23,7 @@ def ensemble_prediction(folder: str, max_ensemble_size: int, plot: bool, use_cas
     elif use_case=='imdb':
         wenzeL_acc = 0.8703
         wenzeL_loss = 0.3044
-        ylim = (0.8, 0.88)
+        ylim = (0.83, 0.88)
         num_classes = 1
         max_features = 20000
         _, (_, y_test) = imdb.load_data(num_words=max_features)
@@ -44,7 +44,11 @@ def ensemble_prediction(folder: str, max_ensemble_size: int, plot: bool, use_cas
         predictions = []
         for subdir in subdirs:
             # Find prediction file
-            pred_file = [f.path for f in os.scandir(subdir) if f.name.endswith('predictions.pkl')][0]
+            pred_file = [f.path for f in os.scandir(subdir) if f.name.endswith('predictions.pkl')]
+            if len(pred_file) == 0:
+                print(f'No predictions found in {subdir}')
+                continue
+            pred_file = pred_file[0]
             # Load the predictions
             with open(pred_file, 'rb') as f:
                 y_pred = pickle.load(f)
@@ -155,7 +159,7 @@ def ensemble_prediction(folder: str, max_ensemble_size: int, plot: bool, use_cas
     # Horizontal line for accuracy of Wen et al. (2020), interpolated from the figure at 0.9363
     plt.axhline(wenzeL_acc, color='grey', linestyle='--', label='Wenzel et al. (2020)')
     plt.title('Ensemble accuracy')
-    plt.xticks(np.arange(ensemble_accs_mean[0][0], ensemble_accs_mean[-1][0] + 1, 2))
+    plt.xticks(np.arange(ensemble_accs_mean[0][0], ensemble_accs_mean[-1][0] + 1, 4))
     plt.grid()
     # Legend lower right
     plt.legend(loc='lower right')
@@ -186,9 +190,9 @@ def ensemble_prediction(folder: str, max_ensemble_size: int, plot: bool, use_cas
 if __name__ == '__main__':
     # Configuration
     parser = argparse.ArgumentParser(description='Ensemble prediction')
-    parser.add_argument('--folder', type=str, default='CNN-LSTM_IMDB/results/30_independent_wenzel_bootstr',
+    parser.add_argument('--folder', type=str, default='CNN-LSTM_IMDB/results/50_independent_wenzel_no_bootstr',
                         help='Folder with the models')
-    parser.add_argument('--max_ensemble_size', type=int, default=30,
+    parser.add_argument('--max_ensemble_size', type=int, default=50,
                         help='Maximum ensemble size')
     parser.add_argument('--plot', action='store_true', help='Plot the results')
     parser.add_argument('--use_case', type=str, default='imdb')
