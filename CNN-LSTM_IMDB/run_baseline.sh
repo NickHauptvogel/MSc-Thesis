@@ -1,13 +1,13 @@
 #!/bin/bash
 
-#SBATCH -o baseline_mle_%a.out
+#SBATCH -o bootstr_baseline_map_%a.out
 #SBATCH --time=00:20:00
 #SBATCH --gres=gpu:titanx:1
 #SBATCH --array=1-50
 
 # Declare output folder as variable
 folder="CNN-LSTM_IMDB/"
-out_folder="results/50_independent_wenzel_no_bootstr_mle"
+out_folder="results/50_independent_wenzel_bootstr_map"
 max_ensemble_size=50
 
 #export NVIDIA_VISIBLE_DEVICES=all
@@ -29,7 +29,8 @@ python -m sgd_baseline \
     --out_folder=$out_folder \
     --nesterov \
     --checkpointing \
-    --validation_split=0.2
+    --validation_split=0.0 \
+    --bootstrapping
     #--map_optimizer
 
 
