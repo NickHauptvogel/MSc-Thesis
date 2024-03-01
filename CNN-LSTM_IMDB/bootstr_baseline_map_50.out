@@ -1,232 +1,0 @@
-Thu Feb 29 21:33:07 2024       
-+---------------------------------------------------------------------------------------+
-| NVIDIA-SMI 545.23.08              Driver Version: 545.23.08    CUDA Version: 12.3     |
-|-----------------------------------------+----------------------+----------------------+
-| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
-| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
-|                                         |                      |               MIG M. |
-|=========================================+======================+======================|
-|   0  NVIDIA TITAN Xp                Off | 00000000:86:00.0 Off |                  N/A |
-| 36%   61C    P0              76W / 250W |      0MiB / 12288MiB |      0%      Default |
-|                                         |                      |                  N/A |
-+-----------------------------------------+----------------------+----------------------+
-                                                                                         
-+---------------------------------------------------------------------------------------+
-| Processes:                                                                            |
-|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
-|        ID   ID                                                             Usage      |
-|=======================================================================================|
-|  No running processes found                                                           |
-+---------------------------------------------------------------------------------------+
-
-
-* * * Run SGD for ID = 50. * * *
-
-
-2024-02-29 21:33:07.818684: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
-2024-02-29 21:33:12.622526: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
-2024-02-29 21:33:12.624185: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
-2024-02-29 21:33:12.667261: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
-pciBusID: 0000:86:00.0 name: NVIDIA TITAN Xp computeCapability: 6.1
-coreClock: 1.582GHz coreCount: 30 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 510.07GiB/s
-2024-02-29 21:33:12.667310: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
-2024-02-29 21:33:12.672490: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
-2024-02-29 21:33:12.672585: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
-2024-02-29 21:33:12.677603: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
-2024-02-29 21:33:12.680772: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
-2024-02-29 21:33:12.701857: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
-2024-02-29 21:33:12.704419: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
-2024-02-29 21:33:12.716467: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
-2024-02-29 21:33:12.717354: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
-2024-02-29 21:33:12.717457: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
-<__array_function__ internals>:5: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
-/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:159: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
-  x_train, y_train = np.array(xs[:idx]), np.array(labels[:idx])
-/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:160: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
-  x_test, y_test = np.array(xs[idx:]), np.array(labels[idx:])
-2024-02-29 21:33:19.713789: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 AVX512F FMA
-To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2024-02-29 21:33:19.714465: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
-2024-02-29 21:33:19.715710: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
-pciBusID: 0000:86:00.0 name: NVIDIA TITAN Xp computeCapability: 6.1
-coreClock: 1.582GHz coreCount: 30 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 510.07GiB/s
-2024-02-29 21:33:19.715754: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
-2024-02-29 21:33:19.715824: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
-2024-02-29 21:33:19.715854: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
-2024-02-29 21:33:19.715873: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
-2024-02-29 21:33:19.715892: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
-2024-02-29 21:33:19.715910: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
-2024-02-29 21:33:19.715931: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
-2024-02-29 21:33:19.715950: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
-2024-02-29 21:33:19.716550: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
-2024-02-29 21:33:19.716597: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
-2024-02-29 21:33:20.586943: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
-2024-02-29 21:33:20.587005: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
-2024-02-29 21:33:20.587017: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
-2024-02-29 21:33:20.588203: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11217 MB memory) -> physical GPU (device: 0, name: NVIDIA TITAN Xp, pci bus id: 0000:86:00.0, compute capability: 6.1)
-{'id': '50', 'seed': 50, 'out_folder': 'results/50_independent_wenzel_bootstr_map', 'batch_size': 32, 'epochs': 50, 'validation_split': 0.0, 'checkpointing': True, 'initial_lr': 0.1, 'momentum': 0.98, 'nesterov': True, 'bootstrapping': True, 'map_optimizer': False, 'model': 'CNN-LSTM', 'tf_version': '2.4.1', 'keras_version': '2.4.3', 'GPU': 'NVIDIA TITAN Xp'}
-Loading data...
-Pad sequences (samples x time)
-25000 train sequences
-9129 validation sequences
-25000 test sequences
-x_train shape: (25000, 100)
-x_val shape: (9129, 100)
-x_test shape: (25000, 100)
-Using MLE optimizer
-CNN-LSTM
-0epoch [00:00, ?epoch/s]  0%|          | 0/50 [00:00<?, ?epoch/s]2024-02-29 21:33:21.047083: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
-2024-02-29 21:33:21.059061: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2100000000 Hz
-2024-02-29 21:33:22.599875: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
-2024-02-29 21:33:22.838718: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
-2024-02-29 21:33:23.814244: W tensorflow/stream_executor/gpu/asm_compiler.cc:63] Running ptxas --version returned 256
-2024-02-29 21:33:23.868674: W tensorflow/stream_executor/gpu/redzone_allocator.cc:314] Internal: ptxas exited with non-zero error code 256, output: 
-Relying on driver to perform ptx compilation. 
-Modify $PATH to customize ptxas location.
-This message will be only logged once.
-  2%|▏         | 1/50 [00:14<11:56, 14.63s/epoch, loss=0.528, accuracy=0.711, val_loss=0.441, val_accuracy=0.807]  4%|▍         | 2/50 [00:21<07:54,  9.88s/epoch, loss=0.337, accuracy=0.856, val_loss=0.392, val_accuracy=0.82]   6%|▌         | 3/50 [00:27<06:35,  8.41s/epoch, loss=0.274, accuracy=0.891, val_loss=0.424, val_accuracy=0.831]  8%|▊         | 4/50 [00:34<05:48,  7.58s/epoch, loss=0.325, accuracy=0.859, val_loss=0.554, val_accuracy=0.736] 10%|█         | 5/50 [00:40<05:20,  7.12s/epoch, loss=0.594, accuracy=0.676, val_loss=0.668, val_accuracy=0.602] 12%|█▏        | 6/50 [00:46<05:00,  6.83s/epoch, loss=0.685, accuracy=0.56, val_loss=0.731, val_accuracy=0.496]  14%|█▍        | 7/50 [00:53<04:46,  6.66s/epoch, loss=0.706, accuracy=0.506, val_loss=0.696, val_accuracy=0.496] 16%|█▌        | 8/50 [00:59<04:34,  6.53s/epoch, loss=0.71, accuracy=0.499, val_loss=0.705, val_accuracy=0.496]  18%|█▊        | 9/50 [01:05<04:24,  6.45s/epoch, loss=0.71, accuracy=0.498, val_loss=0.693, val_accuracy=0.504] 20%|██        | 10/50 [01:11<04:15,  6.39s/epoch, loss=0.708, accuracy=0.497, val_loss=0.695, val_accuracy=0.496] 22%|██▏       | 11/50 [01:18<04:07,  6.34s/epoch, loss=0.708, accuracy=0.511, val_loss=0.715, val_accuracy=0.504] 24%|██▍       | 12/50 [01:24<04:00,  6.33s/epoch, loss=0.71, accuracy=0.501, val_loss=0.693, val_accuracy=0.504]  26%|██▌       | 13/50 [01:30<03:53,  6.31s/epoch, loss=0.71, accuracy=0.497, val_loss=0.7, val_accuracy=0.496]   28%|██▊       | 14/50 [01:36<03:47,  6.31s/epoch, loss=0.707, accuracy=0.501, val_loss=0.721, val_accuracy=0.504] 30%|███       | 15/50 [01:43<03:40,  6.30s/epoch, loss=0.711, accuracy=0.499, val_loss=0.714, val_accuracy=0.504] 32%|███▏      | 16/50 [01:49<03:33,  6.29s/epoch, loss=0.708, accuracy=0.5, val_loss=0.713, val_accuracy=0.496]   34%|███▍      | 17/50 [01:55<03:27,  6.28s/epoch, loss=0.708, accuracy=0.5, val_loss=0.771, val_accuracy=0.496] 36%|███▌      | 18/50 [02:01<03:20,  6.25s/epoch, loss=0.71, accuracy=0.494, val_loss=0.718, val_accuracy=0.504] 38%|███▊      | 19/50 [02:08<03:14,  6.27s/epoch, loss=0.709, accuracy=0.503, val_loss=0.737, val_accuracy=0.496] 40%|████      | 20/50 [02:14<03:07,  6.26s/epoch, loss=0.709, accuracy=0.503, val_loss=0.733, val_accuracy=0.496] 42%|████▏     | 21/50 [02:20<03:01,  6.25s/epoch, loss=0.709, accuracy=0.502, val_loss=0.762, val_accuracy=0.504] 44%|████▍     | 22/50 [02:26<02:54,  6.25s/epoch, loss=0.7, accuracy=0.521, val_loss=0.692, val_accuracy=0.505]   46%|████▌     | 23/50 [02:33<02:48,  6.25s/epoch, loss=0.705, accuracy=0.508, val_loss=0.715, val_accuracy=0.505] 48%|████▊     | 24/50 [02:39<02:42,  6.24s/epoch, loss=0.707, accuracy=0.51, val_loss=0.725, val_accuracy=0.504]  50%|█████     | 25/50 [02:45<02:35,  6.24s/epoch, loss=0.711, accuracy=0.497, val_loss=0.702, val_accuracy=0.504] 52%|█████▏    | 26/50 [02:51<02:30,  6.26s/epoch, loss=0.71, accuracy=0.498, val_loss=0.738, val_accuracy=0.496]  54%|█████▍    | 27/50 [02:57<02:22,  6.17s/epoch, loss=0.709, accuracy=0.503, val_loss=0.687, val_accuracy=0.518] 56%|█████▌    | 28/50 [03:03<02:13,  6.09s/epoch, loss=0.708, accuracy=0.509, val_loss=0.702, val_accuracy=0.496] 58%|█████▊    | 29/50 [03:09<02:06,  6.03s/epoch, loss=0.689, accuracy=0.541, val_loss=0.716, val_accuracy=0.532] 60%|██████    | 30/50 [03:15<01:59,  5.99s/epoch, loss=0.697, accuracy=0.537, val_loss=0.699, val_accuracy=0.496] 62%|██████▏   | 31/50 [03:21<01:54,  6.04s/epoch, loss=0.707, accuracy=0.498, val_loss=0.721, val_accuracy=0.496] 64%|██████▍   | 32/50 [03:28<01:50,  6.12s/epoch, loss=0.709, accuracy=0.499, val_loss=0.705, val_accuracy=0.497] 66%|██████▌   | 33/50 [03:34<01:45,  6.22s/epoch, loss=0.707, accuracy=0.501, val_loss=0.691, val_accuracy=0.496] 68%|██████▊   | 34/50 [03:40<01:40,  6.25s/epoch, loss=0.707, accuracy=0.509, val_loss=0.735, val_accuracy=0.496] 70%|███████   | 35/50 [03:47<01:34,  6.27s/epoch, loss=0.702, accuracy=0.511, val_loss=0.688, val_accuracy=0.496] 72%|███████▏  | 36/50 [03:53<01:29,  6.38s/epoch, loss=0.697, accuracy=0.522, val_loss=0.698, val_accuracy=0.539] 74%|███████▍  | 37/50 [04:00<01:23,  6.42s/epoch, loss=0.7, accuracy=0.514, val_loss=0.68, val_accuracy=0.532]    76%|███████▌  | 38/50 [04:06<01:16,  6.35s/epoch, loss=0.696, accuracy=0.526, val_loss=0.749, val_accuracy=0.504] 78%|███████▊  | 39/50 [04:12<01:08,  6.25s/epoch, loss=0.705, accuracy=0.522, val_loss=0.804, val_accuracy=0.504] 80%|████████  | 40/50 [04:18<01:01,  6.19s/epoch, loss=0.702, accuracy=0.52, val_loss=0.767, val_accuracy=0.496]  82%|████████▏ | 41/50 [04:24<00:55,  6.15s/epoch, loss=0.705, accuracy=0.523, val_loss=0.733, val_accuracy=0.542] 84%|████████▍ | 42/50 [04:30<00:49,  6.13s/epoch, loss=0.705, accuracy=0.527, val_loss=0.687, val_accuracy=0.544] 86%|████████▌ | 43/50 [04:37<00:43,  6.18s/epoch, loss=0.7, accuracy=0.532, val_loss=0.689, val_accuracy=0.548]   88%|████████▊ | 44/50 [04:43<00:37,  6.18s/epoch, loss=0.704, accuracy=0.526, val_loss=0.691, val_accuracy=0.552] 90%|█████████ | 45/50 [04:49<00:30,  6.16s/epoch, loss=0.702, accuracy=0.527, val_loss=0.694, val_accuracy=0.496] 92%|█████████▏| 46/50 [04:55<00:24,  6.19s/epoch, loss=0.704, accuracy=0.532, val_loss=0.702, val_accuracy=0.553] 94%|█████████▍| 47/50 [05:01<00:18,  6.18s/epoch, loss=0.705, accuracy=0.534, val_loss=0.717, val_accuracy=0.496] 96%|█████████▌| 48/50 [05:07<00:12,  6.15s/epoch, loss=0.706, accuracy=0.528, val_loss=0.727, val_accuracy=0.504] 98%|█████████▊| 49/50 [05:13<00:06,  6.13s/epoch, loss=0.707, accuracy=0.525, val_loss=0.839, val_accuracy=0.496]100%|██████████| 50/50 [05:19<00:00,  6.10s/epoch, loss=0.706, accuracy=0.519, val_loss=0.751, val_accuracy=0.496]100%|██████████| 50/50 [05:19<00:00,  6.40s/epoch, loss=0.706, accuracy=0.519, val_loss=0.751, val_accuracy=0.496]
-Test score: 0.4129025340080261
-Test accuracy: 0.8348000049591064
-
-
-* * * Run Prediction for ensemble = 50. * * *
-
-
-2024-02-29 21:38:49.099112: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
-<__array_function__ internals>:5: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
-/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:159: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
-  x_train, y_train = np.array(xs[:idx]), np.array(labels[:idx])
-/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:160: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
-  x_test, y_test = np.array(xs[idx:]), np.array(labels[idx:])
-2024-02-29 21:39:06.726468: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
-2024-02-29 21:39:06.728092: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
-2024-02-29 21:39:06.770815: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
-pciBusID: 0000:86:00.0 name: NVIDIA TITAN Xp computeCapability: 6.1
-coreClock: 1.582GHz coreCount: 30 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 510.07GiB/s
-2024-02-29 21:39:06.770879: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
-2024-02-29 21:39:06.774472: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
-2024-02-29 21:39:06.774555: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
-2024-02-29 21:39:06.777067: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
-2024-02-29 21:39:06.777998: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
-2024-02-29 21:39:06.780494: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
-2024-02-29 21:39:06.781862: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
-2024-02-29 21:39:06.786556: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
-2024-02-29 21:39:06.787305: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
-2024-02-29 21:39:06.787800: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 AVX512F FMA
-To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2024-02-29 21:39:06.788437: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
-2024-02-29 21:39:06.788876: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
-pciBusID: 0000:86:00.0 name: NVIDIA TITAN Xp computeCapability: 6.1
-coreClock: 1.582GHz coreCount: 30 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 510.07GiB/s
-2024-02-29 21:39:06.788910: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
-2024-02-29 21:39:06.788938: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
-2024-02-29 21:39:06.788954: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
-2024-02-29 21:39:06.788969: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
-2024-02-29 21:39:06.788994: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
-2024-02-29 21:39:06.789009: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
-2024-02-29 21:39:06.789025: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
-2024-02-29 21:39:06.789040: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
-2024-02-29 21:39:06.789615: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
-2024-02-29 21:39:06.789658: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
-2024-02-29 21:39:07.386767: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
-2024-02-29 21:39:07.386844: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
-2024-02-29 21:39:07.386856: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
-2024-02-29 21:39:07.388060: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11217 MB memory) -> physical GPU (device: 0, name: NVIDIA TITAN Xp, pci bus id: 0000:86:00.0, compute capability: 6.1)
-Mean Accuracy Majority Vote: 0.825 (Argmax Ensemble: 0.845 ) with 2 models
-Mean Loss: 0.351 with 2 models
-Mean Accuracy Majority Vote: 0.846 (Argmax Ensemble: 0.849 ) with 3 models
-Mean Loss: 0.343 with 3 models
-Mean Accuracy Majority Vote: 0.843 (Argmax Ensemble: 0.852 ) with 4 models
-Mean Loss: 0.34 with 4 models
-Mean Accuracy Majority Vote: 0.852 (Argmax Ensemble: 0.855 ) with 5 models
-Mean Loss: 0.334 with 5 models
-Mean Accuracy Majority Vote: 0.852 (Argmax Ensemble: 0.856 ) with 6 models
-Mean Loss: 0.331 with 6 models
-Mean Accuracy Majority Vote: 0.855 (Argmax Ensemble: 0.858 ) with 7 models
-Mean Loss: 0.33 with 7 models
-Mean Accuracy Majority Vote: 0.854 (Argmax Ensemble: 0.857 ) with 8 models
-Mean Loss: 0.331 with 8 models
-Mean Accuracy Majority Vote: 0.856 (Argmax Ensemble: 0.858 ) with 9 models
-Mean Loss: 0.328 with 9 models
-Mean Accuracy Majority Vote: 0.857 (Argmax Ensemble: 0.859 ) with 10 models
-Mean Loss: 0.328 with 10 models
-Mean Accuracy Majority Vote: 0.858 (Argmax Ensemble: 0.86 ) with 11 models
-Mean Loss: 0.327 with 11 models
-Mean Accuracy Majority Vote: 0.859 (Argmax Ensemble: 0.86 ) with 12 models
-Mean Loss: 0.325 with 12 models
-Mean Accuracy Majority Vote: 0.859 (Argmax Ensemble: 0.86 ) with 13 models
-Mean Loss: 0.325 with 13 models
-Mean Accuracy Majority Vote: 0.859 (Argmax Ensemble: 0.861 ) with 14 models
-Mean Loss: 0.325 with 14 models
-Mean Accuracy Majority Vote: 0.859 (Argmax Ensemble: 0.86 ) with 15 models
-Mean Loss: 0.326 with 15 models
-Mean Accuracy Majority Vote: 0.859 (Argmax Ensemble: 0.86 ) with 16 models
-Mean Loss: 0.326 with 16 models
-Mean Accuracy Majority Vote: 0.86 (Argmax Ensemble: 0.861 ) with 17 models
-Mean Loss: 0.325 with 17 models
-Mean Accuracy Majority Vote: 0.86 (Argmax Ensemble: 0.861 ) with 18 models
-Mean Loss: 0.324 with 18 models
-Mean Accuracy Majority Vote: 0.86 (Argmax Ensemble: 0.861 ) with 19 models
-Mean Loss: 0.324 with 19 models
-Mean Accuracy Majority Vote: 0.861 (Argmax Ensemble: 0.861 ) with 20 models
-Mean Loss: 0.323 with 20 models
-Mean Accuracy Majority Vote: 0.86 (Argmax Ensemble: 0.861 ) with 21 models
-Mean Loss: 0.324 with 21 models
-Mean Accuracy Majority Vote: 0.861 (Argmax Ensemble: 0.861 ) with 22 models
-Mean Loss: 0.322 with 22 models
-Mean Accuracy Majority Vote: 0.861 (Argmax Ensemble: 0.861 ) with 23 models
-Mean Loss: 0.323 with 23 models
-Mean Accuracy Majority Vote: 0.861 (Argmax Ensemble: 0.862 ) with 24 models
-Mean Loss: 0.323 with 24 models
-Mean Accuracy Majority Vote: 0.861 (Argmax Ensemble: 0.862 ) with 25 models
-Mean Loss: 0.323 with 25 models
-Mean Accuracy Majority Vote: 0.861 (Argmax Ensemble: 0.862 ) with 26 models
-Mean Loss: 0.323 with 26 models
-Mean Accuracy Majority Vote: 0.861 (Argmax Ensemble: 0.861 ) with 27 models
-Mean Loss: 0.323 with 27 models
-Mean Accuracy Majority Vote: 0.861 (Argmax Ensemble: 0.861 ) with 28 models
-Mean Loss: 0.323 with 28 models
-Mean Accuracy Majority Vote: 0.861 (Argmax Ensemble: 0.861 ) with 29 models
-Mean Loss: 0.323 with 29 models
-Mean Accuracy Majority Vote: 0.862 (Argmax Ensemble: 0.861 ) with 30 models
-Mean Loss: 0.323 with 30 models
-Mean Accuracy Majority Vote: 0.861 (Argmax Ensemble: 0.861 ) with 31 models
-Mean Loss: 0.323 with 31 models
-Mean Accuracy Majority Vote: 0.862 (Argmax Ensemble: 0.862 ) with 32 models
-Mean Loss: 0.323 with 32 models
-Mean Accuracy Majority Vote: 0.862 (Argmax Ensemble: 0.862 ) with 33 models
-Mean Loss: 0.323 with 33 models
-Mean Accuracy Majority Vote: 0.862 (Argmax Ensemble: 0.862 ) with 34 models
-Mean Loss: 0.322 with 34 models
-Mean Accuracy Majority Vote: 0.862 (Argmax Ensemble: 0.862 ) with 35 models
-Mean Loss: 0.322 with 35 models
-Mean Accuracy Majority Vote: 0.862 (Argmax Ensemble: 0.862 ) with 36 models
-Mean Loss: 0.322 with 36 models
-Mean Accuracy Majority Vote: 0.862 (Argmax Ensemble: 0.862 ) with 37 models
-Mean Loss: 0.323 with 37 models
-Mean Accuracy Majority Vote: 0.862 (Argmax Ensemble: 0.861 ) with 38 models
-Mean Loss: 0.322 with 38 models
-Mean Accuracy Majority Vote: 0.862 (Argmax Ensemble: 0.861 ) with 39 models
-Mean Loss: 0.322 with 39 models
-Mean Accuracy Majority Vote: 0.862 (Argmax Ensemble: 0.862 ) with 40 models
-Mean Loss: 0.322 with 40 models
-Mean Accuracy Majority Vote: 0.862 (Argmax Ensemble: 0.862 ) with 41 models
-Mean Loss: 0.322 with 41 models
-Mean Accuracy Majority Vote: 0.862 (Argmax Ensemble: 0.862 ) with 42 models
-Mean Loss: 0.322 with 42 models
-Mean Accuracy Majority Vote: 0.862 (Argmax Ensemble: 0.862 ) with 43 models
-Mean Loss: 0.322 with 43 models
-Mean Accuracy Majority Vote: 0.862 (Argmax Ensemble: 0.862 ) with 44 models
-Mean Loss: 0.322 with 44 models
-Mean Accuracy Majority Vote: 0.862 (Argmax Ensemble: 0.862 ) with 45 models
-Mean Loss: 0.322 with 45 models
-Mean Accuracy Majority Vote: 0.862 (Argmax Ensemble: 0.862 ) with 46 models
-Mean Loss: 0.322 with 46 models
-Mean Accuracy Majority Vote: 0.862 (Argmax Ensemble: 0.862 ) with 47 models
-Mean Loss: 0.322 with 47 models
-Mean Accuracy Majority Vote: 0.862 (Argmax Ensemble: 0.862 ) with 48 models
-Mean Loss: 0.322 with 48 models
-Mean Accuracy Majority Vote: 0.862 (Argmax Ensemble: 0.862 ) with 49 models
-Mean Loss: 0.322 with 49 models
-Mean Accuracy Majority Vote: 0.862 (Argmax Ensemble: 0.861 ) with 50 models
-Mean Loss: 0.322 with 50 models

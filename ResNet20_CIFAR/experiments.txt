@@ -1,0 +1,15 @@
+all 30_independent without random initialization
+Random init Checkp Bootstr
+1 0 0 50_independent_wenzel_no_checkp_no_bootstr has validation set (can be used for tandem loss)
+1 0 0 50_independent_wenzel_no_checkp_2 no validation set, full training data
+0 0 1 30_independent_wenzel_no_checkp_bootstr
+0 0 0 30_independent_wenzel_hyperparams_no_checkp
+0 1 0 30_independent_wenzel_hyperparams_checkp
+
+
+
+Random init MAP Bootstr
+1 1 0 50_independent_wenzel_no_bootstr_map
+1 0 0 50_independent_wenzel_no_bootstr_mle
+1 1 1 50_independent_wenzel_bootstr_map
+1 0 1 50_independent_wenzel_bootstr_mle Missing

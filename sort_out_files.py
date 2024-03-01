@@ -2,8 +2,10 @@ import os
 
 
 def sort_out_files():
-    target_folder = 'CNN-LSTM_IMDB/results/50_independent_wenzel_no_bootstr'
-    out_files_folder = 'CNN-LSTM_IMDB'
+    #target_folder = 'CNN-LSTM_IMDB/results/50_independent_wenzel_bootstr_map'
+    #out_files_folder = 'CNN-LSTM_IMDB'
+    target_folder = 'ResNet20_CIFAR/results/50_independent_wenzel_no_checkp_2'
+    out_files_folder = 'ResNet20_CIFAR'
 
     # Get all .out files in out_files_folder
     out_files = [f for f in os.listdir(out_files_folder) if f.endswith('.out')]
