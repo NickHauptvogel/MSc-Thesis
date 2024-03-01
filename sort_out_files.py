@@ -27,8 +27,8 @@ def sort_out_files():
 
 
 def sort_epoch_budget_folders():
-    target_folder = 'ResNet20_CIFAR/results/30_independent_wenzel_no_checkp_bootstr'
-    current_folder = 'ResNet20_CIFAR'
+    target_folder = 'CNN-LSTM_IMDB/results/epoch_budget'
+    current_folder = 'CNN-LSTM_IMDB/results/epoch_budget'
 
     # Get all subdirectories in current_folder that start with 2024
     subdirs = [f.path for f in os.scandir(current_folder) if f.is_dir() and f.name.startswith('2024')]
@@ -45,4 +45,5 @@ def sort_epoch_budget_folders():
         os.rename(subdir, os.path.join(ensemble_folder, model))
 
 if __name__ == '__main__':
-    sort_out_files()
+    #sort_out_files()
+    sort_epoch_budget_folders()

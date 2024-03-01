@@ -1,0 +1,1199 @@
+Fri Mar  1 12:57:11 2024       
++---------------------------------------------------------------------------------------+
+| NVIDIA-SMI 545.23.08              Driver Version: 545.23.08    CUDA Version: 12.3     |
+|-----------------------------------------+----------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
+|                                         |                      |               MIG M. |
+|=========================================+======================+======================|
+|   0  NVIDIA TITAN X (Pascal)        Off | 00000000:02:00.0 Off |                  N/A |
+| 36%   65C    P0              80W / 250W |      0MiB / 12288MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+                                                                                         
++---------------------------------------------------------------------------------------+
+| Processes:                                                                            |
+|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
+|        ID   ID                                                             Usage      |
+|=======================================================================================|
+|  No running processes found                                                           |
++---------------------------------------------------------------------------------------+
+
+
+* * * Run SGD for cluster size = 17. * * *
+
+
+Budget: 29
+
+
+* * * Run SGD for ID = 17_1. * * *
+
+
+2024-03-01 12:57:12.722693: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 12:57:21.376884: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 12:57:21.378129: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2024-03-01 12:57:21.415331: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 12:57:21.415373: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 12:57:21.440274: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 12:57:21.440379: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 12:57:21.464381: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 12:57:21.528320: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 12:57:21.711495: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 12:57:21.744578: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 12:57:21.770135: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 12:57:21.770778: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 12:57:21.770876: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+<__array_function__ internals>:5: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:159: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_train, y_train = np.array(xs[:idx]), np.array(labels[:idx])
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:160: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_test, y_test = np.array(xs[idx:]), np.array(labels[idx:])
+2024-03-01 12:57:27.237173: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-03-01 12:57:27.237648: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 12:57:27.238243: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 12:57:27.238277: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 12:57:27.238334: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 12:57:27.238353: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 12:57:27.238373: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 12:57:27.238390: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 12:57:27.238409: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 12:57:27.238428: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 12:57:27.238447: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 12:57:27.238890: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 12:57:27.238928: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 12:57:28.284845: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
+2024-03-01 12:57:28.284909: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
+2024-03-01 12:57:28.284917: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
+2024-03-01 12:57:28.285872: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11227 MB memory) -> physical GPU (device: 0, name: NVIDIA TITAN X (Pascal), pci bus id: 0000:02:00.0, compute capability: 6.1)
+{'id': '17_01', 'seed': 1, 'out_folder': 'results/epoch_budget', 'batch_size': 32, 'epochs': 29, 'validation_split': 0.2, 'checkpointing': True, 'initial_lr': 0.1, 'momentum': 0.98, 'nesterov': True, 'bootstrapping': False, 'map_optimizer': True, 'model': 'CNN-LSTM', 'tf_version': '2.4.1', 'keras_version': '2.4.3', 'GPU': 'NVIDIA TITAN X (Pascal)'}
+Loading data...
+Pad sequences (samples x time)
+20000 train sequences
+5000 validation sequences
+25000 test sequences
+x_train shape: (20000, 100)
+x_val shape: (5000, 100)
+x_test shape: (25000, 100)
+Using MAP optimizer with reg_weight:  5e-05
+CNN-LSTM
+0epoch [00:00, ?epoch/s]  0%|          | 0/29 [00:00<?, ?epoch/s]2024-03-01 12:57:28.712083: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2024-03-01 12:57:28.724117: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2600020000 Hz
+2024-03-01 12:57:30.210894: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 12:57:30.608835: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 12:57:31.766448: W tensorflow/stream_executor/gpu/asm_compiler.cc:63] Running ptxas --version returned 256
+2024-03-01 12:57:31.823081: W tensorflow/stream_executor/gpu/redzone_allocator.cc:314] Internal: ptxas exited with non-zero error code 256, output: 
+Relying on driver to perform ptx compilation. 
+Modify $PATH to customize ptxas location.
+This message will be only logged once.
+  3%|▎         | 1/29 [00:16<07:29, 16.06s/epoch, loss=0.697, accuracy=0.597, val_loss=0.558, val_accuracy=0.77]  7%|▋         | 2/29 [00:25<05:23, 11.97s/epoch, loss=0.482, accuracy=0.815, val_loss=0.475, val_accuracy=0.818] 10%|█         | 3/29 [00:33<04:32, 10.50s/epoch, loss=0.436, accuracy=0.856, val_loss=0.495, val_accuracy=0.834] 14%|█▍        | 4/29 [00:42<04:04,  9.79s/epoch, loss=0.428, accuracy=0.874, val_loss=0.509, val_accuracy=0.835] 17%|█▋        | 5/29 [00:51<03:43,  9.33s/epoch, loss=0.451, accuracy=0.879, val_loss=0.545, val_accuracy=0.84]  21%|██        | 6/29 [00:59<03:26,  8.99s/epoch, loss=0.476, accuracy=0.888, val_loss=0.61, val_accuracy=0.832] 24%|██▍       | 7/29 [01:07<03:13,  8.79s/epoch, loss=0.649, accuracy=0.837, val_loss=0.895, val_accuracy=0.742] 28%|██▊       | 8/29 [01:16<03:02,  8.68s/epoch, loss=0.979, accuracy=0.736, val_loss=1.19, val_accuracy=0.653]  31%|███       | 9/29 [01:24<02:51,  8.57s/epoch, loss=1.15, accuracy=0.677, val_loss=1.1, val_accuracy=0.695]   34%|███▍      | 10/29 [01:32<02:40,  8.45s/epoch, loss=1.13, accuracy=0.662, val_loss=1.13, val_accuracy=0.643] 38%|███▊      | 11/29 [01:41<02:30,  8.38s/epoch, loss=1.14, accuracy=0.578, val_loss=1.1, val_accuracy=0.548]  41%|████▏     | 12/29 [01:49<02:21,  8.33s/epoch, loss=1.06, accuracy=0.563, val_loss=0.993, val_accuracy=0.604] 45%|████▍     | 13/29 [01:57<02:12,  8.26s/epoch, loss=0.981, accuracy=0.584, val_loss=0.991, val_accuracy=0.55] 48%|████▊     | 14/29 [02:05<02:04,  8.32s/epoch, loss=0.951, accuracy=0.614, val_loss=0.976, val_accuracy=0.586] 52%|█████▏    | 15/29 [02:14<01:56,  8.36s/epoch, loss=1, accuracy=0.628, val_loss=1.02, val_accuracy=0.615]      55%|█████▌    | 16/29 [02:22<01:49,  8.40s/epoch, loss=1.05, accuracy=0.567, val_loss=1.09, val_accuracy=0.517] 59%|█████▊    | 17/29 [02:31<01:40,  8.38s/epoch, loss=1.03, accuracy=0.557, val_loss=0.988, val_accuracy=0.556] 62%|██████▏   | 18/29 [02:39<01:32,  8.38s/epoch, loss=0.981, accuracy=0.545, val_loss=0.938, val_accuracy=0.571] 66%|██████▌   | 19/29 [02:47<01:24,  8.41s/epoch, loss=0.924, accuracy=0.57, val_loss=0.891, val_accuracy=0.489]  69%|██████▉   | 20/29 [02:56<01:16,  8.46s/epoch, loss=0.86, accuracy=0.601, val_loss=0.825, val_accuracy=0.617] 72%|███████▏  | 21/29 [03:05<01:07,  8.50s/epoch, loss=0.811, accuracy=0.653, val_loss=0.843, val_accuracy=0.662] 76%|███████▌  | 22/29 [03:13<00:58,  8.42s/epoch, loss=0.854, accuracy=0.615, val_loss=0.854, val_accuracy=0.62]  79%|███████▉  | 23/29 [03:21<00:50,  8.37s/epoch, loss=0.809, accuracy=0.651, val_loss=0.809, val_accuracy=0.669] 83%|████████▎ | 24/29 [03:29<00:41,  8.31s/epoch, loss=0.793, accuracy=0.668, val_loss=0.793, val_accuracy=0.648] 86%|████████▌ | 25/29 [03:38<00:33,  8.41s/epoch, loss=0.786, accuracy=0.673, val_loss=0.777, val_accuracy=0.706] 90%|████████▉ | 26/29 [03:46<00:25,  8.37s/epoch, loss=0.803, accuracy=0.668, val_loss=0.838, val_accuracy=0.622] 93%|█████████▎| 27/29 [03:54<00:16,  8.32s/epoch, loss=0.79, accuracy=0.694, val_loss=0.882, val_accuracy=0.594]  97%|█████████▋| 28/29 [04:03<00:08,  8.29s/epoch, loss=0.85, accuracy=0.647, val_loss=0.817, val_accuracy=0.694]100%|██████████| 29/29 [04:11<00:00,  8.35s/epoch, loss=0.881, accuracy=0.641, val_loss=0.907, val_accuracy=0.644]100%|██████████| 29/29 [04:11<00:00,  8.68s/epoch, loss=0.881, accuracy=0.641, val_loss=0.907, val_accuracy=0.644]
+Test score: 0.5513084530830383
+Test accuracy: 0.8412399888038635
+
+
+* * * Run SGD for ID = 17_2. * * *
+
+
+2024-03-01 13:01:49.006210: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:01:54.393368: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 13:01:54.394559: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2024-03-01 13:01:54.432725: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 13:01:54.432778: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:01:54.436491: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:01:54.436549: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 13:01:54.439182: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 13:01:54.440624: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 13:01:54.443994: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 13:01:54.445801: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 13:01:54.451008: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:01:54.451688: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 13:01:54.451790: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+<__array_function__ internals>:5: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:159: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_train, y_train = np.array(xs[:idx]), np.array(labels[:idx])
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:160: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_test, y_test = np.array(xs[idx:]), np.array(labels[idx:])
+2024-03-01 13:02:00.014667: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-03-01 13:02:00.015377: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 13:02:00.015992: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 13:02:00.016029: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:02:00.016069: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:02:00.016085: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 13:02:00.016100: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 13:02:00.016116: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 13:02:00.016130: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 13:02:00.016146: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 13:02:00.016161: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:02:00.016609: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 13:02:00.016652: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:02:00.683016: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
+2024-03-01 13:02:00.683075: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
+2024-03-01 13:02:00.683084: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
+2024-03-01 13:02:00.684071: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11227 MB memory) -> physical GPU (device: 0, name: NVIDIA TITAN X (Pascal), pci bus id: 0000:02:00.0, compute capability: 6.1)
+{'id': '17_02', 'seed': 2, 'out_folder': 'results/epoch_budget', 'batch_size': 32, 'epochs': 29, 'validation_split': 0.2, 'checkpointing': True, 'initial_lr': 0.1, 'momentum': 0.98, 'nesterov': True, 'bootstrapping': False, 'map_optimizer': True, 'model': 'CNN-LSTM', 'tf_version': '2.4.1', 'keras_version': '2.4.3', 'GPU': 'NVIDIA TITAN X (Pascal)'}
+Loading data...
+Pad sequences (samples x time)
+20000 train sequences
+5000 validation sequences
+25000 test sequences
+x_train shape: (20000, 100)
+x_val shape: (5000, 100)
+x_test shape: (25000, 100)
+Using MAP optimizer with reg_weight:  5e-05
+CNN-LSTM
+0epoch [00:00, ?epoch/s]  0%|          | 0/29 [00:00<?, ?epoch/s]2024-03-01 13:02:01.094334: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2024-03-01 13:02:01.106117: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2600020000 Hz
+2024-03-01 13:02:02.623783: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:02:02.800171: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:02:03.504750: W tensorflow/stream_executor/gpu/asm_compiler.cc:63] Running ptxas --version returned 256
+2024-03-01 13:02:03.561865: W tensorflow/stream_executor/gpu/redzone_allocator.cc:314] Internal: ptxas exited with non-zero error code 256, output: 
+Relying on driver to perform ptx compilation. 
+Modify $PATH to customize ptxas location.
+This message will be only logged once.
+  3%|▎         | 1/29 [00:14<06:55, 14.83s/epoch, loss=0.663, accuracy=0.636, val_loss=0.516, val_accuracy=0.797]  7%|▋         | 2/29 [00:23<05:02, 11.20s/epoch, loss=0.485, accuracy=0.818, val_loss=0.449, val_accuracy=0.844] 10%|█         | 3/29 [00:31<04:10,  9.64s/epoch, loss=0.426, accuracy=0.859, val_loss=0.478, val_accuracy=0.842] 14%|█▍        | 4/29 [00:38<03:38,  8.74s/epoch, loss=0.433, accuracy=0.872, val_loss=0.532, val_accuracy=0.837] 17%|█▋        | 5/29 [00:46<03:18,  8.27s/epoch, loss=0.422, accuracy=0.888, val_loss=0.558, val_accuracy=0.837] 21%|██        | 6/29 [00:54<03:11,  8.32s/epoch, loss=0.444, accuracy=0.896, val_loss=0.607, val_accuracy=0.831] 24%|██▍       | 7/29 [01:02<03:03,  8.32s/epoch, loss=0.47, accuracy=0.899, val_loss=0.679, val_accuracy=0.824]  28%|██▊       | 8/29 [01:11<02:56,  8.42s/epoch, loss=0.59, accuracy=0.868, val_loss=0.821, val_accuracy=0.799] 31%|███       | 9/29 [01:20<02:49,  8.48s/epoch, loss=1.04, accuracy=0.689, val_loss=1.22, val_accuracy=0.527]  34%|███▍      | 10/29 [01:28<02:41,  8.51s/epoch, loss=1.17, accuracy=0.61, val_loss=1.15, val_accuracy=0.618] 38%|███▊      | 11/29 [01:37<02:33,  8.50s/epoch, loss=1.08, accuracy=0.667, val_loss=1.08, val_accuracy=0.692] 41%|████▏     | 12/29 [01:45<02:25,  8.58s/epoch, loss=1.14, accuracy=0.659, val_loss=1.26, val_accuracy=0.618] 45%|████▍     | 13/29 [01:54<02:17,  8.59s/epoch, loss=1.12, accuracy=0.654, val_loss=1.1, val_accuracy=0.668]  48%|████▊     | 14/29 [02:03<02:09,  8.62s/epoch, loss=1.07, accuracy=0.68, val_loss=1.13, val_accuracy=0.544] 52%|█████▏    | 15/29 [02:11<02:00,  8.63s/epoch, loss=1.09, accuracy=0.61, val_loss=1.06, val_accuracy=0.622] 55%|█████▌    | 16/29 [02:20<01:52,  8.66s/epoch, loss=1.02, accuracy=0.623, val_loss=1.03, val_accuracy=0.648] 59%|█████▊    | 17/29 [02:29<01:43,  8.65s/epoch, loss=1.05, accuracy=0.599, val_loss=1.08, val_accuracy=0.564] 62%|██████▏   | 18/29 [02:37<01:34,  8.61s/epoch, loss=1.04, accuracy=0.583, val_loss=0.965, val_accuracy=0.62] 66%|██████▌   | 19/29 [02:46<01:25,  8.55s/epoch, loss=0.96, accuracy=0.61, val_loss=0.947, val_accuracy=0.613] 69%|██████▉   | 20/29 [02:54<01:16,  8.54s/epoch, loss=0.946, accuracy=0.613, val_loss=0.941, val_accuracy=0.575] 72%|███████▏  | 21/29 [03:03<01:08,  8.57s/epoch, loss=0.953, accuracy=0.595, val_loss=0.924, val_accuracy=0.626] 76%|███████▌  | 22/29 [03:11<00:59,  8.53s/epoch, loss=0.931, accuracy=0.607, val_loss=0.964, val_accuracy=0.596] 79%|███████▉  | 23/29 [03:20<00:50,  8.49s/epoch, loss=0.948, accuracy=0.604, val_loss=0.912, val_accuracy=0.623] 83%|████████▎ | 24/29 [03:28<00:42,  8.43s/epoch, loss=0.935, accuracy=0.615, val_loss=0.923, val_accuracy=0.603] 86%|████████▌ | 25/29 [03:36<00:33,  8.47s/epoch, loss=0.927, accuracy=0.599, val_loss=0.899, val_accuracy=0.645] 90%|████████▉ | 26/29 [03:45<00:25,  8.59s/epoch, loss=0.88, accuracy=0.653, val_loss=0.842, val_accuracy=0.696]  93%|█████████▎| 27/29 [03:54<00:17,  8.64s/epoch, loss=0.878, accuracy=0.654, val_loss=1, val_accuracy=0.604]    97%|█████████▋| 28/29 [04:03<00:08,  8.62s/epoch, loss=0.937, accuracy=0.581, val_loss=0.879, val_accuracy=0.638]100%|██████████| 29/29 [04:11<00:00,  8.60s/epoch, loss=0.865, accuracy=0.651, val_loss=0.835, val_accuracy=0.671]100%|██████████| 29/29 [04:11<00:00,  8.68s/epoch, loss=0.865, accuracy=0.651, val_loss=0.835, val_accuracy=0.671]
+Test score: 0.4500955045223236
+Test accuracy: 0.8384000062942505
+
+
+* * * Run SGD for ID = 17_3. * * *
+
+
+2024-03-01 13:06:20.257383: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:06:23.714148: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 13:06:23.715305: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2024-03-01 13:06:23.752276: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 13:06:23.752321: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:06:23.755539: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:06:23.755583: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 13:06:23.757942: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 13:06:23.758632: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 13:06:23.761582: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 13:06:23.763373: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 13:06:23.768482: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:06:23.771103: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 13:06:23.771220: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+<__array_function__ internals>:5: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:159: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_train, y_train = np.array(xs[:idx]), np.array(labels[:idx])
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:160: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_test, y_test = np.array(xs[idx:]), np.array(labels[idx:])
+2024-03-01 13:06:28.987495: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-03-01 13:06:28.987980: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 13:06:28.988488: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 13:06:28.988525: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:06:28.988576: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:06:28.988596: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 13:06:28.988615: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 13:06:28.988633: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 13:06:28.988652: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 13:06:28.988670: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 13:06:28.988689: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:06:28.989153: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 13:06:28.989197: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:06:29.682363: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
+2024-03-01 13:06:29.682414: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
+2024-03-01 13:06:29.682423: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
+2024-03-01 13:06:29.683334: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11227 MB memory) -> physical GPU (device: 0, name: NVIDIA TITAN X (Pascal), pci bus id: 0000:02:00.0, compute capability: 6.1)
+{'id': '17_03', 'seed': 3, 'out_folder': 'results/epoch_budget', 'batch_size': 32, 'epochs': 29, 'validation_split': 0.2, 'checkpointing': True, 'initial_lr': 0.1, 'momentum': 0.98, 'nesterov': True, 'bootstrapping': False, 'map_optimizer': True, 'model': 'CNN-LSTM', 'tf_version': '2.4.1', 'keras_version': '2.4.3', 'GPU': 'NVIDIA TITAN X (Pascal)'}
+Loading data...
+Pad sequences (samples x time)
+20000 train sequences
+5000 validation sequences
+25000 test sequences
+x_train shape: (20000, 100)
+x_val shape: (5000, 100)
+x_test shape: (25000, 100)
+Using MAP optimizer with reg_weight:  5e-05
+CNN-LSTM
+0epoch [00:00, ?epoch/s]  0%|          | 0/29 [00:00<?, ?epoch/s]2024-03-01 13:06:30.090334: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2024-03-01 13:06:30.102121: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2600020000 Hz
+2024-03-01 13:06:31.573467: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:06:31.747103: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:06:32.462734: W tensorflow/stream_executor/gpu/asm_compiler.cc:63] Running ptxas --version returned 256
+2024-03-01 13:06:32.531787: W tensorflow/stream_executor/gpu/redzone_allocator.cc:314] Internal: ptxas exited with non-zero error code 256, output: 
+Relying on driver to perform ptx compilation. 
+Modify $PATH to customize ptxas location.
+This message will be only logged once.
+  3%|▎         | 1/29 [00:14<06:39, 14.26s/epoch, loss=0.638, accuracy=0.666, val_loss=0.488, val_accuracy=0.811]  7%|▋         | 2/29 [00:22<04:54, 10.91s/epoch, loss=0.461, accuracy=0.834, val_loss=0.492, val_accuracy=0.828] 10%|█         | 3/29 [00:30<04:07,  9.53s/epoch, loss=0.452, accuracy=0.857, val_loss=0.539, val_accuracy=0.827] 14%|█▍        | 4/29 [00:40<04:02,  9.69s/epoch, loss=0.469, accuracy=0.864, val_loss=0.547, val_accuracy=0.835] 17%|█▋        | 5/29 [00:48<03:39,  9.15s/epoch, loss=0.507, accuracy=0.871, val_loss=0.669, val_accuracy=0.827] 21%|██        | 6/29 [00:56<03:21,  8.78s/epoch, loss=0.668, accuracy=0.82, val_loss=0.949, val_accuracy=0.703]  24%|██▍       | 7/29 [01:04<03:07,  8.53s/epoch, loss=1.12, accuracy=0.647, val_loss=1.19, val_accuracy=0.562]  28%|██▊       | 8/29 [01:12<02:54,  8.31s/epoch, loss=1.16, accuracy=0.593, val_loss=1.13, val_accuracy=0.65]  31%|███       | 9/29 [01:20<02:44,  8.22s/epoch, loss=1.1, accuracy=0.589, val_loss=1.1, val_accuracy=0.523]  34%|███▍      | 10/29 [01:28<02:34,  8.16s/epoch, loss=1.08, accuracy=0.515, val_loss=1.02, val_accuracy=0.495] 38%|███▊      | 11/29 [01:36<02:26,  8.13s/epoch, loss=0.984, accuracy=0.542, val_loss=0.931, val_accuracy=0.533] 41%|████▏     | 12/29 [01:44<02:18,  8.12s/epoch, loss=0.951, accuracy=0.551, val_loss=1.05, val_accuracy=0.498]  45%|████▍     | 13/29 [01:52<02:09,  8.07s/epoch, loss=0.915, accuracy=0.565, val_loss=0.867, val_accuracy=0.587] 48%|████▊     | 14/29 [02:00<02:00,  8.05s/epoch, loss=0.881, accuracy=0.598, val_loss=0.871, val_accuracy=0.592] 52%|█████▏    | 15/29 [02:09<01:53,  8.13s/epoch, loss=0.867, accuracy=0.642, val_loss=0.862, val_accuracy=0.652] 55%|█████▌    | 16/29 [02:16<01:43,  7.94s/epoch, loss=0.9, accuracy=0.628, val_loss=0.923, val_accuracy=0.599]   59%|█████▊    | 17/29 [02:24<01:33,  7.76s/epoch, loss=0.919, accuracy=0.606, val_loss=0.94, val_accuracy=0.541] 62%|██████▏   | 18/29 [02:31<01:23,  7.63s/epoch, loss=0.916, accuracy=0.598, val_loss=0.898, val_accuracy=0.594] 66%|██████▌   | 19/29 [02:39<01:17,  7.78s/epoch, loss=0.895, accuracy=0.599, val_loss=0.908, val_accuracy=0.571] 69%|██████▉   | 20/29 [02:47<01:11,  7.93s/epoch, loss=0.867, accuracy=0.613, val_loss=0.882, val_accuracy=0.611] 72%|███████▏  | 21/29 [02:56<01:04,  8.05s/epoch, loss=0.859, accuracy=0.629, val_loss=0.842, val_accuracy=0.646] 76%|███████▌  | 22/29 [03:04<00:57,  8.23s/epoch, loss=0.889, accuracy=0.604, val_loss=0.874, val_accuracy=0.615] 79%|███████▉  | 23/29 [03:13<00:49,  8.26s/epoch, loss=0.871, accuracy=0.643, val_loss=0.96, val_accuracy=0.534]  83%|████████▎ | 24/29 [03:21<00:41,  8.38s/epoch, loss=0.93, accuracy=0.618, val_loss=0.957, val_accuracy=0.59]  86%|████████▌ | 25/29 [03:30<00:33,  8.40s/epoch, loss=0.976, accuracy=0.571, val_loss=0.94, val_accuracy=0.622] 90%|████████▉ | 26/29 [03:38<00:25,  8.48s/epoch, loss=0.962, accuracy=0.571, val_loss=0.949, val_accuracy=0.566] 93%|█████████▎| 27/29 [03:47<00:17,  8.62s/epoch, loss=0.928, accuracy=0.566, val_loss=0.911, val_accuracy=0.578] 97%|█████████▋| 28/29 [03:56<00:08,  8.71s/epoch, loss=0.885, accuracy=0.594, val_loss=0.869, val_accuracy=0.607]100%|██████████| 29/29 [04:05<00:00,  8.72s/epoch, loss=0.879, accuracy=0.59, val_loss=0.853, val_accuracy=0.604] 100%|██████████| 29/29 [04:05<00:00,  8.47s/epoch, loss=0.879, accuracy=0.59, val_loss=0.853, val_accuracy=0.604]
+Test score: 0.534915030002594
+Test accuracy: 0.8409600257873535
+
+
+* * * Run SGD for ID = 17_4. * * *
+
+
+2024-03-01 13:10:46.164368: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:10:54.693128: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 13:10:54.694350: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2024-03-01 13:10:54.732672: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 13:10:54.732713: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:10:54.736005: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:10:54.736057: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 13:10:54.748479: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 13:10:54.749774: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 13:10:54.752226: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 13:10:54.753709: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 13:10:54.758743: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:10:54.759431: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 13:10:54.759542: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+<__array_function__ internals>:5: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:159: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_train, y_train = np.array(xs[:idx]), np.array(labels[:idx])
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:160: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_test, y_test = np.array(xs[idx:]), np.array(labels[idx:])
+2024-03-01 13:11:00.224687: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-03-01 13:11:00.225190: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 13:11:00.225710: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 13:11:00.225746: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:11:00.225795: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:11:00.225824: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 13:11:00.225843: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 13:11:00.225862: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 13:11:00.225880: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 13:11:00.225898: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 13:11:00.225917: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:11:00.226357: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 13:11:00.226389: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:11:00.848795: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
+2024-03-01 13:11:00.848858: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
+2024-03-01 13:11:00.848866: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
+2024-03-01 13:11:00.849809: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11227 MB memory) -> physical GPU (device: 0, name: NVIDIA TITAN X (Pascal), pci bus id: 0000:02:00.0, compute capability: 6.1)
+{'id': '17_04', 'seed': 4, 'out_folder': 'results/epoch_budget', 'batch_size': 32, 'epochs': 29, 'validation_split': 0.2, 'checkpointing': True, 'initial_lr': 0.1, 'momentum': 0.98, 'nesterov': True, 'bootstrapping': False, 'map_optimizer': True, 'model': 'CNN-LSTM', 'tf_version': '2.4.1', 'keras_version': '2.4.3', 'GPU': 'NVIDIA TITAN X (Pascal)'}
+Loading data...
+Pad sequences (samples x time)
+20000 train sequences
+5000 validation sequences
+25000 test sequences
+x_train shape: (20000, 100)
+x_val shape: (5000, 100)
+x_test shape: (25000, 100)
+Using MAP optimizer with reg_weight:  5e-05
+CNN-LSTM
+0epoch [00:00, ?epoch/s]  0%|          | 0/29 [00:00<?, ?epoch/s]2024-03-01 13:11:01.318047: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2024-03-01 13:11:01.330113: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2600020000 Hz
+2024-03-01 13:11:02.819292: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:11:03.012544: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:11:03.688185: W tensorflow/stream_executor/gpu/asm_compiler.cc:63] Running ptxas --version returned 256
+2024-03-01 13:11:03.749801: W tensorflow/stream_executor/gpu/redzone_allocator.cc:314] Internal: ptxas exited with non-zero error code 256, output: 
+Relying on driver to perform ptx compilation. 
+Modify $PATH to customize ptxas location.
+This message will be only logged once.
+  3%|▎         | 1/29 [00:14<06:44, 14.46s/epoch, loss=0.668, accuracy=0.624, val_loss=0.497, val_accuracy=0.81]  7%|▋         | 2/29 [00:22<04:54, 10.91s/epoch, loss=0.469, accuracy=0.828, val_loss=0.473, val_accuracy=0.822] 10%|█         | 3/29 [00:31<04:12,  9.71s/epoch, loss=0.435, accuracy=0.857, val_loss=0.468, val_accuracy=0.842] 14%|█▍        | 4/29 [00:39<03:46,  9.05s/epoch, loss=0.447, accuracy=0.869, val_loss=0.527, val_accuracy=0.84]  17%|█▋        | 5/29 [00:47<03:28,  8.69s/epoch, loss=0.458, accuracy=0.879, val_loss=0.579, val_accuracy=0.84] 21%|██        | 6/29 [00:55<03:15,  8.52s/epoch, loss=0.655, accuracy=0.817, val_loss=1.01, val_accuracy=0.661] 24%|██▍       | 7/29 [01:03<03:06,  8.46s/epoch, loss=1.06, accuracy=0.607, val_loss=1.04, val_accuracy=0.631]  28%|██▊       | 8/29 [01:12<02:57,  8.47s/epoch, loss=0.992, accuracy=0.639, val_loss=0.974, val_accuracy=0.658] 31%|███       | 9/29 [01:20<02:46,  8.32s/epoch, loss=0.967, accuracy=0.636, val_loss=0.952, val_accuracy=0.616] 34%|███▍      | 10/29 [01:28<02:36,  8.21s/epoch, loss=0.934, accuracy=0.631, val_loss=0.963, val_accuracy=0.621] 38%|███▊      | 11/29 [01:36<02:26,  8.13s/epoch, loss=0.963, accuracy=0.599, val_loss=0.94, val_accuracy=0.637]  41%|████▏     | 12/29 [01:43<02:16,  8.03s/epoch, loss=0.98, accuracy=0.568, val_loss=0.98, val_accuracy=0.553]  45%|████▍     | 13/29 [01:51<02:05,  7.81s/epoch, loss=1.05, accuracy=0.541, val_loss=1.09, val_accuracy=0.573] 48%|████▊     | 14/29 [01:58<01:54,  7.63s/epoch, loss=1.08, accuracy=0.535, val_loss=1.01, val_accuracy=0.543] 52%|█████▏    | 15/29 [02:05<01:44,  7.49s/epoch, loss=0.989, accuracy=0.563, val_loss=0.962, val_accuracy=0.586] 55%|█████▌    | 16/29 [02:14<01:40,  7.76s/epoch, loss=0.908, accuracy=0.605, val_loss=1.05, val_accuracy=0.502]  59%|█████▊    | 17/29 [02:22<01:34,  7.84s/epoch, loss=0.906, accuracy=0.598, val_loss=0.905, val_accuracy=0.589] 62%|██████▏   | 18/29 [02:30<01:27,  7.98s/epoch, loss=0.885, accuracy=0.606, val_loss=0.854, val_accuracy=0.621] 66%|██████▌   | 19/29 [02:38<01:20,  8.04s/epoch, loss=0.846, accuracy=0.629, val_loss=0.854, val_accuracy=0.613] 69%|██████▉   | 20/29 [02:46<01:13,  8.14s/epoch, loss=0.836, accuracy=0.638, val_loss=0.873, val_accuracy=0.636] 72%|███████▏  | 21/29 [02:55<01:06,  8.27s/epoch, loss=0.833, accuracy=0.659, val_loss=0.825, val_accuracy=0.66]  76%|███████▌  | 22/29 [03:04<00:58,  8.41s/epoch, loss=0.82, accuracy=0.673, val_loss=0.843, val_accuracy=0.675] 79%|███████▉  | 23/29 [03:12<00:50,  8.44s/epoch, loss=0.836, accuracy=0.662, val_loss=0.885, val_accuracy=0.657] 83%|████████▎ | 24/29 [03:21<00:42,  8.49s/epoch, loss=0.88, accuracy=0.654, val_loss=0.892, val_accuracy=0.644]  86%|████████▌ | 25/29 [03:29<00:34,  8.50s/epoch, loss=0.942, accuracy=0.608, val_loss=0.973, val_accuracy=0.589] 90%|████████▉ | 26/29 [03:38<00:25,  8.45s/epoch, loss=0.973, accuracy=0.559, val_loss=1.03, val_accuracy=0.501]  93%|█████████▎| 27/29 [03:46<00:16,  8.37s/epoch, loss=0.906, accuracy=0.59, val_loss=0.885, val_accuracy=0.625] 97%|█████████▋| 28/29 [03:54<00:08,  8.36s/epoch, loss=0.87, accuracy=0.621, val_loss=0.842, val_accuracy=0.607]100%|██████████| 29/29 [04:03<00:00,  8.39s/epoch, loss=0.846, accuracy=0.619, val_loss=0.861, val_accuracy=0.528]100%|██████████| 29/29 [04:03<00:00,  8.39s/epoch, loss=0.846, accuracy=0.619, val_loss=0.861, val_accuracy=0.528]
+Test score: 0.4729367196559906
+Test accuracy: 0.8416799902915955
+
+
+* * * Run SGD for ID = 17_5. * * *
+
+
+2024-03-01 13:15:12.242889: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:15:15.632338: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 13:15:15.633463: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2024-03-01 13:15:15.670542: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 13:15:15.670585: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:15:15.673677: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:15:15.673715: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 13:15:15.675760: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 13:15:15.676415: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 13:15:15.678981: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 13:15:15.680550: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 13:15:15.685291: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:15:15.685987: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 13:15:15.686092: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+<__array_function__ internals>:5: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:159: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_train, y_train = np.array(xs[:idx]), np.array(labels[:idx])
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:160: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_test, y_test = np.array(xs[idx:]), np.array(labels[idx:])
+2024-03-01 13:15:21.237499: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-03-01 13:15:21.238013: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 13:15:21.238557: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 13:15:21.238590: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:15:21.238641: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:15:21.238672: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 13:15:21.238702: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 13:15:21.238720: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 13:15:21.238737: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 13:15:21.238764: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 13:15:21.238783: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:15:21.239223: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 13:15:21.239253: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:15:21.925050: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
+2024-03-01 13:15:21.925120: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
+2024-03-01 13:15:21.925129: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
+2024-03-01 13:15:21.926149: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11227 MB memory) -> physical GPU (device: 0, name: NVIDIA TITAN X (Pascal), pci bus id: 0000:02:00.0, compute capability: 6.1)
+{'id': '17_05', 'seed': 5, 'out_folder': 'results/epoch_budget', 'batch_size': 32, 'epochs': 29, 'validation_split': 0.2, 'checkpointing': True, 'initial_lr': 0.1, 'momentum': 0.98, 'nesterov': True, 'bootstrapping': False, 'map_optimizer': True, 'model': 'CNN-LSTM', 'tf_version': '2.4.1', 'keras_version': '2.4.3', 'GPU': 'NVIDIA TITAN X (Pascal)'}
+Loading data...
+Pad sequences (samples x time)
+20000 train sequences
+5000 validation sequences
+25000 test sequences
+x_train shape: (20000, 100)
+x_val shape: (5000, 100)
+x_test shape: (25000, 100)
+Using MAP optimizer with reg_weight:  5e-05
+CNN-LSTM
+0epoch [00:00, ?epoch/s]  0%|          | 0/29 [00:00<?, ?epoch/s]2024-03-01 13:15:22.348150: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2024-03-01 13:15:22.360117: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2600020000 Hz
+2024-03-01 13:15:23.851808: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:15:24.033145: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:15:24.723040: W tensorflow/stream_executor/gpu/asm_compiler.cc:63] Running ptxas --version returned 256
+2024-03-01 13:15:24.797001: W tensorflow/stream_executor/gpu/redzone_allocator.cc:314] Internal: ptxas exited with non-zero error code 256, output: 
+Relying on driver to perform ptx compilation. 
+Modify $PATH to customize ptxas location.
+This message will be only logged once.
+  3%|▎         | 1/29 [00:15<07:09, 15.32s/epoch, loss=0.731, accuracy=0.54, val_loss=0.624, val_accuracy=0.717]  7%|▋         | 2/29 [00:24<05:16, 11.71s/epoch, loss=0.531, accuracy=0.779, val_loss=0.488, val_accuracy=0.805] 10%|█         | 3/29 [00:34<04:38, 10.72s/epoch, loss=0.442, accuracy=0.848, val_loss=0.484, val_accuracy=0.833] 14%|█▍        | 4/29 [00:42<04:08,  9.96s/epoch, loss=0.468, accuracy=0.857, val_loss=0.592, val_accuracy=0.808] 17%|█▋        | 5/29 [00:51<03:47,  9.49s/epoch, loss=0.65, accuracy=0.801, val_loss=0.805, val_accuracy=0.748]  21%|██        | 6/29 [01:00<03:34,  9.32s/epoch, loss=0.964, accuracy=0.67, val_loss=1.04, val_accuracy=0.652]  24%|██▍       | 7/29 [01:09<03:21,  9.14s/epoch, loss=1.08, accuracy=0.601, val_loss=1.13, val_accuracy=0.567] 28%|██▊       | 8/29 [01:17<03:07,  8.95s/epoch, loss=1.03, accuracy=0.581, val_loss=1, val_accuracy=0.618]    31%|███       | 9/29 [01:26<02:56,  8.84s/epoch, loss=1.02, accuracy=0.568, val_loss=1.01, val_accuracy=0.549] 34%|███▍      | 10/29 [01:34<02:44,  8.68s/epoch, loss=1.02, accuracy=0.546, val_loss=1.06, val_accuracy=0.492] 38%|███▊      | 11/29 [01:41<02:27,  8.21s/epoch, loss=0.984, accuracy=0.58, val_loss=0.983, val_accuracy=0.619] 41%|████▏     | 12/29 [01:49<02:14,  7.93s/epoch, loss=1.01, accuracy=0.542, val_loss=0.959, val_accuracy=0.567] 45%|████▍     | 13/29 [01:56<02:03,  7.74s/epoch, loss=0.966, accuracy=0.544, val_loss=0.946, val_accuracy=0.55] 48%|████▊     | 14/29 [02:03<01:54,  7.64s/epoch, loss=0.938, accuracy=0.543, val_loss=0.908, val_accuracy=0.508] 52%|█████▏    | 15/29 [02:11<01:46,  7.64s/epoch, loss=0.905, accuracy=0.538, val_loss=0.872, val_accuracy=0.496] 55%|█████▌    | 16/29 [02:19<01:39,  7.65s/epoch, loss=0.855, accuracy=0.562, val_loss=0.847, val_accuracy=0.551] 59%|█████▊    | 17/29 [02:27<01:32,  7.74s/epoch, loss=0.831, accuracy=0.58, val_loss=0.869, val_accuracy=0.579]  62%|██████▏   | 18/29 [02:35<01:25,  7.79s/epoch, loss=0.808, accuracy=0.605, val_loss=0.798, val_accuracy=0.621] 66%|██████▌   | 19/29 [02:42<01:17,  7.78s/epoch, loss=0.824, accuracy=0.589, val_loss=0.908, val_accuracy=0.534] 69%|██████▉   | 20/29 [02:50<01:10,  7.79s/epoch, loss=0.833, accuracy=0.595, val_loss=0.866, val_accuracy=0.492] 72%|███████▏  | 21/29 [02:58<01:02,  7.85s/epoch, loss=0.847, accuracy=0.6, val_loss=0.835, val_accuracy=0.59]    76%|███████▌  | 22/29 [03:06<00:55,  7.89s/epoch, loss=0.846, accuracy=0.607, val_loss=0.904, val_accuracy=0.545] 79%|███████▉  | 23/29 [03:14<00:47,  7.91s/epoch, loss=0.862, accuracy=0.594, val_loss=0.898, val_accuracy=0.591] 83%|████████▎ | 24/29 [03:22<00:39,  7.92s/epoch, loss=0.837, accuracy=0.619, val_loss=0.84, val_accuracy=0.584]  86%|████████▌ | 25/29 [03:30<00:31,  7.96s/epoch, loss=0.806, accuracy=0.635, val_loss=0.82, val_accuracy=0.624] 90%|████████▉ | 26/29 [03:38<00:23,  7.96s/epoch, loss=0.816, accuracy=0.619, val_loss=0.818, val_accuracy=0.614] 93%|█████████▎| 27/29 [03:46<00:15,  7.99s/epoch, loss=0.788, accuracy=0.654, val_loss=0.902, val_accuracy=0.551] 97%|█████████▋| 28/29 [03:54<00:07,  7.99s/epoch, loss=0.798, accuracy=0.645, val_loss=0.822, val_accuracy=0.64] 100%|██████████| 29/29 [04:02<00:00,  7.98s/epoch, loss=0.801, accuracy=0.659, val_loss=0.816, val_accuracy=0.656]100%|██████████| 29/29 [04:02<00:00,  8.36s/epoch, loss=0.801, accuracy=0.659, val_loss=0.816, val_accuracy=0.656]
+Test score: 0.4823916554450989
+Test accuracy: 0.8352000117301941
+
+
+* * * Run SGD for ID = 17_6. * * *
+
+
+2024-03-01 13:19:31.714983: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:19:35.236615: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 13:19:35.238646: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2024-03-01 13:19:35.276112: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 13:19:35.276169: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:19:35.279466: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:19:35.279546: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 13:19:35.281892: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 13:19:35.282828: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 13:19:35.285309: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 13:19:35.286761: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 13:19:35.291480: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:19:35.292294: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 13:19:35.292481: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+<__array_function__ internals>:5: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:159: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_train, y_train = np.array(xs[:idx]), np.array(labels[:idx])
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:160: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_test, y_test = np.array(xs[idx:]), np.array(labels[idx:])
+2024-03-01 13:19:40.756647: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-03-01 13:19:40.757174: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 13:19:40.757635: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 13:19:40.757691: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:19:40.757727: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:19:40.757747: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 13:19:40.757763: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 13:19:40.757778: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 13:19:40.757793: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 13:19:40.757808: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 13:19:40.757823: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:19:40.758290: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 13:19:40.758334: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:19:41.440591: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
+2024-03-01 13:19:41.440663: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
+2024-03-01 13:19:41.440673: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
+2024-03-01 13:19:41.441606: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11227 MB memory) -> physical GPU (device: 0, name: NVIDIA TITAN X (Pascal), pci bus id: 0000:02:00.0, compute capability: 6.1)
+{'id': '17_06', 'seed': 6, 'out_folder': 'results/epoch_budget', 'batch_size': 32, 'epochs': 29, 'validation_split': 0.2, 'checkpointing': True, 'initial_lr': 0.1, 'momentum': 0.98, 'nesterov': True, 'bootstrapping': False, 'map_optimizer': True, 'model': 'CNN-LSTM', 'tf_version': '2.4.1', 'keras_version': '2.4.3', 'GPU': 'NVIDIA TITAN X (Pascal)'}
+Loading data...
+Pad sequences (samples x time)
+20000 train sequences
+5000 validation sequences
+25000 test sequences
+x_train shape: (20000, 100)
+x_val shape: (5000, 100)
+x_test shape: (25000, 100)
+Using MAP optimizer with reg_weight:  5e-05
+CNN-LSTM
+0epoch [00:00, ?epoch/s]  0%|          | 0/29 [00:00<?, ?epoch/s]2024-03-01 13:19:41.874310: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2024-03-01 13:19:41.887134: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2600020000 Hz
+2024-03-01 13:19:43.415262: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:19:43.602428: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:19:44.321873: W tensorflow/stream_executor/gpu/asm_compiler.cc:63] Running ptxas --version returned 256
+2024-03-01 13:19:44.404317: W tensorflow/stream_executor/gpu/redzone_allocator.cc:314] Internal: ptxas exited with non-zero error code 256, output: 
+Relying on driver to perform ptx compilation. 
+Modify $PATH to customize ptxas location.
+This message will be only logged once.
+  3%|▎         | 1/29 [00:15<07:21, 15.78s/epoch, loss=0.641, accuracy=0.657, val_loss=0.493, val_accuracy=0.809]  7%|▋         | 2/29 [00:27<05:53, 13.10s/epoch, loss=0.471, accuracy=0.829, val_loss=0.478, val_accuracy=0.836] 10%|█         | 3/29 [00:35<04:51, 11.20s/epoch, loss=0.565, accuracy=0.816, val_loss=0.663, val_accuracy=0.787] 14%|█▍        | 4/29 [00:44<04:15, 10.21s/epoch, loss=0.77, accuracy=0.727, val_loss=0.893, val_accuracy=0.65]   17%|█▋        | 5/29 [00:53<03:51,  9.66s/epoch, loss=0.929, accuracy=0.619, val_loss=0.939, val_accuracy=0.639] 21%|██        | 6/29 [01:01<03:33,  9.29s/epoch, loss=0.942, accuracy=0.624, val_loss=0.918, val_accuracy=0.65]  24%|██▍       | 7/29 [01:11<03:23,  9.26s/epoch, loss=0.954, accuracy=0.621, val_loss=0.948, val_accuracy=0.616] 28%|██▊       | 8/29 [01:19<03:12,  9.15s/epoch, loss=0.974, accuracy=0.604, val_loss=0.999, val_accuracy=0.512] 31%|███       | 9/29 [01:27<02:54,  8.71s/epoch, loss=0.977, accuracy=0.574, val_loss=0.952, val_accuracy=0.577] 34%|███▍      | 10/29 [01:34<02:36,  8.22s/epoch, loss=0.964, accuracy=0.544, val_loss=0.999, val_accuracy=0.49] 38%|███▊      | 11/29 [01:42<02:22,  7.93s/epoch, loss=0.94, accuracy=0.539, val_loss=0.922, val_accuracy=0.488] 41%|████▏     | 12/29 [01:49<02:12,  7.78s/epoch, loss=0.894, accuracy=0.556, val_loss=0.899, val_accuracy=0.581] 45%|████▍     | 13/29 [01:57<02:05,  7.82s/epoch, loss=0.832, accuracy=0.604, val_loss=0.816, val_accuracy=0.633] 48%|████▊     | 14/29 [02:05<01:57,  7.85s/epoch, loss=1.14, accuracy=0.681, val_loss=1.28, val_accuracy=0.634]   52%|█████▏    | 15/29 [02:12<01:48,  7.77s/epoch, loss=1.19, accuracy=0.665, val_loss=1.19, val_accuracy=0.635] 55%|█████▌    | 16/29 [02:21<01:42,  7.89s/epoch, loss=1.15, accuracy=0.61, val_loss=1.11, val_accuracy=0.645]  59%|█████▊    | 17/29 [02:29<01:35,  7.93s/epoch, loss=1.83, accuracy=0.603, val_loss=1.96, val_accuracy=0.488] 62%|██████▏   | 18/29 [02:37<01:27,  7.98s/epoch, loss=1.74, accuracy=0.604, val_loss=1.59, val_accuracy=0.604] 66%|██████▌   | 19/29 [02:45<01:20,  8.00s/epoch, loss=1.48, accuracy=0.616, val_loss=1.38, val_accuracy=0.598] 69%|██████▉   | 20/29 [02:53<01:12,  8.03s/epoch, loss=1.28, accuracy=0.635, val_loss=1.2, val_accuracy=0.644]  72%|███████▏  | 21/29 [03:01<01:04,  8.01s/epoch, loss=1.14, accuracy=0.651, val_loss=1.16, val_accuracy=0.607] 76%|███████▌  | 22/29 [03:09<00:56,  8.01s/epoch, loss=1.08, accuracy=0.643, val_loss=1.02, val_accuracy=0.655] 79%|███████▉  | 23/29 [03:17<00:48,  8.01s/epoch, loss=1.01, accuracy=0.659, val_loss=0.967, val_accuracy=0.677] 83%|████████▎ | 24/29 [03:25<00:39,  7.91s/epoch, loss=1.01, accuracy=0.639, val_loss=1.06, val_accuracy=0.555]  86%|████████▌ | 25/29 [03:33<00:31,  7.96s/epoch, loss=0.974, accuracy=0.627, val_loss=0.968, val_accuracy=0.604] 90%|████████▉ | 26/29 [03:41<00:24,  8.02s/epoch, loss=0.95, accuracy=0.638, val_loss=0.934, val_accuracy=0.627]  93%|█████████▎| 27/29 [03:49<00:16,  8.04s/epoch, loss=0.906, accuracy=0.648, val_loss=0.907, val_accuracy=0.63] 97%|█████████▋| 28/29 [03:57<00:07,  7.98s/epoch, loss=0.871, accuracy=0.66, val_loss=0.869, val_accuracy=0.659]100%|██████████| 29/29 [04:04<00:00,  7.91s/epoch, loss=0.867, accuracy=0.657, val_loss=0.91, val_accuracy=0.628]100%|██████████| 29/29 [04:04<00:00,  8.45s/epoch, loss=0.867, accuracy=0.657, val_loss=0.91, val_accuracy=0.628]
+Test score: 0.4817202687263489
+Test accuracy: 0.8302000164985657
+
+
+* * * Run SGD for ID = 17_7. * * *
+
+
+2024-03-01 13:23:54.070204: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:23:57.294770: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 13:23:57.295911: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2024-03-01 13:23:57.333533: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 13:23:57.333577: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:23:57.336525: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:23:57.336577: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 13:23:57.339419: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 13:23:57.340226: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 13:23:57.342727: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 13:23:57.344113: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 13:23:57.348765: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:23:57.349441: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 13:23:57.349551: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+<__array_function__ internals>:5: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:159: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_train, y_train = np.array(xs[:idx]), np.array(labels[:idx])
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:160: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_test, y_test = np.array(xs[idx:]), np.array(labels[idx:])
+2024-03-01 13:24:02.680202: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-03-01 13:24:02.681181: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 13:24:02.681950: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 13:24:02.681994: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:24:02.682051: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:24:02.682071: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 13:24:02.682088: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 13:24:02.682105: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 13:24:02.682122: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 13:24:02.682139: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 13:24:02.682155: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:24:02.682585: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 13:24:02.682623: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:24:03.352367: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
+2024-03-01 13:24:03.352418: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
+2024-03-01 13:24:03.352426: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
+2024-03-01 13:24:03.353340: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11227 MB memory) -> physical GPU (device: 0, name: NVIDIA TITAN X (Pascal), pci bus id: 0000:02:00.0, compute capability: 6.1)
+{'id': '17_07', 'seed': 7, 'out_folder': 'results/epoch_budget', 'batch_size': 32, 'epochs': 29, 'validation_split': 0.2, 'checkpointing': True, 'initial_lr': 0.1, 'momentum': 0.98, 'nesterov': True, 'bootstrapping': False, 'map_optimizer': True, 'model': 'CNN-LSTM', 'tf_version': '2.4.1', 'keras_version': '2.4.3', 'GPU': 'NVIDIA TITAN X (Pascal)'}
+Loading data...
+Pad sequences (samples x time)
+20000 train sequences
+5000 validation sequences
+25000 test sequences
+x_train shape: (20000, 100)
+x_val shape: (5000, 100)
+x_test shape: (25000, 100)
+Using MAP optimizer with reg_weight:  5e-05
+CNN-LSTM
+0epoch [00:00, ?epoch/s]  0%|          | 0/29 [00:00<?, ?epoch/s]2024-03-01 13:24:03.778331: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2024-03-01 13:24:03.790134: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2600020000 Hz
+2024-03-01 13:24:05.287039: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:24:05.459086: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:24:06.121556: W tensorflow/stream_executor/gpu/asm_compiler.cc:63] Running ptxas --version returned 256
+2024-03-01 13:24:06.192084: W tensorflow/stream_executor/gpu/redzone_allocator.cc:314] Internal: ptxas exited with non-zero error code 256, output: 
+Relying on driver to perform ptx compilation. 
+Modify $PATH to customize ptxas location.
+This message will be only logged once.
+  3%|▎         | 1/29 [00:13<06:25, 13.76s/epoch, loss=0.696, accuracy=0.594, val_loss=0.508, val_accuracy=0.792]  7%|▋         | 2/29 [00:22<04:46, 10.61s/epoch, loss=0.494, accuracy=0.813, val_loss=0.474, val_accuracy=0.833] 10%|█         | 3/29 [00:30<04:08,  9.55s/epoch, loss=0.461, accuracy=0.847, val_loss=0.524, val_accuracy=0.808] 14%|█▍        | 4/29 [00:38<03:45,  9.03s/epoch, loss=0.518, accuracy=0.838, val_loss=0.649, val_accuracy=0.79]  17%|█▋        | 5/29 [00:46<03:28,  8.69s/epoch, loss=0.765, accuracy=0.755, val_loss=0.921, val_accuracy=0.681] 21%|██        | 6/29 [00:54<03:11,  8.34s/epoch, loss=1.02, accuracy=0.617, val_loss=1.03, val_accuracy=0.636]   24%|██▍       | 7/29 [01:02<03:01,  8.23s/epoch, loss=1.05, accuracy=0.603, val_loss=1.02, val_accuracy=0.608] 28%|██▊       | 8/29 [01:10<02:48,  8.02s/epoch, loss=1.04, accuracy=0.582, val_loss=1.05, val_accuracy=0.58]  31%|███       | 9/29 [01:17<02:38,  7.92s/epoch, loss=1.03, accuracy=0.535, val_loss=1.14, val_accuracy=0.502] 34%|███▍      | 10/29 [01:25<02:30,  7.93s/epoch, loss=0.96, accuracy=0.575, val_loss=0.96, val_accuracy=0.502] 38%|███▊      | 11/29 [01:33<02:21,  7.87s/epoch, loss=0.926, accuracy=0.569, val_loss=0.919, val_accuracy=0.595] 41%|████▏     | 12/29 [01:42<02:19,  8.19s/epoch, loss=0.884, accuracy=0.59, val_loss=0.885, val_accuracy=0.6]    45%|████▍     | 13/29 [01:50<02:13,  8.33s/epoch, loss=0.844, accuracy=0.621, val_loss=0.838, val_accuracy=0.647] 48%|████▊     | 14/29 [01:59<02:05,  8.38s/epoch, loss=0.855, accuracy=0.626, val_loss=0.852, val_accuracy=0.603] 52%|█████▏    | 15/29 [02:08<01:59,  8.50s/epoch, loss=0.884, accuracy=0.608, val_loss=0.921, val_accuracy=0.619] 55%|█████▌    | 16/29 [02:17<01:52,  8.64s/epoch, loss=0.882, accuracy=0.618, val_loss=0.894, val_accuracy=0.635] 59%|█████▊    | 17/29 [02:25<01:44,  8.67s/epoch, loss=0.965, accuracy=0.609, val_loss=0.984, val_accuracy=0.589] 62%|██████▏   | 18/29 [02:35<01:37,  8.84s/epoch, loss=1.03, accuracy=0.554, val_loss=0.991, val_accuracy=0.572]  66%|██████▌   | 19/29 [02:43<01:27,  8.75s/epoch, loss=0.995, accuracy=0.545, val_loss=0.999, val_accuracy=0.511] 69%|██████▉   | 20/29 [02:52<01:19,  8.80s/epoch, loss=0.971, accuracy=0.54, val_loss=0.923, val_accuracy=0.542]  72%|███████▏  | 21/29 [03:01<01:10,  8.85s/epoch, loss=0.952, accuracy=0.544, val_loss=0.939, val_accuracy=0.528] 76%|███████▌  | 22/29 [03:10<01:02,  8.92s/epoch, loss=0.964, accuracy=0.51, val_loss=0.9, val_accuracy=0.517]    79%|███████▉  | 23/29 [03:19<00:53,  9.00s/epoch, loss=0.927, accuracy=0.516, val_loss=0.95, val_accuracy=0.499] 83%|████████▎ | 24/29 [03:28<00:45,  9.00s/epoch, loss=0.881, accuracy=0.531, val_loss=0.832, val_accuracy=0.504] 86%|████████▌ | 25/29 [03:38<00:36,  9.06s/epoch, loss=0.846, accuracy=0.551, val_loss=0.821, val_accuracy=0.569] 90%|████████▉ | 26/29 [03:47<00:27,  9.09s/epoch, loss=0.821, accuracy=0.603, val_loss=0.931, val_accuracy=0.499] 93%|█████████▎| 27/29 [03:56<00:18,  9.08s/epoch, loss=0.821, accuracy=0.616, val_loss=0.929, val_accuracy=0.572] 97%|█████████▋| 28/29 [04:05<00:09,  9.10s/epoch, loss=0.897, accuracy=0.584, val_loss=0.939, val_accuracy=0.615]100%|██████████| 29/29 [04:14<00:00,  9.06s/epoch, loss=0.96, accuracy=0.567, val_loss=0.994, val_accuracy=0.582] 100%|██████████| 29/29 [04:14<00:00,  8.77s/epoch, loss=0.96, accuracy=0.567, val_loss=0.994, val_accuracy=0.582]
+Test score: 0.470398873090744
+Test accuracy: 0.8353599905967712
+
+
+* * * Run SGD for ID = 17_8. * * *
+
+
+2024-03-01 13:28:26.176954: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:28:29.697147: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 13:28:29.698382: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2024-03-01 13:28:29.736941: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 13:28:29.736996: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:28:29.740442: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:28:29.740528: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 13:28:29.742868: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 13:28:29.743494: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 13:28:29.745784: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 13:28:29.747140: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 13:28:29.751995: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:28:29.753034: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 13:28:29.753145: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+<__array_function__ internals>:5: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:159: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_train, y_train = np.array(xs[:idx]), np.array(labels[:idx])
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:160: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_test, y_test = np.array(xs[idx:]), np.array(labels[idx:])
+2024-03-01 13:28:35.345863: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-03-01 13:28:35.346421: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 13:28:35.346909: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 13:28:35.346964: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:28:35.347021: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:28:35.347042: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 13:28:35.347059: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 13:28:35.347076: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 13:28:35.347095: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 13:28:35.347112: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 13:28:35.347130: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:28:35.347564: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 13:28:35.347600: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:28:36.040176: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
+2024-03-01 13:28:36.040243: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
+2024-03-01 13:28:36.040254: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
+2024-03-01 13:28:36.041206: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11227 MB memory) -> physical GPU (device: 0, name: NVIDIA TITAN X (Pascal), pci bus id: 0000:02:00.0, compute capability: 6.1)
+{'id': '17_08', 'seed': 8, 'out_folder': 'results/epoch_budget', 'batch_size': 32, 'epochs': 29, 'validation_split': 0.2, 'checkpointing': True, 'initial_lr': 0.1, 'momentum': 0.98, 'nesterov': True, 'bootstrapping': False, 'map_optimizer': True, 'model': 'CNN-LSTM', 'tf_version': '2.4.1', 'keras_version': '2.4.3', 'GPU': 'NVIDIA TITAN X (Pascal)'}
+Loading data...
+Pad sequences (samples x time)
+20000 train sequences
+5000 validation sequences
+25000 test sequences
+x_train shape: (20000, 100)
+x_val shape: (5000, 100)
+x_test shape: (25000, 100)
+Using MAP optimizer with reg_weight:  5e-05
+CNN-LSTM
+0epoch [00:00, ?epoch/s]  0%|          | 0/29 [00:00<?, ?epoch/s]2024-03-01 13:28:36.468999: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2024-03-01 13:28:36.481131: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2600020000 Hz
+2024-03-01 13:28:37.995592: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:28:38.180143: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:28:38.891345: W tensorflow/stream_executor/gpu/asm_compiler.cc:63] Running ptxas --version returned 256
+2024-03-01 13:28:38.965149: W tensorflow/stream_executor/gpu/redzone_allocator.cc:314] Internal: ptxas exited with non-zero error code 256, output: 
+Relying on driver to perform ptx compilation. 
+Modify $PATH to customize ptxas location.
+This message will be only logged once.
+  3%|▎         | 1/29 [00:16<07:30, 16.10s/epoch, loss=0.731, accuracy=0.546, val_loss=0.61, val_accuracy=0.719]  7%|▋         | 2/29 [00:26<05:38, 12.52s/epoch, loss=0.497, accuracy=0.801, val_loss=0.466, val_accuracy=0.824] 10%|█         | 3/29 [00:34<04:42, 10.86s/epoch, loss=0.441, accuracy=0.848, val_loss=0.546, val_accuracy=0.793] 14%|█▍        | 4/29 [00:44<04:14, 10.16s/epoch, loss=0.443, accuracy=0.864, val_loss=0.564, val_accuracy=0.809] 17%|█▋        | 5/29 [00:52<03:45,  9.40s/epoch, loss=0.549, accuracy=0.838, val_loss=0.777, val_accuracy=0.715] 21%|██        | 6/29 [00:59<03:21,  8.77s/epoch, loss=0.779, accuracy=0.764, val_loss=0.893, val_accuracy=0.733] 24%|██▍       | 7/29 [01:07<03:04,  8.37s/epoch, loss=1.03, accuracy=0.664, val_loss=1.08, val_accuracy=0.619]   28%|██▊       | 8/29 [01:14<02:50,  8.10s/epoch, loss=1.19, accuracy=0.554, val_loss=1.15, val_accuracy=0.562] 31%|███       | 9/29 [01:22<02:41,  8.05s/epoch, loss=1.13, accuracy=0.544, val_loss=1.1, val_accuracy=0.52]   34%|███▍      | 10/29 [01:30<02:33,  8.06s/epoch, loss=1.1, accuracy=0.539, val_loss=1.1, val_accuracy=0.513] 38%|███▊      | 11/29 [01:38<02:24,  8.05s/epoch, loss=1.02, accuracy=0.537, val_loss=0.948, val_accuracy=0.579] 41%|████▏     | 12/29 [01:46<02:16,  8.03s/epoch, loss=0.928, accuracy=0.584, val_loss=0.905, val_accuracy=0.489] 45%|████▍     | 13/29 [01:54<02:09,  8.07s/epoch, loss=0.904, accuracy=0.601, val_loss=1.33, val_accuracy=0.511]  48%|████▊     | 14/29 [02:02<02:00,  8.05s/epoch, loss=0.932, accuracy=0.576, val_loss=0.931, val_accuracy=0.51] 52%|█████▏    | 15/29 [02:10<01:52,  8.02s/epoch, loss=0.895, accuracy=0.592, val_loss=1.02, val_accuracy=0.513] 55%|█████▌    | 16/29 [02:19<01:44,  8.07s/epoch, loss=0.88, accuracy=0.588, val_loss=0.853, val_accuracy=0.637] 59%|█████▊    | 17/29 [02:27<01:36,  8.08s/epoch, loss=0.851, accuracy=0.624, val_loss=0.797, val_accuracy=0.662] 62%|██████▏   | 18/29 [02:35<01:28,  8.03s/epoch, loss=0.828, accuracy=0.652, val_loss=0.862, val_accuracy=0.607] 66%|██████▌   | 19/29 [02:43<01:20,  8.04s/epoch, loss=3.58, accuracy=0.628, val_loss=4.53, val_accuracy=0.655]   69%|██████▉   | 20/29 [02:51<01:12,  8.02s/epoch, loss=4.04, accuracy=0.637, val_loss=3.59, val_accuracy=0.622] 72%|███████▏  | 21/29 [02:59<01:04,  8.04s/epoch, loss=3.24, accuracy=0.574, val_loss=2.87, val_accuracy=0.579] 76%|███████▌  | 22/29 [03:07<00:56,  8.03s/epoch, loss=2.58, accuracy=0.595, val_loss=2.32, val_accuracy=0.596] 79%|███████▉  | 23/29 [03:15<00:48,  8.06s/epoch, loss=2.1, accuracy=0.606, val_loss=1.94, val_accuracy=0.614]  83%|████████▎ | 24/29 [03:23<00:40,  8.07s/epoch, loss=1.78, accuracy=0.585, val_loss=1.69, val_accuracy=0.491] 86%|████████▌ | 25/29 [03:31<00:32,  8.06s/epoch, loss=1.57, accuracy=0.593, val_loss=1.44, val_accuracy=0.607] 90%|████████▉ | 26/29 [03:39<00:24,  8.08s/epoch, loss=1.35, accuracy=0.64, val_loss=1.31, val_accuracy=0.583]  93%|█████████▎| 27/29 [03:47<00:16,  8.06s/epoch, loss=1.25, accuracy=0.594, val_loss=1.18, val_accuracy=0.639] 97%|█████████▋| 28/29 [03:55<00:08,  8.04s/epoch, loss=1.16, accuracy=0.616, val_loss=1.11, val_accuracy=0.626]100%|██████████| 29/29 [04:03<00:00,  8.09s/epoch, loss=1.09, accuracy=0.618, val_loss=1.06, val_accuracy=0.605]100%|██████████| 29/29 [04:03<00:00,  8.41s/epoch, loss=1.09, accuracy=0.618, val_loss=1.06, val_accuracy=0.605]
+Test score: 0.45323988795280457
+Test accuracy: 0.834879994392395
+
+
+* * * Run SGD for ID = 17_9. * * *
+
+
+2024-03-01 13:32:47.968311: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:32:57.043146: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 13:32:57.044399: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2024-03-01 13:32:57.083940: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 13:32:57.084020: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:32:57.088802: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:32:57.088859: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 13:32:57.091600: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 13:32:57.093184: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 13:32:57.095946: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 13:32:57.098115: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 13:32:57.103526: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:32:57.104253: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 13:32:57.104365: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+<__array_function__ internals>:5: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:159: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_train, y_train = np.array(xs[:idx]), np.array(labels[:idx])
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:160: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_test, y_test = np.array(xs[idx:]), np.array(labels[idx:])
+2024-03-01 13:33:02.736294: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-03-01 13:33:02.736838: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 13:33:02.737389: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 13:33:02.737431: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:33:02.737506: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:33:02.737527: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 13:33:02.737546: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 13:33:02.737564: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 13:33:02.737583: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 13:33:02.737602: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 13:33:02.737620: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:33:02.738104: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 13:33:02.738138: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:33:03.428058: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
+2024-03-01 13:33:03.428127: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
+2024-03-01 13:33:03.428144: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
+2024-03-01 13:33:03.429065: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11227 MB memory) -> physical GPU (device: 0, name: NVIDIA TITAN X (Pascal), pci bus id: 0000:02:00.0, compute capability: 6.1)
+{'id': '17_09', 'seed': 9, 'out_folder': 'results/epoch_budget', 'batch_size': 32, 'epochs': 29, 'validation_split': 0.2, 'checkpointing': True, 'initial_lr': 0.1, 'momentum': 0.98, 'nesterov': True, 'bootstrapping': False, 'map_optimizer': True, 'model': 'CNN-LSTM', 'tf_version': '2.4.1', 'keras_version': '2.4.3', 'GPU': 'NVIDIA TITAN X (Pascal)'}
+Loading data...
+Pad sequences (samples x time)
+20000 train sequences
+5000 validation sequences
+25000 test sequences
+x_train shape: (20000, 100)
+x_val shape: (5000, 100)
+x_test shape: (25000, 100)
+Using MAP optimizer with reg_weight:  5e-05
+CNN-LSTM
+0epoch [00:00, ?epoch/s]  0%|          | 0/29 [00:00<?, ?epoch/s]2024-03-01 13:33:03.859777: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2024-03-01 13:33:03.872121: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2600020000 Hz
+2024-03-01 13:33:05.411386: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:33:05.587886: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:33:06.305806: W tensorflow/stream_executor/gpu/asm_compiler.cc:63] Running ptxas --version returned 256
+2024-03-01 13:33:06.374751: W tensorflow/stream_executor/gpu/redzone_allocator.cc:314] Internal: ptxas exited with non-zero error code 256, output: 
+Relying on driver to perform ptx compilation. 
+Modify $PATH to customize ptxas location.
+This message will be only logged once.
+  3%|▎         | 1/29 [00:15<07:16, 15.58s/epoch, loss=0.681, accuracy=0.611, val_loss=0.531, val_accuracy=0.786]  7%|▋         | 2/29 [00:24<05:10, 11.52s/epoch, loss=0.481, accuracy=0.818, val_loss=0.479, val_accuracy=0.824] 10%|█         | 3/29 [00:31<04:12,  9.70s/epoch, loss=0.424, accuracy=0.859, val_loss=0.474, val_accuracy=0.838] 14%|█▍        | 4/29 [00:39<03:39,  8.79s/epoch, loss=0.419, accuracy=0.876, val_loss=0.51, val_accuracy=0.837]  17%|█▋        | 5/29 [00:47<03:24,  8.50s/epoch, loss=0.434, accuracy=0.885, val_loss=0.586, val_accuracy=0.844] 21%|██        | 6/29 [00:54<03:09,  8.25s/epoch, loss=0.47, accuracy=0.888, val_loss=0.651, val_accuracy=0.829]  24%|██▍       | 7/29 [01:02<02:59,  8.14s/epoch, loss=0.805, accuracy=0.751, val_loss=0.964, val_accuracy=0.69] 28%|██▊       | 8/29 [01:10<02:49,  8.09s/epoch, loss=1.03, accuracy=0.632, val_loss=0.988, val_accuracy=0.673] 31%|███       | 9/29 [01:18<02:41,  8.07s/epoch, loss=1.06, accuracy=0.649, val_loss=1.1, val_accuracy=0.627]   34%|███▍      | 10/29 [01:26<02:32,  8.01s/epoch, loss=1.09, accuracy=0.624, val_loss=1.11, val_accuracy=0.535] 38%|███▊      | 11/29 [01:34<02:24,  8.02s/epoch, loss=1.11, accuracy=0.619, val_loss=1.11, val_accuracy=0.607] 41%|████▏     | 12/29 [01:42<02:16,  8.04s/epoch, loss=1.09, accuracy=0.604, val_loss=1.04, val_accuracy=0.638] 45%|████▍     | 13/29 [01:50<02:08,  8.03s/epoch, loss=1.05, accuracy=0.614, val_loss=1.05, val_accuracy=0.615] 48%|████▊     | 14/29 [01:58<02:00,  8.03s/epoch, loss=1.03, accuracy=0.592, val_loss=1.01, val_accuracy=0.599] 52%|█████▏    | 15/29 [02:06<01:52,  8.03s/epoch, loss=0.979, accuracy=0.58, val_loss=0.941, val_accuracy=0.604] 55%|█████▌    | 16/29 [02:14<01:44,  8.01s/epoch, loss=0.936, accuracy=0.593, val_loss=0.995, val_accuracy=0.49] 59%|█████▊    | 17/29 [02:22<01:35,  7.99s/epoch, loss=0.885, accuracy=0.631, val_loss=0.873, val_accuracy=0.562] 62%|██████▏   | 18/29 [02:30<01:28,  8.03s/epoch, loss=0.875, accuracy=0.635, val_loss=0.864, val_accuracy=0.639] 66%|██████▌   | 19/29 [02:39<01:20,  8.06s/epoch, loss=0.914, accuracy=0.61, val_loss=0.937, val_accuracy=0.522]  69%|██████▉   | 20/29 [02:47<01:12,  8.09s/epoch, loss=0.933, accuracy=0.595, val_loss=0.886, val_accuracy=0.596] 72%|███████▏  | 21/29 [02:55<01:04,  8.05s/epoch, loss=0.895, accuracy=0.614, val_loss=0.886, val_accuracy=0.622] 76%|███████▌  | 22/29 [03:03<00:55,  7.99s/epoch, loss=0.861, accuracy=0.645, val_loss=0.863, val_accuracy=0.658] 79%|███████▉  | 23/29 [03:10<00:47,  7.98s/epoch, loss=0.841, accuracy=0.657, val_loss=0.886, val_accuracy=0.622] 83%|████████▎ | 24/29 [03:18<00:39,  7.96s/epoch, loss=0.863, accuracy=0.609, val_loss=0.885, val_accuracy=0.624] 86%|████████▌ | 25/29 [03:26<00:31,  7.95s/epoch, loss=0.817, accuracy=0.674, val_loss=0.91, val_accuracy=0.612]  90%|████████▉ | 26/29 [03:34<00:23,  7.91s/epoch, loss=0.857, accuracy=0.644, val_loss=0.934, val_accuracy=0.625] 93%|█████████▎| 27/29 [03:42<00:15,  7.92s/epoch, loss=0.889, accuracy=0.618, val_loss=0.882, val_accuracy=0.644] 97%|█████████▋| 28/29 [03:50<00:07,  7.96s/epoch, loss=0.874, accuracy=0.644, val_loss=0.9, val_accuracy=0.622]  100%|██████████| 29/29 [03:58<00:00,  7.97s/epoch, loss=0.891, accuracy=0.629, val_loss=0.882, val_accuracy=0.607]100%|██████████| 29/29 [03:58<00:00,  8.23s/epoch, loss=0.891, accuracy=0.629, val_loss=0.882, val_accuracy=0.607]
+Test score: 0.5840770602226257
+Test accuracy: 0.8419600129127502
+
+
+* * * Run SGD for ID = 17_10. * * *
+
+
+2024-03-01 13:37:10.158148: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:37:13.281470: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 13:37:13.282633: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2024-03-01 13:37:13.318989: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 13:37:13.319032: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:37:13.322238: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:37:13.322281: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 13:37:13.324610: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 13:37:13.325814: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 13:37:13.328287: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 13:37:13.329793: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 13:37:13.334907: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:37:13.335573: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 13:37:13.335687: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+<__array_function__ internals>:5: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:159: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_train, y_train = np.array(xs[:idx]), np.array(labels[:idx])
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:160: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_test, y_test = np.array(xs[idx:]), np.array(labels[idx:])
+2024-03-01 13:37:18.692918: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-03-01 13:37:18.693479: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 13:37:18.695235: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 13:37:18.695271: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:37:18.695335: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:37:18.695356: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 13:37:18.695374: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 13:37:18.695391: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 13:37:18.695407: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 13:37:18.695424: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 13:37:18.695441: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:37:18.695868: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 13:37:18.695903: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:37:19.354832: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
+2024-03-01 13:37:19.354882: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
+2024-03-01 13:37:19.354890: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
+2024-03-01 13:37:19.355764: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11227 MB memory) -> physical GPU (device: 0, name: NVIDIA TITAN X (Pascal), pci bus id: 0000:02:00.0, compute capability: 6.1)
+{'id': '17_10', 'seed': 10, 'out_folder': 'results/epoch_budget', 'batch_size': 32, 'epochs': 29, 'validation_split': 0.2, 'checkpointing': True, 'initial_lr': 0.1, 'momentum': 0.98, 'nesterov': True, 'bootstrapping': False, 'map_optimizer': True, 'model': 'CNN-LSTM', 'tf_version': '2.4.1', 'keras_version': '2.4.3', 'GPU': 'NVIDIA TITAN X (Pascal)'}
+Loading data...
+Pad sequences (samples x time)
+20000 train sequences
+5000 validation sequences
+25000 test sequences
+x_train shape: (20000, 100)
+x_val shape: (5000, 100)
+x_test shape: (25000, 100)
+Using MAP optimizer with reg_weight:  5e-05
+CNN-LSTM
+0epoch [00:00, ?epoch/s]  0%|          | 0/29 [00:00<?, ?epoch/s]2024-03-01 13:37:19.764395: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2024-03-01 13:37:19.776148: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2600020000 Hz
+2024-03-01 13:37:21.200353: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:37:21.415578: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:37:22.062771: W tensorflow/stream_executor/gpu/asm_compiler.cc:63] Running ptxas --version returned 256
+2024-03-01 13:37:22.131108: W tensorflow/stream_executor/gpu/redzone_allocator.cc:314] Internal: ptxas exited with non-zero error code 256, output: 
+Relying on driver to perform ptx compilation. 
+Modify $PATH to customize ptxas location.
+This message will be only logged once.
+  3%|▎         | 1/29 [00:13<06:24, 13.72s/epoch, loss=0.635, accuracy=0.664, val_loss=0.505, val_accuracy=0.81]  7%|▋         | 2/29 [00:23<05:04, 11.27s/epoch, loss=0.451, accuracy=0.839, val_loss=0.492, val_accuracy=0.817] 10%|█         | 3/29 [00:32<04:33, 10.51s/epoch, loss=0.421, accuracy=0.868, val_loss=0.509, val_accuracy=0.828] 14%|█▍        | 4/29 [00:42<04:14, 10.17s/epoch, loss=0.411, accuracy=0.886, val_loss=0.534, val_accuracy=0.835] 17%|█▋        | 5/29 [00:51<03:52,  9.71s/epoch, loss=0.461, accuracy=0.879, val_loss=0.659, val_accuracy=0.806] 21%|██        | 6/29 [01:00<03:37,  9.44s/epoch, loss=0.686, accuracy=0.815, val_loss=0.86, val_accuracy=0.745]  24%|██▍       | 7/29 [01:08<03:22,  9.18s/epoch, loss=0.985, accuracy=0.681, val_loss=1.05, val_accuracy=0.62]  28%|██▊       | 8/29 [01:17<03:09,  9.04s/epoch, loss=1.01, accuracy=0.654, val_loss=1.02, val_accuracy=0.653] 31%|███       | 9/29 [01:26<02:57,  8.87s/epoch, loss=1.06, accuracy=0.597, val_loss=1.08, val_accuracy=0.511] 34%|███▍      | 10/29 [01:34<02:47,  8.80s/epoch, loss=1.07, accuracy=0.57, val_loss=1.02, val_accuracy=0.564] 38%|███▊      | 11/29 [01:43<02:38,  8.79s/epoch, loss=1.03, accuracy=0.574, val_loss=1.01, val_accuracy=0.599] 41%|████▏     | 12/29 [01:52<02:29,  8.80s/epoch, loss=0.99, accuracy=0.586, val_loss=0.942, val_accuracy=0.628] 45%|████▍     | 13/29 [02:01<02:21,  8.86s/epoch, loss=0.995, accuracy=0.545, val_loss=0.977, val_accuracy=0.526] 48%|████▊     | 14/29 [02:10<02:13,  8.91s/epoch, loss=0.953, accuracy=0.549, val_loss=0.9, val_accuracy=0.578]   52%|█████▏    | 15/29 [02:19<02:03,  8.81s/epoch, loss=0.89, accuracy=0.584, val_loss=0.885, val_accuracy=0.593] 55%|█████▌    | 16/29 [02:27<01:53,  8.75s/epoch, loss=0.881, accuracy=0.59, val_loss=0.86, val_accuracy=0.613]  59%|█████▊    | 17/29 [02:36<01:46,  8.83s/epoch, loss=0.967, accuracy=0.546, val_loss=0.941, val_accuracy=0.572] 62%|██████▏   | 18/29 [02:46<01:38,  9.00s/epoch, loss=0.945, accuracy=0.546, val_loss=0.889, val_accuracy=0.589] 66%|██████▌   | 19/29 [02:54<01:29,  8.97s/epoch, loss=0.901, accuracy=0.583, val_loss=0.871, val_accuracy=0.603] 69%|██████▉   | 20/29 [03:03<01:18,  8.76s/epoch, loss=0.889, accuracy=0.611, val_loss=0.909, val_accuracy=0.596] 72%|███████▏  | 21/29 [03:11<01:09,  8.72s/epoch, loss=0.909, accuracy=0.586, val_loss=0.878, val_accuracy=0.622] 76%|███████▌  | 22/29 [03:20<01:01,  8.74s/epoch, loss=0.881, accuracy=0.608, val_loss=0.845, val_accuracy=0.638] 79%|███████▉  | 23/29 [03:29<00:52,  8.80s/epoch, loss=0.978, accuracy=0.625, val_loss=0.985, val_accuracy=0.626] 83%|████████▎ | 24/29 [03:38<00:43,  8.77s/epoch, loss=0.968, accuracy=0.629, val_loss=0.991, val_accuracy=0.595] 86%|████████▌ | 25/29 [03:47<00:35,  8.81s/epoch, loss=0.951, accuracy=0.607, val_loss=0.934, val_accuracy=0.611] 90%|████████▉ | 26/29 [03:56<00:26,  8.84s/epoch, loss=0.936, accuracy=0.601, val_loss=0.927, val_accuracy=0.626] 93%|█████████▎| 27/29 [04:04<00:17,  8.79s/epoch, loss=0.91, accuracy=0.627, val_loss=0.906, val_accuracy=0.626]  97%|█████████▋| 28/29 [04:12<00:08,  8.47s/epoch, loss=0.891, accuracy=0.633, val_loss=0.891, val_accuracy=0.644]100%|██████████| 29/29 [04:20<00:00,  8.23s/epoch, loss=0.892, accuracy=0.62, val_loss=0.892, val_accuracy=0.628] 100%|██████████| 29/29 [04:20<00:00,  8.97s/epoch, loss=0.892, accuracy=0.62, val_loss=0.892, val_accuracy=0.628]
+Test score: 0.5282514691352844
+Test accuracy: 0.8308799862861633
+
+
+* * * Run SGD for ID = 17_11. * * *
+
+
+2024-03-01 13:41:46.825185: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:41:49.327755: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 13:41:49.328863: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2024-03-01 13:41:49.366223: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 13:41:49.366282: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:41:49.369003: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:41:49.369042: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 13:41:49.371004: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 13:41:49.371496: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 13:41:49.373557: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 13:41:49.374847: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 13:41:49.379393: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:41:49.380014: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 13:41:49.380117: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+<__array_function__ internals>:5: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:159: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_train, y_train = np.array(xs[:idx]), np.array(labels[:idx])
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:160: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_test, y_test = np.array(xs[idx:]), np.array(labels[idx:])
+2024-03-01 13:41:54.642071: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-03-01 13:41:54.642588: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 13:41:54.643165: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 13:41:54.643201: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:41:54.643269: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:41:54.643289: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 13:41:54.643307: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 13:41:54.643325: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 13:41:54.643344: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 13:41:54.643373: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 13:41:54.643394: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:41:54.643816: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 13:41:54.643855: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:41:55.284600: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
+2024-03-01 13:41:55.284668: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
+2024-03-01 13:41:55.284677: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
+2024-03-01 13:41:55.285643: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11227 MB memory) -> physical GPU (device: 0, name: NVIDIA TITAN X (Pascal), pci bus id: 0000:02:00.0, compute capability: 6.1)
+{'id': '17_11', 'seed': 11, 'out_folder': 'results/epoch_budget', 'batch_size': 32, 'epochs': 29, 'validation_split': 0.2, 'checkpointing': True, 'initial_lr': 0.1, 'momentum': 0.98, 'nesterov': True, 'bootstrapping': False, 'map_optimizer': True, 'model': 'CNN-LSTM', 'tf_version': '2.4.1', 'keras_version': '2.4.3', 'GPU': 'NVIDIA TITAN X (Pascal)'}
+Loading data...
+Pad sequences (samples x time)
+20000 train sequences
+5000 validation sequences
+25000 test sequences
+x_train shape: (20000, 100)
+x_val shape: (5000, 100)
+x_test shape: (25000, 100)
+Using MAP optimizer with reg_weight:  5e-05
+CNN-LSTM
+0epoch [00:00, ?epoch/s]  0%|          | 0/29 [00:00<?, ?epoch/s]2024-03-01 13:41:55.704158: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2024-03-01 13:41:55.716132: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2600020000 Hz
+2024-03-01 13:41:57.185887: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:41:57.357217: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:41:58.007789: W tensorflow/stream_executor/gpu/asm_compiler.cc:63] Running ptxas --version returned 256
+2024-03-01 13:41:58.068730: W tensorflow/stream_executor/gpu/redzone_allocator.cc:314] Internal: ptxas exited with non-zero error code 256, output: 
+Relying on driver to perform ptx compilation. 
+Modify $PATH to customize ptxas location.
+This message will be only logged once.
+  3%|▎         | 1/29 [00:15<07:25, 15.92s/epoch, loss=0.607, accuracy=0.703, val_loss=0.474, val_accuracy=0.821]  7%|▋         | 2/29 [00:26<05:37, 12.51s/epoch, loss=0.456, accuracy=0.837, val_loss=0.463, val_accuracy=0.837] 10%|█         | 3/29 [00:34<04:37, 10.65s/epoch, loss=0.422, accuracy=0.868, val_loss=0.491, val_accuracy=0.847] 14%|█▍        | 4/29 [00:42<04:01,  9.64s/epoch, loss=0.413, accuracy=0.886, val_loss=0.517, val_accuracy=0.841] 17%|█▋        | 5/29 [00:50<03:38,  9.10s/epoch, loss=0.431, accuracy=0.892, val_loss=0.582, val_accuracy=0.832] 21%|██        | 6/29 [00:58<03:21,  8.78s/epoch, loss=0.469, accuracy=0.892, val_loss=0.618, val_accuracy=0.84]  24%|██▍       | 7/29 [01:07<03:08,  8.58s/epoch, loss=0.522, accuracy=0.891, val_loss=0.673, val_accuracy=0.83] 28%|██▊       | 8/29 [01:15<02:56,  8.41s/epoch, loss=0.817, accuracy=0.785, val_loss=1.16, val_accuracy=0.634] 31%|███       | 9/29 [01:23<02:45,  8.28s/epoch, loss=1.22, accuracy=0.602, val_loss=1.24, val_accuracy=0.5]    34%|███▍      | 10/29 [01:31<02:36,  8.23s/epoch, loss=1.19, accuracy=0.571, val_loss=1.16, val_accuracy=0.549] 38%|███▊      | 11/29 [01:39<02:27,  8.22s/epoch, loss=1.08, accuracy=0.596, val_loss=1.09, val_accuracy=0.596] 41%|████▏     | 12/29 [01:47<02:18,  8.16s/epoch, loss=1.03, accuracy=0.586, val_loss=0.993, val_accuracy=0.613] 45%|████▍     | 13/29 [01:55<02:10,  8.14s/epoch, loss=0.979, accuracy=0.589, val_loss=1.01, val_accuracy=0.605] 48%|████▊     | 14/29 [02:03<02:01,  8.11s/epoch, loss=0.967, accuracy=0.593, val_loss=0.957, val_accuracy=0.59] 52%|█████▏    | 15/29 [02:11<01:53,  8.14s/epoch, loss=0.91, accuracy=0.629, val_loss=0.862, val_accuracy=0.652] 55%|█████▌    | 16/29 [02:20<01:46,  8.18s/epoch, loss=0.85, accuracy=0.657, val_loss=0.833, val_accuracy=0.652] 59%|█████▊    | 17/29 [02:28<01:37,  8.16s/epoch, loss=0.826, accuracy=0.665, val_loss=0.813, val_accuracy=0.665] 62%|██████▏   | 18/29 [02:36<01:29,  8.18s/epoch, loss=0.835, accuracy=0.655, val_loss=0.863, val_accuracy=0.584] 66%|██████▌   | 19/29 [02:44<01:21,  8.17s/epoch, loss=0.85, accuracy=0.642, val_loss=0.885, val_accuracy=0.536]  69%|██████▉   | 20/29 [02:52<01:13,  8.16s/epoch, loss=0.859, accuracy=0.656, val_loss=0.845, val_accuracy=0.626] 72%|███████▏  | 21/29 [03:00<01:05,  8.15s/epoch, loss=0.833, accuracy=0.679, val_loss=0.883, val_accuracy=0.595] 76%|███████▌  | 22/29 [03:08<00:56,  8.11s/epoch, loss=0.828, accuracy=0.674, val_loss=0.821, val_accuracy=0.658] 79%|███████▉  | 23/29 [03:16<00:48,  8.13s/epoch, loss=0.833, accuracy=0.673, val_loss=0.867, val_accuracy=0.661] 83%|████████▎ | 24/29 [03:25<00:40,  8.11s/epoch, loss=0.834, accuracy=0.682, val_loss=0.84, val_accuracy=0.684]  86%|████████▌ | 25/29 [03:33<00:32,  8.08s/epoch, loss=0.827, accuracy=0.687, val_loss=0.814, val_accuracy=0.706] 90%|████████▉ | 26/29 [03:40<00:23,  7.90s/epoch, loss=0.868, accuracy=0.678, val_loss=0.923, val_accuracy=0.666] 93%|█████████▎| 27/29 [03:47<00:15,  7.68s/epoch, loss=0.954, accuracy=0.65, val_loss=0.968, val_accuracy=0.627]  97%|█████████▋| 28/29 [03:55<00:07,  7.69s/epoch, loss=0.992, accuracy=0.63, val_loss=1.02, val_accuracy=0.623] 100%|██████████| 29/29 [04:03<00:00,  7.87s/epoch, loss=1.04, accuracy=0.593, val_loss=1.01, val_accuracy=0.623]100%|██████████| 29/29 [04:03<00:00,  8.40s/epoch, loss=1.04, accuracy=0.593, val_loss=1.01, val_accuracy=0.623]
+Test score: 0.48422059416770935
+Test accuracy: 0.841759979724884
+
+
+* * * Run SGD for ID = 17_12. * * *
+
+
+2024-03-01 13:46:06.782170: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:46:09.411368: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 13:46:09.412474: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2024-03-01 13:46:09.448756: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 13:46:09.448813: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:46:09.451537: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:46:09.451593: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 13:46:09.453740: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 13:46:09.454677: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 13:46:09.456852: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 13:46:09.458099: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 13:46:09.462569: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:46:09.463229: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 13:46:09.463331: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+<__array_function__ internals>:5: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:159: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_train, y_train = np.array(xs[:idx]), np.array(labels[:idx])
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:160: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_test, y_test = np.array(xs[idx:]), np.array(labels[idx:])
+2024-03-01 13:46:14.804214: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-03-01 13:46:14.804785: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 13:46:14.805615: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 13:46:14.805657: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:46:14.805714: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:46:14.805735: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 13:46:14.805753: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 13:46:14.805770: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 13:46:14.805788: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 13:46:14.805806: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 13:46:14.805824: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:46:14.806290: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 13:46:14.806323: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:46:15.491581: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
+2024-03-01 13:46:15.491658: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
+2024-03-01 13:46:15.491674: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
+2024-03-01 13:46:15.492575: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11227 MB memory) -> physical GPU (device: 0, name: NVIDIA TITAN X (Pascal), pci bus id: 0000:02:00.0, compute capability: 6.1)
+{'id': '17_12', 'seed': 12, 'out_folder': 'results/epoch_budget', 'batch_size': 32, 'epochs': 29, 'validation_split': 0.2, 'checkpointing': True, 'initial_lr': 0.1, 'momentum': 0.98, 'nesterov': True, 'bootstrapping': False, 'map_optimizer': True, 'model': 'CNN-LSTM', 'tf_version': '2.4.1', 'keras_version': '2.4.3', 'GPU': 'NVIDIA TITAN X (Pascal)'}
+Loading data...
+Pad sequences (samples x time)
+20000 train sequences
+5000 validation sequences
+25000 test sequences
+x_train shape: (20000, 100)
+x_val shape: (5000, 100)
+x_test shape: (25000, 100)
+Using MAP optimizer with reg_weight:  5e-05
+CNN-LSTM
+0epoch [00:00, ?epoch/s]  0%|          | 0/29 [00:00<?, ?epoch/s]2024-03-01 13:46:15.914161: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2024-03-01 13:46:15.926132: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2600020000 Hz
+2024-03-01 13:46:17.391030: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:46:17.583714: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:46:18.281633: W tensorflow/stream_executor/gpu/asm_compiler.cc:63] Running ptxas --version returned 256
+2024-03-01 13:46:18.356503: W tensorflow/stream_executor/gpu/redzone_allocator.cc:314] Internal: ptxas exited with non-zero error code 256, output: 
+Relying on driver to perform ptx compilation. 
+Modify $PATH to customize ptxas location.
+This message will be only logged once.
+  3%|▎         | 1/29 [00:14<06:44, 14.46s/epoch, loss=0.659, accuracy=0.644, val_loss=0.513, val_accuracy=0.794]  7%|▋         | 2/29 [00:23<05:00, 11.14s/epoch, loss=0.495, accuracy=0.824, val_loss=0.577, val_accuracy=0.794] 10%|█         | 3/29 [00:31<04:19,  9.98s/epoch, loss=0.465, accuracy=0.85, val_loss=0.52, val_accuracy=0.832]   14%|█▍        | 4/29 [00:40<03:51,  9.26s/epoch, loss=0.45, accuracy=0.87, val_loss=0.577, val_accuracy=0.822] 17%|█▋        | 5/29 [00:48<03:32,  8.87s/epoch, loss=0.473, accuracy=0.874, val_loss=0.583, val_accuracy=0.829] 21%|██        | 6/29 [00:56<03:19,  8.66s/epoch, loss=0.524, accuracy=0.874, val_loss=0.818, val_accuracy=0.796] 24%|██▍       | 7/29 [01:04<03:08,  8.55s/epoch, loss=0.827, accuracy=0.763, val_loss=1.09, val_accuracy=0.664]  28%|██▊       | 8/29 [01:12<02:56,  8.39s/epoch, loss=1.19, accuracy=0.565, val_loss=1.19, val_accuracy=0.544]  31%|███       | 9/29 [01:21<02:48,  8.41s/epoch, loss=1.14, accuracy=0.573, val_loss=1.12, val_accuracy=0.554] 34%|███▍      | 10/29 [01:29<02:39,  8.40s/epoch, loss=1.1, accuracy=0.577, val_loss=1.12, val_accuracy=0.516] 38%|███▊      | 11/29 [01:38<02:30,  8.39s/epoch, loss=1.05, accuracy=0.57, val_loss=1, val_accuracy=0.596]    41%|████▏     | 12/29 [01:46<02:22,  8.36s/epoch, loss=0.983, accuracy=0.602, val_loss=0.962, val_accuracy=0.601] 45%|████▍     | 13/29 [01:54<02:12,  8.27s/epoch, loss=0.944, accuracy=0.605, val_loss=0.913, val_accuracy=0.616] 48%|████▊     | 14/29 [02:02<02:03,  8.23s/epoch, loss=0.923, accuracy=0.598, val_loss=0.891, val_accuracy=0.627] 52%|█████▏    | 15/29 [02:10<01:54,  8.16s/epoch, loss=0.908, accuracy=0.625, val_loss=0.902, val_accuracy=0.629] 55%|█████▌    | 16/29 [02:18<01:45,  8.10s/epoch, loss=0.9, accuracy=0.626, val_loss=0.873, val_accuracy=0.643]   59%|█████▊    | 17/29 [02:26<01:37,  8.11s/epoch, loss=0.898, accuracy=0.608, val_loss=0.908, val_accuracy=0.592] 62%|██████▏   | 18/29 [02:34<01:29,  8.15s/epoch, loss=0.889, accuracy=0.607, val_loss=0.867, val_accuracy=0.634] 66%|██████▌   | 19/29 [02:43<01:21,  8.18s/epoch, loss=0.886, accuracy=0.632, val_loss=0.9, val_accuracy=0.619]   69%|██████▉   | 20/29 [02:51<01:13,  8.18s/epoch, loss=0.882, accuracy=0.649, val_loss=0.894, val_accuracy=0.658] 72%|███████▏  | 21/29 [02:59<01:05,  8.16s/epoch, loss=0.908, accuracy=0.635, val_loss=0.898, val_accuracy=0.649] 76%|███████▌  | 22/29 [03:07<00:56,  8.02s/epoch, loss=0.899, accuracy=0.635, val_loss=0.88, val_accuracy=0.661]  79%|███████▉  | 23/29 [03:14<00:47,  7.85s/epoch, loss=0.896, accuracy=0.644, val_loss=0.931, val_accuracy=0.616] 83%|████████▎ | 24/29 [03:22<00:38,  7.73s/epoch, loss=0.956, accuracy=0.552, val_loss=0.945, val_accuracy=0.546] 86%|████████▌ | 25/29 [03:29<00:31,  7.76s/epoch, loss=0.914, accuracy=0.565, val_loss=0.915, val_accuracy=0.624] 90%|████████▉ | 26/29 [03:38<00:23,  7.97s/epoch, loss=0.861, accuracy=0.637, val_loss=0.861, val_accuracy=0.654] 93%|█████████▎| 27/29 [03:46<00:16,  8.16s/epoch, loss=0.908, accuracy=0.593, val_loss=0.889, val_accuracy=0.573] 97%|█████████▋| 28/29 [03:55<00:08,  8.31s/epoch, loss=0.877, accuracy=0.596, val_loss=0.912, val_accuracy=0.597]100%|██████████| 29/29 [04:04<00:00,  8.43s/epoch, loss=0.85, accuracy=0.635, val_loss=0.87, val_accuracy=0.624]  100%|██████████| 29/29 [04:04<00:00,  8.42s/epoch, loss=0.85, accuracy=0.635, val_loss=0.87, val_accuracy=0.624]
+Test score: 0.517160177230835
+Test accuracy: 0.8343600034713745
+
+
+* * * Run SGD for ID = 17_13. * * *
+
+
+2024-03-01 13:50:27.827647: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:50:30.673830: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 13:50:30.675021: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2024-03-01 13:50:30.712583: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 13:50:30.712629: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:50:30.715705: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:50:30.715756: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 13:50:30.717765: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 13:50:30.718300: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 13:50:30.720500: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 13:50:30.721813: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 13:50:30.726903: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:50:30.727583: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 13:50:30.727694: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+<__array_function__ internals>:5: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:159: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_train, y_train = np.array(xs[:idx]), np.array(labels[:idx])
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:160: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_test, y_test = np.array(xs[idx:]), np.array(labels[idx:])
+2024-03-01 13:50:36.025244: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-03-01 13:50:36.025757: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 13:50:36.026597: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 13:50:36.026632: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:50:36.026689: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:50:36.026710: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 13:50:36.026727: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 13:50:36.026745: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 13:50:36.026764: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 13:50:36.026781: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 13:50:36.026800: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:50:36.027259: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 13:50:36.027293: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:50:36.712126: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
+2024-03-01 13:50:36.712182: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
+2024-03-01 13:50:36.712191: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
+2024-03-01 13:50:36.713174: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11227 MB memory) -> physical GPU (device: 0, name: NVIDIA TITAN X (Pascal), pci bus id: 0000:02:00.0, compute capability: 6.1)
+{'id': '17_13', 'seed': 13, 'out_folder': 'results/epoch_budget', 'batch_size': 32, 'epochs': 29, 'validation_split': 0.2, 'checkpointing': True, 'initial_lr': 0.1, 'momentum': 0.98, 'nesterov': True, 'bootstrapping': False, 'map_optimizer': True, 'model': 'CNN-LSTM', 'tf_version': '2.4.1', 'keras_version': '2.4.3', 'GPU': 'NVIDIA TITAN X (Pascal)'}
+Loading data...
+Pad sequences (samples x time)
+20000 train sequences
+5000 validation sequences
+25000 test sequences
+x_train shape: (20000, 100)
+x_val shape: (5000, 100)
+x_test shape: (25000, 100)
+Using MAP optimizer with reg_weight:  5e-05
+CNN-LSTM
+0epoch [00:00, ?epoch/s]  0%|          | 0/29 [00:00<?, ?epoch/s]2024-03-01 13:50:37.128853: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2024-03-01 13:50:37.141115: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2600020000 Hz
+2024-03-01 13:50:38.591938: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:50:38.762131: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:50:39.430713: W tensorflow/stream_executor/gpu/asm_compiler.cc:63] Running ptxas --version returned 256
+2024-03-01 13:50:39.500349: W tensorflow/stream_executor/gpu/redzone_allocator.cc:314] Internal: ptxas exited with non-zero error code 256, output: 
+Relying on driver to perform ptx compilation. 
+Modify $PATH to customize ptxas location.
+This message will be only logged once.
+  3%|▎         | 1/29 [00:16<07:47, 16.70s/epoch, loss=0.617, accuracy=0.685, val_loss=0.473, val_accuracy=0.821]  7%|▋         | 2/29 [00:26<05:37, 12.51s/epoch, loss=0.445, accuracy=0.841, val_loss=0.465, val_accuracy=0.845] 10%|█         | 3/29 [00:34<04:32, 10.49s/epoch, loss=0.431, accuracy=0.863, val_loss=0.537, val_accuracy=0.837] 14%|█▍        | 4/29 [00:42<03:57,  9.50s/epoch, loss=0.451, accuracy=0.873, val_loss=0.55, val_accuracy=0.841]  17%|█▋        | 5/29 [00:50<03:35,  8.97s/epoch, loss=0.49, accuracy=0.877, val_loss=0.625, val_accuracy=0.823] 21%|██        | 6/29 [00:58<03:19,  8.66s/epoch, loss=0.696, accuracy=0.815, val_loss=0.946, val_accuracy=0.723] 24%|██▍       | 7/29 [01:06<03:05,  8.44s/epoch, loss=1.08, accuracy=0.652, val_loss=1.15, val_accuracy=0.641]   28%|██▊       | 8/29 [01:14<02:54,  8.29s/epoch, loss=1.09, accuracy=0.69, val_loss=1.1, val_accuracy=0.627]   31%|███       | 9/29 [01:22<02:43,  8.16s/epoch, loss=1.06, accuracy=0.713, val_loss=1.08, val_accuracy=0.717] 34%|███▍      | 10/29 [01:30<02:33,  8.09s/epoch, loss=1.12, accuracy=0.684, val_loss=1.19, val_accuracy=0.621] 38%|███▊      | 11/29 [01:38<02:24,  8.04s/epoch, loss=1.2, accuracy=0.63, val_loss=1.17, val_accuracy=0.628]   41%|████▏     | 12/29 [01:45<02:15,  7.98s/epoch, loss=1.11, accuracy=0.622, val_loss=1.08, val_accuracy=0.616] 45%|████▍     | 13/29 [01:53<02:07,  7.96s/epoch, loss=1.04, accuracy=0.626, val_loss=1.03, val_accuracy=0.627] 48%|████▊     | 14/29 [02:01<01:59,  7.95s/epoch, loss=1.01, accuracy=0.628, val_loss=1.05, val_accuracy=0.584] 52%|█████▏    | 15/29 [02:09<01:50,  7.93s/epoch, loss=1.01, accuracy=0.61, val_loss=0.991, val_accuracy=0.618] 55%|█████▌    | 16/29 [02:17<01:42,  7.92s/epoch, loss=0.962, accuracy=0.612, val_loss=0.93, val_accuracy=0.61] 59%|█████▊    | 17/29 [02:25<01:35,  7.92s/epoch, loss=0.924, accuracy=0.61, val_loss=0.929, val_accuracy=0.624] 62%|██████▏   | 18/29 [02:33<01:27,  7.94s/epoch, loss=0.879, accuracy=0.629, val_loss=0.923, val_accuracy=0.575] 66%|██████▌   | 19/29 [02:41<01:19,  7.95s/epoch, loss=0.839, accuracy=0.646, val_loss=0.855, val_accuracy=0.651] 69%|██████▉   | 20/29 [02:49<01:10,  7.83s/epoch, loss=0.789, accuracy=0.686, val_loss=0.798, val_accuracy=0.691] 72%|███████▏  | 21/29 [02:56<01:01,  7.63s/epoch, loss=0.825, accuracy=0.675, val_loss=0.882, val_accuracy=0.625] 76%|███████▌  | 22/29 [03:03<00:52,  7.53s/epoch, loss=0.871, accuracy=0.656, val_loss=0.912, val_accuracy=0.631] 79%|███████▉  | 23/29 [03:11<00:45,  7.64s/epoch, loss=0.905, accuracy=0.647, val_loss=0.928, val_accuracy=0.626] 83%|████████▎ | 24/29 [03:19<00:38,  7.73s/epoch, loss=0.955, accuracy=0.621, val_loss=1.03, val_accuracy=0.496]  86%|████████▌ | 25/29 [03:27<00:31,  7.94s/epoch, loss=0.988, accuracy=0.552, val_loss=0.991, val_accuracy=0.607] 90%|████████▉ | 26/29 [03:36<00:24,  8.13s/epoch, loss=0.975, accuracy=0.582, val_loss=0.957, val_accuracy=0.538] 93%|█████████▎| 27/29 [03:44<00:16,  8.28s/epoch, loss=0.952, accuracy=0.612, val_loss=0.96, val_accuracy=0.619]  97%|█████████▋| 28/29 [03:53<00:08,  8.37s/epoch, loss=0.899, accuracy=0.659, val_loss=0.857, val_accuracy=0.675]100%|██████████| 29/29 [04:02<00:00,  8.45s/epoch, loss=0.896, accuracy=0.658, val_loss=0.978, val_accuracy=0.625]100%|██████████| 29/29 [04:02<00:00,  8.35s/epoch, loss=0.896, accuracy=0.658, val_loss=0.978, val_accuracy=0.625]
+Test score: 0.4557662606239319
+Test accuracy: 0.8446000218391418
+
+
+* * * Run SGD for ID = 17_14. * * *
+
+
+2024-03-01 13:54:46.632883: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:54:50.050208: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 13:54:50.051445: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2024-03-01 13:54:50.088906: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 13:54:50.088951: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:54:50.092402: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:54:50.092449: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 13:54:50.094569: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 13:54:50.095227: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 13:54:50.097545: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 13:54:50.098901: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 13:54:50.103528: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:54:50.104205: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 13:54:50.104309: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+<__array_function__ internals>:5: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:159: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_train, y_train = np.array(xs[:idx]), np.array(labels[:idx])
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:160: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_test, y_test = np.array(xs[idx:]), np.array(labels[idx:])
+2024-03-01 13:54:55.773267: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-03-01 13:54:55.773766: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 13:54:55.774585: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 13:54:55.774620: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:54:55.774677: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:54:55.774700: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 13:54:55.774719: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 13:54:55.774738: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 13:54:55.774757: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 13:54:55.774783: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 13:54:55.774803: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:54:55.775247: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 13:54:55.775285: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:54:56.446266: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
+2024-03-01 13:54:56.446313: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
+2024-03-01 13:54:56.446323: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
+2024-03-01 13:54:56.447304: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11227 MB memory) -> physical GPU (device: 0, name: NVIDIA TITAN X (Pascal), pci bus id: 0000:02:00.0, compute capability: 6.1)
+{'id': '17_14', 'seed': 14, 'out_folder': 'results/epoch_budget', 'batch_size': 32, 'epochs': 29, 'validation_split': 0.2, 'checkpointing': True, 'initial_lr': 0.1, 'momentum': 0.98, 'nesterov': True, 'bootstrapping': False, 'map_optimizer': True, 'model': 'CNN-LSTM', 'tf_version': '2.4.1', 'keras_version': '2.4.3', 'GPU': 'NVIDIA TITAN X (Pascal)'}
+Loading data...
+Pad sequences (samples x time)
+20000 train sequences
+5000 validation sequences
+25000 test sequences
+x_train shape: (20000, 100)
+x_val shape: (5000, 100)
+x_test shape: (25000, 100)
+Using MAP optimizer with reg_weight:  5e-05
+CNN-LSTM
+0epoch [00:00, ?epoch/s]  0%|          | 0/29 [00:00<?, ?epoch/s]2024-03-01 13:54:56.868950: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2024-03-01 13:54:56.881114: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2600020000 Hz
+2024-03-01 13:54:58.390127: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:54:58.574091: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:54:59.278163: W tensorflow/stream_executor/gpu/asm_compiler.cc:63] Running ptxas --version returned 256
+2024-03-01 13:54:59.341858: W tensorflow/stream_executor/gpu/redzone_allocator.cc:314] Internal: ptxas exited with non-zero error code 256, output: 
+Relying on driver to perform ptx compilation. 
+Modify $PATH to customize ptxas location.
+This message will be only logged once.
+  3%|▎         | 1/29 [00:15<07:17, 15.64s/epoch, loss=0.688, accuracy=0.599, val_loss=0.528, val_accuracy=0.783]  7%|▋         | 2/29 [00:25<05:23, 12.00s/epoch, loss=0.484, accuracy=0.817, val_loss=0.485, val_accuracy=0.833] 10%|█         | 3/29 [00:34<04:35, 10.59s/epoch, loss=0.426, accuracy=0.856, val_loss=0.465, val_accuracy=0.846] 14%|█▍        | 4/29 [00:42<04:07,  9.91s/epoch, loss=0.425, accuracy=0.871, val_loss=0.503, val_accuracy=0.838] 17%|█▋        | 5/29 [00:51<03:46,  9.44s/epoch, loss=0.435, accuracy=0.885, val_loss=0.586, val_accuracy=0.833] 21%|██        | 6/29 [00:59<03:29,  9.10s/epoch, loss=0.521, accuracy=0.864, val_loss=0.821, val_accuracy=0.725] 24%|██▍       | 7/29 [01:08<03:15,  8.89s/epoch, loss=0.986, accuracy=0.682, val_loss=1.14, val_accuracy=0.598]  28%|██▊       | 8/29 [01:17<03:05,  8.83s/epoch, loss=1.18, accuracy=0.61, val_loss=1.19, val_accuracy=0.624]   31%|███       | 9/29 [01:25<02:53,  8.66s/epoch, loss=1.19, accuracy=0.579, val_loss=1.17, val_accuracy=0.571] 34%|███▍      | 10/29 [01:33<02:42,  8.54s/epoch, loss=1.14, accuracy=0.57, val_loss=1.11, val_accuracy=0.578] 38%|███▊      | 11/29 [01:42<02:33,  8.51s/epoch, loss=1.08, accuracy=0.565, val_loss=1.07, val_accuracy=0.494] 41%|████▏     | 12/29 [01:50<02:25,  8.57s/epoch, loss=1.03, accuracy=0.551, val_loss=1.01, val_accuracy=0.545] 45%|████▍     | 13/29 [01:59<02:16,  8.54s/epoch, loss=0.958, accuracy=0.568, val_loss=0.922, val_accuracy=0.585] 48%|████▊     | 14/29 [02:07<02:07,  8.53s/epoch, loss=0.923, accuracy=0.58, val_loss=0.906, val_accuracy=0.623]  52%|█████▏    | 15/29 [02:16<02:00,  8.60s/epoch, loss=0.924, accuracy=0.563, val_loss=0.905, val_accuracy=0.512] 55%|█████▌    | 16/29 [02:25<01:51,  8.59s/epoch, loss=0.899, accuracy=0.557, val_loss=0.874, val_accuracy=0.603] 59%|█████▊    | 17/29 [02:33<01:42,  8.54s/epoch, loss=0.842, accuracy=0.605, val_loss=0.824, val_accuracy=0.636] 62%|██████▏   | 18/29 [02:40<01:30,  8.20s/epoch, loss=0.799, accuracy=0.64, val_loss=0.806, val_accuracy=0.585]  66%|██████▌   | 19/29 [02:48<01:19,  7.96s/epoch, loss=0.824, accuracy=0.646, val_loss=0.828, val_accuracy=0.674] 69%|██████▉   | 20/29 [02:55<01:10,  7.80s/epoch, loss=0.915, accuracy=0.601, val_loss=0.969, val_accuracy=0.506] 72%|███████▏  | 21/29 [03:03<01:02,  7.83s/epoch, loss=0.934, accuracy=0.57, val_loss=0.929, val_accuracy=0.564]  76%|███████▌  | 22/29 [03:11<00:54,  7.75s/epoch, loss=0.889, accuracy=0.606, val_loss=0.851, val_accuracy=0.633] 79%|███████▉  | 23/29 [03:19<00:46,  7.78s/epoch, loss=0.873, accuracy=0.629, val_loss=0.856, val_accuracy=0.674] 83%|████████▎ | 24/29 [03:26<00:39,  7.82s/epoch, loss=0.898, accuracy=0.614, val_loss=0.888, val_accuracy=0.621] 86%|████████▌ | 25/29 [03:34<00:31,  7.82s/epoch, loss=0.889, accuracy=0.616, val_loss=0.833, val_accuracy=0.654] 90%|████████▉ | 26/29 [03:42<00:23,  7.84s/epoch, loss=0.858, accuracy=0.645, val_loss=0.918, val_accuracy=0.56]  93%|█████████▎| 27/29 [03:50<00:15,  7.85s/epoch, loss=0.913, accuracy=0.608, val_loss=0.953, val_accuracy=0.509] 97%|█████████▋| 28/29 [03:58<00:07,  7.88s/epoch, loss=0.915, accuracy=0.607, val_loss=0.905, val_accuracy=0.614]100%|██████████| 29/29 [04:06<00:00,  7.89s/epoch, loss=0.874, accuracy=0.621, val_loss=0.858, val_accuracy=0.616]100%|██████████| 29/29 [04:06<00:00,  8.50s/epoch, loss=0.874, accuracy=0.621, val_loss=0.858, val_accuracy=0.616]
+Test score: 0.46514055132865906
+Test accuracy: 0.8406800031661987
+
+
+* * * Run SGD for ID = 17_15. * * *
+
+
+2024-03-01 13:59:11.382672: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:59:25.494600: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 13:59:25.495805: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2024-03-01 13:59:25.535040: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 13:59:25.535099: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:59:25.538572: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:59:25.538634: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 13:59:25.540877: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 13:59:25.541549: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 13:59:25.543773: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 13:59:25.545176: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 13:59:25.550297: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:59:25.551110: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 13:59:25.551256: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+<__array_function__ internals>:5: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:159: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_train, y_train = np.array(xs[:idx]), np.array(labels[:idx])
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:160: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_test, y_test = np.array(xs[idx:]), np.array(labels[idx:])
+2024-03-01 13:59:31.006428: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-03-01 13:59:31.007090: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 13:59:31.007895: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 13:59:31.007941: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:59:31.008052: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:59:31.008075: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 13:59:31.008094: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 13:59:31.008112: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 13:59:31.008130: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 13:59:31.008148: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 13:59:31.008167: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:59:31.008606: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 13:59:31.008646: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 13:59:31.675093: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
+2024-03-01 13:59:31.675156: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
+2024-03-01 13:59:31.675166: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
+2024-03-01 13:59:31.676205: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11227 MB memory) -> physical GPU (device: 0, name: NVIDIA TITAN X (Pascal), pci bus id: 0000:02:00.0, compute capability: 6.1)
+{'id': '17_15', 'seed': 15, 'out_folder': 'results/epoch_budget', 'batch_size': 32, 'epochs': 29, 'validation_split': 0.2, 'checkpointing': True, 'initial_lr': 0.1, 'momentum': 0.98, 'nesterov': True, 'bootstrapping': False, 'map_optimizer': True, 'model': 'CNN-LSTM', 'tf_version': '2.4.1', 'keras_version': '2.4.3', 'GPU': 'NVIDIA TITAN X (Pascal)'}
+Loading data...
+Pad sequences (samples x time)
+20000 train sequences
+5000 validation sequences
+25000 test sequences
+x_train shape: (20000, 100)
+x_val shape: (5000, 100)
+x_test shape: (25000, 100)
+Using MAP optimizer with reg_weight:  5e-05
+CNN-LSTM
+0epoch [00:00, ?epoch/s]  0%|          | 0/29 [00:00<?, ?epoch/s]2024-03-01 13:59:32.100283: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2024-03-01 13:59:32.112123: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2600020000 Hz
+2024-03-01 13:59:33.611600: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 13:59:33.780595: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 13:59:34.526302: W tensorflow/stream_executor/gpu/asm_compiler.cc:63] Running ptxas --version returned 256
+2024-03-01 13:59:34.597426: W tensorflow/stream_executor/gpu/redzone_allocator.cc:314] Internal: ptxas exited with non-zero error code 256, output: 
+Relying on driver to perform ptx compilation. 
+Modify $PATH to customize ptxas location.
+This message will be only logged once.
+  3%|▎         | 1/29 [00:17<08:19, 17.84s/epoch, loss=0.753, accuracy=0.497, val_loss=0.74, val_accuracy=0.496]  7%|▋         | 2/29 [00:28<06:14, 13.89s/epoch, loss=0.736, accuracy=0.497, val_loss=0.729, val_accuracy=0.504] 10%|█         | 3/29 [00:37<04:57, 11.45s/epoch, loss=0.722, accuracy=0.513, val_loss=0.653, val_accuracy=0.645] 14%|█▍        | 4/29 [00:45<04:14, 10.18s/epoch, loss=0.545, accuracy=0.758, val_loss=0.479, val_accuracy=0.816] 17%|█▋        | 5/29 [00:54<03:48,  9.50s/epoch, loss=0.438, accuracy=0.838, val_loss=0.445, val_accuracy=0.839] 21%|██        | 6/29 [01:01<03:25,  8.92s/epoch, loss=0.411, accuracy=0.868, val_loss=0.506, val_accuracy=0.826] 24%|██▍       | 7/29 [01:10<03:14,  8.84s/epoch, loss=0.404, accuracy=0.885, val_loss=0.522, val_accuracy=0.847] 28%|██▊       | 8/29 [01:18<03:01,  8.63s/epoch, loss=0.424, accuracy=0.892, val_loss=0.592, val_accuracy=0.837] 31%|███       | 9/29 [01:26<02:49,  8.46s/epoch, loss=0.591, accuracy=0.84, val_loss=0.862, val_accuracy=0.727]  34%|███▍      | 10/29 [01:34<02:38,  8.34s/epoch, loss=1.07, accuracy=0.62, val_loss=1.1, val_accuracy=0.611]   38%|███▊      | 11/29 [01:42<02:28,  8.24s/epoch, loss=1.11, accuracy=0.616, val_loss=1.15, val_accuracy=0.583] 41%|████▏     | 12/29 [01:50<02:18,  8.17s/epoch, loss=1.13, accuracy=0.559, val_loss=1.1, val_accuracy=0.563]  45%|████▍     | 13/29 [01:58<02:07,  7.94s/epoch, loss=1.09, accuracy=0.537, val_loss=1.12, val_accuracy=0.504] 48%|████▊     | 14/29 [02:05<01:56,  7.73s/epoch, loss=1.01, accuracy=0.541, val_loss=0.951, val_accuracy=0.557] 52%|█████▏    | 15/29 [02:12<01:45,  7.56s/epoch, loss=0.957, accuracy=0.534, val_loss=0.922, val_accuracy=0.518] 55%|█████▌    | 16/29 [02:19<01:36,  7.46s/epoch, loss=0.881, accuracy=0.594, val_loss=0.852, val_accuracy=0.601] 59%|█████▊    | 17/29 [02:27<01:29,  7.46s/epoch, loss=0.846, accuracy=0.653, val_loss=0.796, val_accuracy=0.697] 62%|██████▏   | 18/29 [02:35<01:23,  7.55s/epoch, loss=0.866, accuracy=0.652, val_loss=0.928, val_accuracy=0.604] 66%|██████▌   | 19/29 [02:43<01:17,  7.73s/epoch, loss=0.937, accuracy=0.621, val_loss=0.903, val_accuracy=0.66]  69%|██████▉   | 20/29 [02:51<01:10,  7.79s/epoch, loss=0.952, accuracy=0.607, val_loss=0.906, val_accuracy=0.65] 72%|███████▏  | 21/29 [02:59<01:02,  7.85s/epoch, loss=0.96, accuracy=0.576, val_loss=0.929, val_accuracy=0.579] 76%|███████▌  | 22/29 [03:07<00:55,  7.90s/epoch, loss=0.924, accuracy=0.588, val_loss=0.901, val_accuracy=0.599] 79%|███████▉  | 23/29 [03:15<00:47,  7.96s/epoch, loss=0.936, accuracy=0.555, val_loss=0.948, val_accuracy=0.496] 83%|████████▎ | 24/29 [03:23<00:39,  7.96s/epoch, loss=0.926, accuracy=0.532, val_loss=0.923, val_accuracy=0.581] 86%|████████▌ | 25/29 [03:31<00:31,  7.97s/epoch, loss=0.88, accuracy=0.57, val_loss=0.862, val_accuracy=0.601]   90%|████████▉ | 26/29 [03:39<00:23,  8.00s/epoch, loss=0.815, accuracy=0.63, val_loss=0.849, val_accuracy=0.6]  93%|█████████▎| 27/29 [03:47<00:15,  7.97s/epoch, loss=0.954, accuracy=0.608, val_loss=1.01, val_accuracy=0.559] 97%|█████████▋| 28/29 [03:55<00:08,  8.03s/epoch, loss=1.01, accuracy=0.571, val_loss=0.986, val_accuracy=0.525]100%|██████████| 29/29 [04:03<00:00,  8.03s/epoch, loss=0.963, accuracy=0.582, val_loss=1.02, val_accuracy=0.568]100%|██████████| 29/29 [04:03<00:00,  8.40s/epoch, loss=0.963, accuracy=0.582, val_loss=1.02, val_accuracy=0.568]
+Test score: 0.5181261897087097
+Test accuracy: 0.838919997215271
+
+
+* * * Run SGD for ID = 17_16. * * *
+
+
+2024-03-01 14:03:42.661965: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 14:03:46.152639: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 14:03:46.153761: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2024-03-01 14:03:46.190463: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 14:03:46.190524: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 14:03:46.193711: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 14:03:46.193759: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 14:03:46.195969: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 14:03:46.196598: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 14:03:46.198951: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 14:03:46.200481: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 14:03:46.205375: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 14:03:46.206066: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 14:03:46.206162: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+<__array_function__ internals>:5: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:159: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_train, y_train = np.array(xs[:idx]), np.array(labels[:idx])
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:160: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_test, y_test = np.array(xs[idx:]), np.array(labels[idx:])
+2024-03-01 14:03:51.806355: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-03-01 14:03:51.807308: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 14:03:51.808145: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 14:03:51.808179: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 14:03:51.808246: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 14:03:51.808288: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 14:03:51.808305: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 14:03:51.808323: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 14:03:51.808340: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 14:03:51.808357: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 14:03:51.808374: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 14:03:51.808806: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 14:03:51.808837: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 14:03:52.519286: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
+2024-03-01 14:03:52.519542: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
+2024-03-01 14:03:52.519552: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
+2024-03-01 14:03:52.520829: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11227 MB memory) -> physical GPU (device: 0, name: NVIDIA TITAN X (Pascal), pci bus id: 0000:02:00.0, compute capability: 6.1)
+{'id': '17_16', 'seed': 16, 'out_folder': 'results/epoch_budget', 'batch_size': 32, 'epochs': 29, 'validation_split': 0.2, 'checkpointing': True, 'initial_lr': 0.1, 'momentum': 0.98, 'nesterov': True, 'bootstrapping': False, 'map_optimizer': True, 'model': 'CNN-LSTM', 'tf_version': '2.4.1', 'keras_version': '2.4.3', 'GPU': 'NVIDIA TITAN X (Pascal)'}
+Loading data...
+Pad sequences (samples x time)
+20000 train sequences
+5000 validation sequences
+25000 test sequences
+x_train shape: (20000, 100)
+x_val shape: (5000, 100)
+x_test shape: (25000, 100)
+Using MAP optimizer with reg_weight:  5e-05
+CNN-LSTM
+0epoch [00:00, ?epoch/s]  0%|          | 0/29 [00:00<?, ?epoch/s]2024-03-01 14:03:52.961130: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2024-03-01 14:03:52.973148: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2600020000 Hz
+2024-03-01 14:03:54.481233: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 14:03:54.671219: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 14:03:55.403806: W tensorflow/stream_executor/gpu/asm_compiler.cc:63] Running ptxas --version returned 256
+2024-03-01 14:03:55.462284: W tensorflow/stream_executor/gpu/redzone_allocator.cc:314] Internal: ptxas exited with non-zero error code 256, output: 
+Relying on driver to perform ptx compilation. 
+Modify $PATH to customize ptxas location.
+This message will be only logged once.
+  3%|▎         | 1/29 [00:15<07:16, 15.60s/epoch, loss=0.689, accuracy=0.604, val_loss=0.541, val_accuracy=0.768]  7%|▋         | 2/29 [00:26<05:46, 12.82s/epoch, loss=0.479, accuracy=0.815, val_loss=0.504, val_accuracy=0.812] 10%|█         | 3/29 [00:37<05:07, 11.84s/epoch, loss=0.435, accuracy=0.855, val_loss=0.478, val_accuracy=0.84]  14%|█▍        | 4/29 [00:48<04:55, 11.81s/epoch, loss=0.437, accuracy=0.871, val_loss=0.53, val_accuracy=0.842] 17%|█▋        | 5/29 [00:57<04:17, 10.75s/epoch, loss=0.435, accuracy=0.889, val_loss=0.529, val_accuracy=0.842] 21%|██        | 6/29 [01:07<03:55, 10.25s/epoch, loss=0.482, accuracy=0.88, val_loss=0.741, val_accuracy=0.763]  24%|██▍       | 7/29 [01:16<03:37,  9.89s/epoch, loss=0.828, accuracy=0.742, val_loss=0.978, val_accuracy=0.7]  28%|██▊       | 8/29 [01:25<03:22,  9.65s/epoch, loss=1.02, accuracy=0.668, val_loss=1.03, val_accuracy=0.645] 31%|███       | 9/29 [01:34<03:07,  9.39s/epoch, loss=1.06, accuracy=0.643, val_loss=1.09, val_accuracy=0.612] 34%|███▍      | 10/29 [01:42<02:53,  9.13s/epoch, loss=1.09, accuracy=0.603, val_loss=1.13, val_accuracy=0.585] 38%|███▊      | 11/29 [01:50<02:36,  8.68s/epoch, loss=1.1, accuracy=0.531, val_loss=1.04, val_accuracy=0.539]  41%|████▏     | 12/29 [01:57<02:21,  8.35s/epoch, loss=1.02, accuracy=0.55, val_loss=1.02, val_accuracy=0.485] 45%|████▍     | 13/29 [02:05<02:10,  8.14s/epoch, loss=0.967, accuracy=0.571, val_loss=0.964, val_accuracy=0.585] 48%|████▊     | 14/29 [02:13<02:00,  8.02s/epoch, loss=0.914, accuracy=0.597, val_loss=0.925, val_accuracy=0.485] 52%|█████▏    | 15/29 [02:21<01:51,  7.98s/epoch, loss=0.881, accuracy=0.612, val_loss=0.863, val_accuracy=0.627] 55%|█████▌    | 16/29 [02:29<01:43,  7.98s/epoch, loss=0.865, accuracy=0.627, val_loss=0.933, val_accuracy=0.575] 59%|█████▊    | 17/29 [02:37<01:35,  7.93s/epoch, loss=0.847, accuracy=0.617, val_loss=0.855, val_accuracy=0.583] 62%|██████▏   | 18/29 [02:44<01:26,  7.88s/epoch, loss=0.873, accuracy=0.601, val_loss=1.01, val_accuracy=0.488]  66%|██████▌   | 19/29 [02:52<01:19,  7.94s/epoch, loss=0.884, accuracy=0.568, val_loss=0.9, val_accuracy=0.576]  69%|██████▉   | 20/29 [03:01<01:11,  7.99s/epoch, loss=0.838, accuracy=0.616, val_loss=0.831, val_accuracy=0.619] 72%|███████▏  | 21/29 [03:09<01:04,  8.01s/epoch, loss=0.803, accuracy=0.645, val_loss=0.803, val_accuracy=0.662] 76%|███████▌  | 22/29 [03:17<00:56,  8.06s/epoch, loss=0.87, accuracy=0.629, val_loss=0.845, val_accuracy=0.654]  79%|███████▉  | 23/29 [03:25<00:48,  8.05s/epoch, loss=0.868, accuracy=0.652, val_loss=0.95, val_accuracy=0.581] 83%|████████▎ | 24/29 [03:33<00:40,  8.07s/epoch, loss=0.939, accuracy=0.623, val_loss=0.929, val_accuracy=0.62] 86%|████████▌ | 25/29 [03:41<00:32,  8.08s/epoch, loss=0.959, accuracy=0.603, val_loss=1.07, val_accuracy=0.515] 90%|████████▉ | 26/29 [03:49<00:24,  8.08s/epoch, loss=1.09, accuracy=0.532, val_loss=1.13, val_accuracy=0.489]  93%|█████████▎| 27/29 [03:57<00:16,  8.10s/epoch, loss=1.04, accuracy=0.544, val_loss=1.02, val_accuracy=0.516] 97%|█████████▋| 28/29 [04:05<00:08,  8.09s/epoch, loss=0.989, accuracy=0.546, val_loss=1.07, val_accuracy=0.53]100%|██████████| 29/29 [04:13<00:00,  8.09s/epoch, loss=0.922, accuracy=0.589, val_loss=1.01, val_accuracy=0.616]100%|██████████| 29/29 [04:13<00:00,  8.75s/epoch, loss=0.922, accuracy=0.589, val_loss=1.01, val_accuracy=0.616]
+Test score: 0.5364438891410828
+Test accuracy: 0.8392800092697144
+
+
+* * * Run SGD for ID = 17_17. * * *
+
+
+2024-03-01 14:08:14.757432: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 14:08:24.624162: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 14:08:24.625336: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2024-03-01 14:08:24.664221: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 14:08:24.664284: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 14:08:24.667924: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 14:08:24.668040: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 14:08:24.670438: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 14:08:24.671572: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 14:08:24.673944: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 14:08:24.675391: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 14:08:24.680032: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 14:08:24.680671: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 14:08:24.680776: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+<__array_function__ internals>:5: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:159: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_train, y_train = np.array(xs[:idx]), np.array(labels[:idx])
+/home/gkb738/.conda/envs/TF_KERAS_GPU/lib/python3.9/site-packages/tensorflow/python/keras/datasets/imdb.py:160: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray
+  x_test, y_test = np.array(xs[idx:]), np.array(labels[idx:])
+2024-03-01 14:08:30.182156: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-03-01 14:08:30.182652: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-01 14:08:30.183142: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:02:00.0 name: NVIDIA TITAN X (Pascal) computeCapability: 6.1
+coreClock: 1.531GHz coreCount: 28 deviceMemorySize: 11.90GiB deviceMemoryBandwidth: 447.48GiB/s
+2024-03-01 14:08:30.183176: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 14:08:30.183218: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 14:08:30.183234: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.10
+2024-03-01 14:08:30.183249: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2024-03-01 14:08:30.183281: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2024-03-01 14:08:30.183306: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2024-03-01 14:08:30.183322: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.10
+2024-03-01 14:08:30.183337: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 14:08:30.183768: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2024-03-01 14:08:30.183801: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.10.1
+2024-03-01 14:08:30.910885: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
+2024-03-01 14:08:30.910939: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
+2024-03-01 14:08:30.910948: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
+2024-03-01 14:08:30.911912: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11227 MB memory) -> physical GPU (device: 0, name: NVIDIA TITAN X (Pascal), pci bus id: 0000:02:00.0, compute capability: 6.1)
+{'id': '17_17', 'seed': 17, 'out_folder': 'results/epoch_budget', 'batch_size': 32, 'epochs': 29, 'validation_split': 0.2, 'checkpointing': True, 'initial_lr': 0.1, 'momentum': 0.98, 'nesterov': True, 'bootstrapping': False, 'map_optimizer': True, 'model': 'CNN-LSTM', 'tf_version': '2.4.1', 'keras_version': '2.4.3', 'GPU': 'NVIDIA TITAN X (Pascal)'}
+Loading data...
+Pad sequences (samples x time)
+20000 train sequences
+5000 validation sequences
+25000 test sequences
+x_train shape: (20000, 100)
+x_val shape: (5000, 100)
+x_test shape: (25000, 100)
+Using MAP optimizer with reg_weight:  5e-05
+CNN-LSTM
+0epoch [00:00, ?epoch/s]  0%|          | 0/29 [00:00<?, ?epoch/s]2024-03-01 14:08:31.329997: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2024-03-01 14:08:31.342123: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2600020000 Hz
+2024-03-01 14:08:32.830558: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.10
+2024-03-01 14:08:33.006477: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.7
+2024-03-01 14:08:33.728718: W tensorflow/stream_executor/gpu/asm_compiler.cc:63] Running ptxas --version returned 256
+2024-03-01 14:08:33.804857: W tensorflow/stream_executor/gpu/redzone_allocator.cc:314] Internal: ptxas exited with non-zero error code 256, output: 
+Relying on driver to perform ptx compilation. 
+Modify $PATH to customize ptxas location.
+This message will be only logged once.
+  3%|▎         | 1/29 [00:15<07:27, 15.99s/epoch, loss=0.641, accuracy=0.664, val_loss=0.542, val_accuracy=0.777]  7%|▋         | 2/29 [00:30<06:41, 14.86s/epoch, loss=0.47, accuracy=0.831, val_loss=0.506, val_accuracy=0.814]  10%|█         | 3/29 [00:39<05:27, 12.59s/epoch, loss=0.445, accuracy=0.855, val_loss=0.495, val_accuracy=0.836] 14%|█▍        | 4/29 [00:48<04:35, 11.01s/epoch, loss=0.482, accuracy=0.854, val_loss=0.58, val_accuracy=0.823]  17%|█▋        | 5/29 [00:57<04:03, 10.13s/epoch, loss=0.71, accuracy=0.775, val_loss=0.944, val_accuracy=0.639] 21%|██        | 6/29 [01:05<03:36,  9.39s/epoch, loss=1.02, accuracy=0.626, val_loss=1.1, val_accuracy=0.491]   24%|██▍       | 7/29 [01:12<03:12,  8.76s/epoch, loss=1.06, accuracy=0.599, val_loss=1.03, val_accuracy=0.649] 28%|██▊       | 8/29 [01:19<02:55,  8.34s/epoch, loss=1.08, accuracy=0.601, val_loss=1.08, val_accuracy=0.581] 31%|███       | 9/29 [01:28<02:45,  8.28s/epoch, loss=1.04, accuracy=0.604, val_loss=0.989, val_accuracy=0.613] 34%|███▍      | 10/29 [01:36<02:35,  8.20s/epoch, loss=1, accuracy=0.574, val_loss=0.968, val_accuracy=0.608]   38%|███▊      | 11/29 [01:44<02:29,  8.30s/epoch, loss=0.974, accuracy=0.557, val_loss=0.94, val_accuracy=0.589] 41%|████▏     | 12/29 [01:53<02:22,  8.40s/epoch, loss=0.935, accuracy=0.582, val_loss=0.988, val_accuracy=0.613] 45%|████▍     | 13/29 [02:01<02:15,  8.46s/epoch, loss=0.925, accuracy=0.619, val_loss=0.927, val_accuracy=0.624] 48%|████▊     | 14/29 [02:10<02:06,  8.47s/epoch, loss=0.929, accuracy=0.601, val_loss=0.925, val_accuracy=0.591] 52%|█████▏    | 15/29 [02:18<01:59,  8.50s/epoch, loss=0.938, accuracy=0.594, val_loss=0.934, val_accuracy=0.616] 55%|█████▌    | 16/29 [02:27<01:50,  8.49s/epoch, loss=0.89, accuracy=0.624, val_loss=0.886, val_accuracy=0.623]  59%|█████▊    | 17/29 [02:35<01:41,  8.49s/epoch, loss=0.854, accuracy=0.63, val_loss=0.873, val_accuracy=0.602] 62%|██████▏   | 18/29 [02:44<01:33,  8.48s/epoch, loss=0.846, accuracy=0.635, val_loss=0.823, val_accuracy=0.671] 66%|██████▌   | 19/29 [02:52<01:23,  8.37s/epoch, loss=0.87, accuracy=0.619, val_loss=0.893, val_accuracy=0.599]  69%|██████▉   | 20/29 [03:00<01:15,  8.40s/epoch, loss=0.928, accuracy=0.576, val_loss=1.05, val_accuracy=0.512] 72%|███████▏  | 21/29 [03:09<01:07,  8.39s/epoch, loss=1.03, accuracy=0.565, val_loss=0.971, val_accuracy=0.635] 76%|███████▌  | 22/29 [03:17<00:58,  8.38s/epoch, loss=0.993, accuracy=0.591, val_loss=0.962, val_accuracy=0.589] 79%|███████▉  | 23/29 [03:26<00:50,  8.42s/epoch, loss=0.941, accuracy=0.608, val_loss=0.917, val_accuracy=0.642] 83%|████████▎ | 24/29 [03:34<00:42,  8.48s/epoch, loss=0.9, accuracy=0.636, val_loss=0.881, val_accuracy=0.629]   86%|████████▌ | 25/29 [03:43<00:34,  8.55s/epoch, loss=0.866, accuracy=0.653, val_loss=0.866, val_accuracy=0.655] 90%|████████▉ | 26/29 [03:52<00:25,  8.55s/epoch, loss=0.877, accuracy=0.658, val_loss=0.898, val_accuracy=0.649] 93%|█████████▎| 27/29 [04:00<00:17,  8.57s/epoch, loss=0.958, accuracy=0.613, val_loss=0.918, val_accuracy=0.655] 97%|█████████▋| 28/29 [04:09<00:08,  8.55s/epoch, loss=0.945, accuracy=0.617, val_loss=0.961, val_accuracy=0.599]100%|██████████| 29/29 [04:17<00:00,  8.53s/epoch, loss=0.955, accuracy=0.586, val_loss=0.909, val_accuracy=0.607]100%|██████████| 29/29 [04:17<00:00,  8.88s/epoch, loss=0.955, accuracy=0.586, val_loss=0.909, val_accuracy=0.607]
+Test score: 0.494484543800354
+Test accuracy: 0.8372799754142761
