@@ -45,5 +45,5 @@ def sort_epoch_budget_folders():
         os.rename(subdir, os.path.join(ensemble_folder, model))
 
 if __name__ == '__main__':
-    #sort_out_files()
+    sort_out_files()
     #sort_epoch_budget_folders()
