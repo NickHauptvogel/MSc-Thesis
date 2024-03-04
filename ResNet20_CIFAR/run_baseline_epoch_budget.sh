@@ -8,6 +8,10 @@
 #SBATCH --gres=gpu:titanx:1
 #SBATCH --array=1-20
 
+# Declare output folder as variable
+folder="ResNet20_CIFAR/"
+out_folder="results/epoch_budget"
+
 nvidia-smi
 
 # Run experiment
@@ -25,9 +29,11 @@ do
         --id=$(printf "%02d_%02d" $SLURM_ARRAY_TASK_ID $i) \
         --seed=$i \
         --epochs=$budget \
+        --out_folder=$out_folder \
         --data_augmentation \
         --nesterov \
-        --checkpointing
+        --validation_split=0.0
+        #--checkpointing
         #--augm_shift=0.1 \
         #--initial_lr=1e-3 \
         #--l2_reg=1e-4 \
