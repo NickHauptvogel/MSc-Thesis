@@ -7,12 +7,12 @@ import argparse
 
 # Configuration
 parser = argparse.ArgumentParser(description='Ensemble prediction')
-parser.add_argument('--folder', type=str, default='CNN-LSTM_IMDB/results/epoch_budget',
+parser.add_argument('--folder', type=str, default='ResNet20_CIFAR/results/epoch_budget',
                     help='Folder with the models')
-parser.add_argument('--max_ensemble_size', type=int, default=20,
+parser.add_argument('--max_ensemble_size', type=int, default=19,
                     help='Maximum ensemble size')
 parser.add_argument('--plot', action='store_true', help='Plot the results')
-parser.add_argument('--use_case', type=str, default='imdb')
+parser.add_argument('--use_case', type=str, default='cifar10')
 
 args = parser.parse_args()
 folder = args.folder

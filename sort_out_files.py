@@ -2,10 +2,10 @@ import os
 
 
 def sort_out_files():
-    target_folder = 'CNN-LSTM_IMDB/results/epoch_budget'
-    out_files_folder = 'CNN-LSTM_IMDB'
-    #target_folder = 'ResNet20_CIFAR/results/50_independent_wenzel_no_checkp_2'
-    #out_files_folder = 'ResNet20_CIFAR'
+    #target_folder = 'CNN-LSTM_IMDB/results/epoch_budget'
+    #out_files_folder = 'CNN-LSTM_IMDB'
+    target_folder = 'ResNet20_CIFAR/results/epoch_budget'
+    out_files_folder = 'ResNet20_CIFAR'
 
     # Get all .out files in out_files_folder
     out_files = [f for f in os.listdir(out_files_folder) if f.endswith('.out')]
@@ -27,8 +27,8 @@ def sort_out_files():
 
 
 def sort_epoch_budget_folders():
-    target_folder = 'CNN-LSTM_IMDB/results/epoch_budget'
-    current_folder = 'CNN-LSTM_IMDB/results/epoch_budget'
+    target_folder = 'ResNet20_CIFAR/results/epoch_budget'
+    current_folder = 'ResNet20_CIFAR/results/epoch_budget'
 
     # Get all subdirectories in current_folder that start with 2024
     subdirs = [f.path for f in os.scandir(current_folder) if f.is_dir() and f.name.startswith('2024')]
