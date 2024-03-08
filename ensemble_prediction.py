@@ -44,7 +44,7 @@ def ensemble_prediction(folder: str, max_ensemble_size: int, plot: bool, use_cas
         predictions = []
         for subdir in subdirs:
             # Find prediction file
-            pred_file = [f.path for f in os.scandir(subdir) if f.name.endswith('predictions.pkl')]
+            pred_file = [f.path for f in os.scandir(subdir) if f.name.endswith('test_predictions.pkl')]
             if len(pred_file) == 0:
                 print(f'No predictions found in {subdir}')
                 continue

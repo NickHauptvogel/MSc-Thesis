@@ -530,6 +530,12 @@ with open(fn, 'w') as f:
 
 # Save predictions
 y_pred = model.predict(x_test)
-fn = os.path.join(save_dir, model_name + '_predictions.pkl')
+fn = os.path.join(save_dir, model_name + '_predictions_test.pkl')
 with open(fn, 'wb') as f:
     pickle.dump(y_pred, f)
+
+if validation_split > 0 or bootstrapping:
+    y_pred = model.predict(x_val)
+    fn = os.path.join(save_dir, model_name + '_predictions_val.pkl')
+    with open(fn, 'wb') as f:
+        pickle.dump(y_pred, f)
