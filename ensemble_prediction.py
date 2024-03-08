@@ -15,8 +15,6 @@ def ensemble_prediction(folder: str, max_ensemble_size: int, plot: bool, use_cas
         wenzeL_loss = 0.217
         ylim = (0.9, 0.95)
         num_classes = 10
-        # Subtracting pixel mean improves accuracy
-        subtract_pixel_mean = True
         _, (_, y_test) = cifar10.load_data()
         y_test = y_test[:, 0]
 
