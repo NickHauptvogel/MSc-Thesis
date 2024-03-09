@@ -335,7 +335,7 @@ def main(path):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Train a ResNet model on CIFAR10')
-    parser.add_argument('--path', type=str, default='results/50_independent_wenzel_no_checkp_val', help='Folder with the models')
+    parser.add_argument('--path', type=str, default='results/50_independent_wenzel_no_checkp_bootstr', help='Folder with the models')
     args = parser.parse_args()
 
     # Get all subdirectories in path

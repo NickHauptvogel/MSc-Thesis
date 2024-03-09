@@ -39,6 +39,7 @@ parser.add_argument('--batch_size', type=int, default=32, help='batch size')
 parser.add_argument('--epochs', type=int, default=50, help='number of epochs')
 parser.add_argument('--validation_split', type=float, default=0.2, help='validation split')
 parser.add_argument('--checkpointing', action='store_true', help='save the best model during training')
+parser.add_argument('--hold_out_validation_split', default=0.0, help='fraction of validation set to hold out for final eval')
 parser.add_argument('--initial_lr', type=float, default=0.1, help='initial learning rate')
 parser.add_argument('--momentum', type=float, default=0.98, help='momentum for SGD')
 parser.add_argument('--nesterov', action='store_true', help='use Nesterov momentum')
@@ -74,6 +75,7 @@ experiment_id = args.id
 batch_size = args.batch_size
 epochs = args.epochs
 validation_split = args.validation_split
+hold_out_validation_split = args.hold_out_validation_split
 checkpointing = args.checkpointing
 initial_lr = args.initial_lr
 momentum = args.momentum
@@ -118,11 +120,21 @@ if validation_split > 0 or bootstrapping:
     train_indices, val_indices = split_dataset(x_train.shape[0], validation_split, bootstrap=bootstrapping, random=True)
     x_train, x_val = x_train[train_indices], x_train[val_indices]
     y_train, y_val = y_train[train_indices], y_train[val_indices]
+    if hold_out_validation_split > 0:
+        holdout_size = int(x_val.shape[0] * hold_out_validation_split)
+        holdout_indices = np.random.choice(val_indices, holdout_size, replace=False)
+        val_indices = np.setdiff1d(val_indices, holdout_indices)
+        x_val_holdout, _ = x_val[holdout_indices], y_val[holdout_indices]
+        x_val, y_val = x_val[val_indices], y_val[val_indices]
+        configuration['holdout_indices'] = holdout_indices.tolist()
     configuration['train_indices'] = train_indices.tolist()
     configuration['val_indices'] = val_indices.tolist()
 else:
     x_val, y_val = x_test, y_test
     print('Using test set as validation set')
+    if checkpointing:
+        print("WARNING! YOU ARE VALIDATING ON THE TEST SET AND CHECKPOINTING IS ENABLED! SELECTION BIAS")
+        sys.exit(1)
 
 print(len(x_train), 'train sequences')
 print(len(x_val), 'validation sequences')
@@ -226,3 +238,9 @@ if validation_split > 0 or bootstrapping:
     fn = os.path.join(save_dir, model_name + '_val_predictions.pkl')
     with open(fn, 'wb') as f:
         pickle.dump(y_pred, f)
+
+    if hold_out_validation_split > 0:
+        y_pred = model.predict(x_val_holdout)
+        fn = os.path.join(save_dir, model_name + '_val_holdout_predictions.pkl')
+        with open(fn, 'wb') as f:
+            pickle.dump(y_pred, f)

@@ -4,7 +4,7 @@ import os
 def sort_out_files():
     #target_folder = 'CNN-LSTM_IMDB/results/epoch_budget'
     #out_files_folder = 'CNN-LSTM_IMDB'
-    target_folder = 'ResNet20_CIFAR/results/epoch_budget'
+    target_folder = 'ResNet20_CIFAR/results/50_independent_wenzel_no_checkp_bootstr'
     out_files_folder = 'ResNet20_CIFAR'
 
     # Get all .out files in out_files_folder
@@ -43,6 +43,20 @@ def sort_epoch_budget_folders():
             os.makedirs(ensemble_folder)
         # Move the subdirectory to the ensemble folder
         os.rename(subdir, os.path.join(ensemble_folder, model))
+
+
+def rename_files():
+    folder = 'ResNet20_CIFAR/results/50_independent_wenzel_no_checkp_bootstr'
+    # Get all files that end with predictions.pkl recursively
+    files = [os.path.join(dp, f) for dp, dn, filenames in os.walk(folder) for f in filenames if
+             f.endswith('predictions.pkl')]
+    files = [f for f in files if 'all' not in f]
+    for file in files:
+        # Rename to test_predictions.pkl
+        new_name = file.replace('predictions.pkl', 'test_predictions.pkl')
+        os.rename(file, new_name)
+        print(f'{file} -> {new_name}')
+
 
 if __name__ == '__main__':
     sort_out_files()
