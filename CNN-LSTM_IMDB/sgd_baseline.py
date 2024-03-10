@@ -75,7 +75,7 @@ experiment_id = args.id
 batch_size = args.batch_size
 epochs = args.epochs
 validation_split = args.validation_split
-hold_out_validation_split = args.hold_out_validation_split
+hold_out_validation_split = float(args.hold_out_validation_split)
 checkpointing = args.checkpointing
 initial_lr = args.initial_lr
 momentum = args.momentum
@@ -120,13 +120,17 @@ if validation_split > 0 or bootstrapping:
     train_indices, val_indices = split_dataset(x_train.shape[0], validation_split, bootstrap=bootstrapping, random=True)
     x_train, x_val = x_train[train_indices], x_train[val_indices]
     y_train, y_val = y_train[train_indices], y_train[val_indices]
-    if hold_out_validation_split > 0:
+    if hold_out_validation_split > 0.0:
         holdout_size = int(x_val.shape[0] * hold_out_validation_split)
         holdout_indices = np.random.choice(val_indices, holdout_size, replace=False)
         val_indices = np.setdiff1d(val_indices, holdout_indices)
-        x_val_holdout, _ = x_val[holdout_indices], y_val[holdout_indices]
-        x_val, y_val = x_val[val_indices], y_val[val_indices]
+        x_val_holdout, _ = x_train[holdout_indices], y_train[holdout_indices]
+        x_val, y_val = x_train[val_indices], y_train[val_indices]
         configuration['holdout_indices'] = holdout_indices.tolist()
+        # Make sure the three sets are disjoint
+        assert len(np.intersect1d(train_indices, val_indices)) == 0
+        assert len(np.intersect1d(train_indices, holdout_indices)) == 0
+        assert len(np.intersect1d(val_indices, holdout_indices)) == 0
     configuration['train_indices'] = train_indices.tolist()
     configuration['val_indices'] = val_indices.tolist()
 else:
