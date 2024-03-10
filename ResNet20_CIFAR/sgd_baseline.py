@@ -34,7 +34,7 @@ parser.add_argument('--batch_size', type=int, default=128, help='batch size')
 parser.add_argument('--epochs', type=int, default=200, help='number of epochs')
 parser.add_argument('--validation_split', type=float, default=0.1, help='validation split')
 parser.add_argument('--checkpointing', action='store_true', help='save the best model during training')
-parser.add_argument('--hold_out_validation_split', default=0.0, help='fraction of validation set to hold out for final eval')
+parser.add_argument('--hold_out_validation_split', type=float, default=0.0, help='fraction of validation set to hold out for final eval')
 parser.add_argument('--data_augmentation', action='store_true', help='use data augmentation')
 # 0.1 in other implementations
 parser.add_argument('--augm_shift', type=float, default=4, help='augmentation shift (px for >1 or fraction <1)')
@@ -62,7 +62,7 @@ experiment_id = args.id
 batch_size = args.batch_size
 epochs = args.epochs
 validation_split = args.validation_split
-hold_out_validation_split = float(args.hold_out_validation_split)
+hold_out_validation_split = args.hold_out_validation_split
 checkpointing = args.checkpointing
 data_augmentation = args.data_augmentation
 augm_shift = args.augm_shift

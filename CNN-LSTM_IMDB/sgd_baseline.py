@@ -39,7 +39,7 @@ parser.add_argument('--batch_size', type=int, default=32, help='batch size')
 parser.add_argument('--epochs', type=int, default=50, help='number of epochs')
 parser.add_argument('--validation_split', type=float, default=0.2, help='validation split')
 parser.add_argument('--checkpointing', action='store_true', help='save the best model during training')
-parser.add_argument('--hold_out_validation_split', default=0.0, help='fraction of validation set to hold out for final eval')
+parser.add_argument('--hold_out_validation_split', type=float, default=0.0, help='fraction of validation set to hold out for final eval')
 parser.add_argument('--initial_lr', type=float, default=0.1, help='initial learning rate')
 parser.add_argument('--momentum', type=float, default=0.98, help='momentum for SGD')
 parser.add_argument('--nesterov', action='store_true', help='use Nesterov momentum')
@@ -75,7 +75,7 @@ experiment_id = args.id
 batch_size = args.batch_size
 epochs = args.epochs
 validation_split = args.validation_split
-hold_out_validation_split = float(args.hold_out_validation_split)
+hold_out_validation_split = args.hold_out_validation_split
 checkpointing = args.checkpointing
 initial_lr = args.initial_lr
 momentum = args.momentum
