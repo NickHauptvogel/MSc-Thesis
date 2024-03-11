@@ -24,6 +24,7 @@ import sys
 sys.path.append('..')
 
 from dataset_split import split_dataset
+from snapshot_lr_schedule import sse_lr_schedule
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--id', type=str, default='01', help='ID of the experiment')
@@ -34,6 +35,7 @@ parser.add_argument('--batch_size', type=int, default=128, help='batch size')
 parser.add_argument('--epochs', type=int, default=200, help='number of epochs')
 parser.add_argument('--validation_split', type=float, default=0.1, help='validation split')
 parser.add_argument('--checkpointing', action='store_true', help='save the best model during training')
+parser.add_argument('--checkpoint_every', type=int, default=-1, help='save the model every x epochs')
 parser.add_argument('--hold_out_validation_split', type=float, default=0.0, help='fraction of validation set to hold out for final eval')
 parser.add_argument('--data_augmentation', action='store_true', help='use data augmentation')
 # 0.1 in other implementations
@@ -48,6 +50,7 @@ parser.add_argument('--momentum', type=float, default=0.9, help='momentum for SG
 parser.add_argument('--nesterov', action='store_true', help='use Nesterov momentum')
 parser.add_argument('--bootstrapping', action='store_true', help='use bootstrapping')
 parser.add_argument('--num_classes', type=int, default=10, help='number of classes for CIFAR (10/100)')
+parser.add_argument('--SSE_lr', action='store_true', help='learning rate for SSE. Use with checkpoint_every for M, initial_lr for reset learning rate and number of epochs for B')
 
 args = parser.parse_args()
 
@@ -56,7 +59,6 @@ seed = args.seed
 tf.random.set_seed(seed)
 np.random.seed(seed)
 
-# Training parameters
 out_folder = args.out_folder
 os.makedirs(out_folder, exist_ok=True)
 experiment_id = args.id
@@ -65,6 +67,7 @@ epochs = args.epochs
 validation_split = args.validation_split
 hold_out_validation_split = args.hold_out_validation_split
 checkpointing = args.checkpointing
+checkpoint_every = args.checkpoint_every
 data_augmentation = args.data_augmentation
 augm_shift = args.augm_shift
 initial_lr = args.initial_lr
@@ -74,6 +77,7 @@ momentum = args.momentum
 nesterov = args.nesterov
 bootstrapping = args.bootstrapping
 num_classes = args.num_classes
+SSE_lr = args.SSE_lr
 
 # Subtracting pixel mean improves accuracy
 subtract_pixel_mean = True
@@ -432,9 +436,9 @@ else:
     model = resnet_v1(input_shape=input_shape, depth=depth, num_classes=num_classes)
 
 if optimizer == 'adam':
-    optimizer_ = Adam(learning_rate=lr_schedule(0))
+    optimizer_ = Adam(learning_rate=initial_lr)
 elif optimizer == 'sgd':
-    optimizer_ = SGD(learning_rate=lr_schedule(0), momentum=momentum, nesterov=nesterov)
+    optimizer_ = SGD(learning_rate=initial_lr, momentum=momentum, nesterov=nesterov)
 else:
     raise ValueError('Unknown optimizer')
 
@@ -444,25 +448,40 @@ model.compile(loss='categorical_crossentropy',
 #model.summary()
 print(model_type)
 
-# Prepare callbacks for model saving and for learning rate adjustment.
+# Prepare callbacks
 callbacks = []
 if checkpointing:
-    checkpoint = ModelCheckpoint(filepath=filepath,
-                                 monitor='val_accuracy',
-                                 verbose=0,
-                                 save_best_only=True)
+    if checkpoint_every > 0:
+        filepath_preformat = os.path.join(save_dir, model_name + '_{epoch:02d}.h5')
+        checkpoint = ModelCheckpoint(filepath=filepath_preformat,
+                                     monitor='val_accuracy',
+                                     save_weights_only=True,
+                                     save_freq='epoch',
+                                     save_best_only=False)
+    else:
+        checkpoint = ModelCheckpoint(filepath=filepath,
+                                     monitor='val_accuracy',
+                                     save_weights_only=True,
+                                     save_best_only=True)
     callbacks.append(checkpoint)
 
-lr_scheduler = LearningRateScheduler(lr_schedule)
+if SSE_lr:
+    if checkpoint_every < 1:
+        print('ERROR: checkpoint_every must be set to a positive integer when using SSE_lr')
+        sys.exit(1)
+    M = epochs // checkpoint_every
+    lr_scheduler = LearningRateScheduler(lambda epoch: sse_lr_schedule(epoch, B=epochs, M=M, initial_lr=initial_lr))
+else:
+    lr_scheduler = LearningRateScheduler(lr_schedule)
 
-lr_reducer = ReduceLROnPlateau(factor=np.sqrt(0.1),
-                               cooldown=0,
-                               patience=5,
-                               min_lr=0.5e-6)
+#lr_reducer = ReduceLROnPlateau(factor=np.sqrt(0.1),
+#                               cooldown=0,
+#                               patience=5,
+#                               min_lr=0.5e-6)
 
 tqdm_callback = TqdmCallback(verbose=0)
 
-callbacks.extend([lr_reducer, lr_scheduler, tqdm_callback])
+callbacks.extend([lr_scheduler, tqdm_callback])
 
 # Run training, with or without data augmentation.
 if not data_augmentation:
@@ -530,28 +549,67 @@ else:
         epochs=epochs, verbose=0, workers=4,
         callbacks=callbacks)
 
-if checkpointing:
-    # Load best model weights (already saved)
-    model.load_weights(filepath)
-    print('Best model loaded from epoch: ', np.argmax(history.history['val_accuracy']) + 1)
-else:
+if not checkpointing:
     # Save the model
     model.save(filepath)
 
-# Score trained model.
-score, acc = model.evaluate(x_test, y_test, verbose=0)
-print('Test score:', score)
-print('Test accuracy:', acc)
-val_score, val_acc = model.evaluate(x_val, y_val, verbose=0)
-print('Val score:', val_score)
-print('Val accuracy:', val_acc)
-scores = {'test_loss': score, 'test_accuracy': acc, 'val_loss': val_score, 'val_accuracy': val_acc, 'history': history.history}
+# Get all model checkpoint files
+checkpoint_files = sorted([f for f in os.listdir(save_dir) if f.startswith(model_name) and f.endswith('.h5')])
+if checkpoint_every > 0:
+    # Clean up the checkpoint files to include every x epochs
+    for  i, file in enumerate(checkpoint_files):
+        if (i+1) % checkpoint_every != 0:
+            os.remove(os.path.join(save_dir, file))
+
+checkpoint_files = sorted([f for f in os.listdir(save_dir) if f.startswith(model_name) and f.endswith('.h5')])
+
+if len(checkpoint_files) == 1:
+    print('Only one model saved')
+
+scores = {'history': history.history, 'test_loss': [], 'test_accuracy': [], 'val_loss': [], 'val_accuracy': []}
 if hold_out_validation_split > 0:
-    holdout_score, holdout_acc = model.evaluate(x_val_holdout, y_val_holdout, verbose=0)
-    print('Holdout score:', holdout_score)
-    print('Holdout accuracy:', holdout_acc)
-    scores['holdout_loss'] = holdout_score
-    scores['holdout_accuracy'] = holdout_acc
+    scores['holdout_loss'] = []
+    scores['holdout_accuracy'] = []
+
+for file in checkpoint_files:
+    print('\nLoading model:', file)
+    file_model_name = file.replace('.h5', '')
+    # Load the model
+    model.load_weights(os.path.join(save_dir, file))
+    # Score trained model.
+    score, acc = model.evaluate(x_test, y_test, verbose=0)
+    print('Test score:', score)
+    print('Test accuracy:', acc)
+    scores['test_loss'].append(score)
+    scores['test_accuracy'].append(acc)
+    # Save predictions
+    y_pred = model.predict(x_test)
+    fn = os.path.join(save_dir, file_model_name + '_test_predictions.pkl')
+    with open(fn, 'wb') as f:
+        pickle.dump(y_pred, f)
+
+    if validation_split > 0 or bootstrapping:
+        val_score, val_acc = model.evaluate(x_val, y_val, verbose=0)
+        print('Val score:', val_score)
+        print('Val accuracy:', val_acc)
+        scores['val_loss'].append(val_score)
+        scores['val_accuracy'].append(val_acc)
+        y_pred = model.predict(x_val)
+        fn = os.path.join(save_dir, file_model_name + '_val_predictions.pkl')
+        with open(fn, 'wb') as f:
+            pickle.dump(y_pred, f)
+
+        if hold_out_validation_split > 0:
+            holdout_score, holdout_acc = model.evaluate(x_val_holdout, y_val_holdout, verbose=0)
+            print('Holdout score:', holdout_score)
+            print('Holdout accuracy:', holdout_acc)
+            scores['holdout_loss'].append(holdout_score)
+            scores['holdout_accuracy'].append(holdout_acc)
+            y_pred = model.predict(x_val_holdout)
+            fn = os.path.join(save_dir, file_model_name + '_val_holdout_predictions.pkl')
+            with open(fn, 'wb') as f:
+                pickle.dump(y_pred, f)
+
 # Save as dictionary
 fn = os.path.join(save_dir, model_name + '_scores.json')
 # Change all np.float32 to float
@@ -559,21 +617,3 @@ for k, v in scores['history'].items():
     scores['history'][k] = [float(x) for x in v]
 with open(fn, 'w') as f:
     json.dump(scores, f, indent=4)
-
-# Save predictions
-y_pred = model.predict(x_test)
-fn = os.path.join(save_dir, model_name + '_test_predictions.pkl')
-with open(fn, 'wb') as f:
-    pickle.dump(y_pred, f)
-
-if validation_split > 0 or bootstrapping:
-    y_pred = model.predict(x_val)
-    fn = os.path.join(save_dir, model_name + '_val_predictions.pkl')
-    with open(fn, 'wb') as f:
-        pickle.dump(y_pred, f)
-
-    if hold_out_validation_split > 0:
-        y_pred = model.predict(x_val_holdout)
-        fn = os.path.join(save_dir, model_name + '_val_holdout_predictions.pkl')
-        with open(fn, 'wb') as f:
-            pickle.dump(y_pred, f)

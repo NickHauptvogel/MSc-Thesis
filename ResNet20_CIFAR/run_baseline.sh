@@ -29,10 +29,13 @@ python -m sgd_baseline \
     --out_folder=$out_folder \
     --data_augmentation \
     --nesterov \
-    --validation_split=0.0 \
-    --bootstrapping \
-    --num_classes=100
-    #--checkpointing \
+    --validation_split=0.2 \
+    --num_classes=10 \
+    --checkpointing \
+    --checkpoint_every=40 \
+    --initial_lr=0.2 \
+    --SSE_lr
+    #--bootstrapping \
     #--augm_shift=0.1 \
     #--initial_lr=1e-3 \
     #--l2_reg=1e-4 \

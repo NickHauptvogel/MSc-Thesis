@@ -8,7 +8,7 @@ from __future__ import print_function
 import tensorflow as tf
 import keras
 from keras.preprocessing import sequence
-from keras.callbacks import ModelCheckpoint
+from keras.callbacks import ModelCheckpoint, LearningRateScheduler
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation
 from keras.layers import Embedding
@@ -30,6 +30,7 @@ import sys
 sys.path.append('..')
 
 from dataset_split import split_dataset
+from snapshot_lr_schedule import sse_lr_schedule
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--id', type=str, default='01', help='ID of the experiment')
@@ -39,13 +40,14 @@ parser.add_argument('--batch_size', type=int, default=32, help='batch size')
 parser.add_argument('--epochs', type=int, default=50, help='number of epochs')
 parser.add_argument('--validation_split', type=float, default=0.2, help='validation split')
 parser.add_argument('--checkpointing', action='store_true', help='save the best model during training')
-parser.add_argument('--checkpoint_every_epoch', action='store_true', help='save the model every epoch')
+parser.add_argument('--checkpoint_every', type=int, default=-1, help='save the model every x epochs')
 parser.add_argument('--hold_out_validation_split', type=float, default=0.0, help='fraction of validation set to hold out for final eval')
 parser.add_argument('--initial_lr', type=float, default=0.1, help='initial learning rate')
 parser.add_argument('--momentum', type=float, default=0.98, help='momentum for SGD')
 parser.add_argument('--nesterov', action='store_true', help='use Nesterov momentum')
 parser.add_argument('--bootstrapping', action='store_true', help='use bootstrapping')
 parser.add_argument('--map_optimizer', action='store_true', help='use MAP optimizer instead of MLE')
+parser.add_argument('--SSE_lr', action='store_true', help='learning rate for SSE. Use with checkpoint_every for M, initial_lr for reset learning rate and number of epochs for B')
 
 args = parser.parse_args()
 
@@ -78,12 +80,13 @@ epochs = args.epochs
 validation_split = args.validation_split
 hold_out_validation_split = args.hold_out_validation_split
 checkpointing = args.checkpointing
-checkpoint_every_epoch = args.checkpoint_every_epoch
+checkpoint_every = args.checkpoint_every
 initial_lr = args.initial_lr
 momentum = args.momentum
 nesterov = args.nesterov
 bootstrapping = args.bootstrapping
 map_optimizer = args.map_optimizer
+SSE_lr = args.SSE_lr
 
 '''
 Note:
@@ -193,10 +196,10 @@ model.compile(loss='binary_crossentropy',
 #model.summary()
 print(model_type)
 
-# Prepare callbacks for model saving and for learning rate adjustment.
+# Prepare callbacks
 callbacks = []
 if checkpointing:
-    if checkpoint_every_epoch:
+    if checkpoint_every > 0:
         filepath_preformat = os.path.join(save_dir, model_name + '_{epoch:02d}.h5')
         checkpoint = ModelCheckpoint(filepath=filepath_preformat,
                                      monitor='val_accuracy',
@@ -209,6 +212,14 @@ if checkpointing:
                                      save_weights_only=True,
                                      save_best_only=True)
     callbacks.append(checkpoint)
+
+if SSE_lr:
+    if checkpoint_every < 1:
+        print('ERROR: checkpoint_every must be set to a positive integer when using SSE_lr')
+        sys.exit(1)
+    M = epochs // checkpoint_every
+    lr_scheduler = LearningRateScheduler(lambda epoch: sse_lr_schedule(epoch, B=epochs, M=M, initial_lr=initial_lr))
+    callbacks.append(lr_scheduler)
 
 tqdm_callback = TqdmCallback(verbose=0)
 
@@ -225,6 +236,13 @@ if not checkpointing:
     model.save(filepath)
 
 # Get all model checkpoint files
+checkpoint_files = sorted([f for f in os.listdir(save_dir) if f.startswith(model_name) and f.endswith('.h5')])
+if checkpoint_every > 0:
+    # Clean up the checkpoint files to include every x epochs
+    for  i, file in enumerate(checkpoint_files):
+        if (i+1) % checkpoint_every != 0:
+            os.remove(os.path.join(save_dir, file))
+
 checkpoint_files = sorted([f for f in os.listdir(save_dir) if f.startswith(model_name) and f.endswith('.h5')])
 
 if len(checkpoint_files) == 1:
