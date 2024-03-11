@@ -452,7 +452,7 @@ print(model_type)
 callbacks = []
 if checkpointing:
     if checkpoint_every > 0:
-        filepath_preformat = os.path.join(save_dir, model_name + '_{epoch:02d}.h5')
+        filepath_preformat = os.path.join(save_dir, model_name + '_{epoch:03d}.h5')
         checkpoint = ModelCheckpoint(filepath=filepath_preformat,
                                      monitor='val_accuracy',
                                      save_weights_only=True,

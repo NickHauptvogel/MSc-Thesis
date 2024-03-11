@@ -199,12 +199,12 @@ def ensemble_prediction(folder: str, max_ensemble_size: int, plot: bool, use_cas
 if __name__ == '__main__':
     # Configuration
     parser = argparse.ArgumentParser(description='Ensemble prediction')
-    parser.add_argument('--folder', type=str, default='CNN-LSTM_IMDB/results/50_independent_wenzel_no_checkp_val',
+    parser.add_argument('--folder', type=str, default='ResNet20_CIFAR/results/11_snapshot_every_40_wenzel_0_2_val',
                         help='Folder with the models')
     parser.add_argument('--max_ensemble_size', type=int, default=50,
                         help='Maximum ensemble size')
     parser.add_argument('--plot', action='store_true', help='Plot the results')
-    parser.add_argument('--use_case', type=str, default='imdb')
+    parser.add_argument('--use_case', type=str, default='cifar10')
 
     args = parser.parse_args()
     folder = args.folder
