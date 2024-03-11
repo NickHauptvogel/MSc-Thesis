@@ -113,11 +113,6 @@ print(configuration)
 print('Loading data...')
 (x_train, y_train), (x_test, y_test) = imdb.load_data(num_words=max_features)
 
-x_train = x_train[:1000]
-y_train = y_train[:1000]
-x_test = x_test[:1000]
-y_test = y_test[:1000]
-
 print('Pad sequences (samples x time)')
 x_train = sequence.pad_sequences(x_train, maxlen=maxlen)
 x_test = sequence.pad_sequences(x_test, maxlen=maxlen)
