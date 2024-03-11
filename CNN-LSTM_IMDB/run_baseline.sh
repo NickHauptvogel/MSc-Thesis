@@ -3,12 +3,12 @@
 #SBATCH -o log_%a.out
 #SBATCH --time=00:20:00
 #SBATCH --gres=gpu:titanx:1
-#SBATCH --array=1-10
+#SBATCH --array=1-50
 
 # Declare output folder as variable
 folder="CNN-LSTM_IMDB/"
-out_folder="results/10_snapshot_every_epoch_wenzel_0_2_val"
-max_ensemble_size=10
+out_folder="results/50_independent_wenzel_no_checkp_val"
+max_ensemble_size=50
 
 #export NVIDIA_VISIBLE_DEVICES=all
 #export CUDA_VISIBLE_DEVICES=0
@@ -29,10 +29,10 @@ python -m sgd_baseline \
     --out_folder=$out_folder \
     --nesterov \
     --map_optimizer \
-    --epochs=5 \
-    --checkpointing \
-    --checkpoint_every_epoch \
+    --epochs=2 \
     --validation_split=0.2 \
+    #--checkpointing \
+    #--checkpoint_every_epoch \
     #--hold_out_validation_split=0.5 \
     #--initial_lr=0.001 \
     #--bootstrapping

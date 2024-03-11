@@ -6,6 +6,7 @@ import json
 import matplotlib.pyplot as plt
 import pickle
 import argparse
+import sys
 
 
 def ensemble_prediction(folder: str, max_ensemble_size: int, plot: bool, use_case: str):
@@ -41,27 +42,36 @@ def ensemble_prediction(folder: str, max_ensemble_size: int, plot: bool, use_cas
         losses = []
         predictions = []
         for subdir in subdirs:
-            # Find prediction file
-            pred_file = [f.path for f in os.scandir(subdir) if f.name.endswith('test_predictions.pkl')]
-            if len(pred_file) == 0:
+            # Find prediction files
+            pred_files = sorted([f.path for f in os.scandir(subdir) if f.name.endswith('test_predictions.pkl')])
+            if len(pred_files) == 0:
                 print(f'No predictions found in {subdir}')
                 continue
-            pred_file = pred_file[0]
-            # Load the predictions
-            with open(pred_file, 'rb') as f:
-                y_pred = pickle.load(f)
-            predictions.append(y_pred)
             # Find the score file
             score_file = [f.path for f in os.scandir(subdir) if f.name.endswith('scores.json')][0]
-            # Load the scores
+             # Load the scores
             with open(score_file, 'r') as f:
                 scores = json.load(f)
-                test_acc = scores['test_accuracy']
-                test_loss = scores['test_loss']
-            accs.append(test_acc)
-            losses.append(test_loss)
-            if len(predictions) == max_ensemble_size:
-                break
+
+            if isinstance(scores['test_accuracy'], list) and len(pred_files) != len(scores['test_accuracy']):
+                print(f'Number of predictions and scores does not match in {subdir}')
+                sys.exit(1)
+
+            for i, pred_file in enumerate(pred_files):
+                print(pred_file)
+                # Load the predictions
+                with open(pred_file, 'rb') as f:
+                    y_pred = pickle.load(f)
+                predictions.append(y_pred)
+                if isinstance(scores['test_accuracy'], list):
+                    accs.append(scores['test_accuracy'][i])
+                    losses.append(scores['test_loss'][i])
+                else:
+                    accs.append(scores['test_accuracy'])
+                    losses.append(scores['test_loss'])
+
+                if len(predictions) == max_ensemble_size:
+                    break
 
         # Concatenate all predictions to single array in the dimensions (test_samples, models, classes)
         y_pred = np.array(predictions).transpose(1, 0, 2)
@@ -189,7 +199,7 @@ def ensemble_prediction(folder: str, max_ensemble_size: int, plot: bool, use_cas
 if __name__ == '__main__':
     # Configuration
     parser = argparse.ArgumentParser(description='Ensemble prediction')
-    parser.add_argument('--folder', type=str, default='CNN-LSTM_IMDB/results/50_independent_smalllr_bootstr_hold_out_val',
+    parser.add_argument('--folder', type=str, default='CNN-LSTM_IMDB/results/10_snapshot_every_epoch_wenzel_0_2_val',
                         help='Folder with the models')
     parser.add_argument('--max_ensemble_size', type=int, default=50,
                         help='Maximum ensemble size')
