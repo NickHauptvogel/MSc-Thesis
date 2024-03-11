@@ -118,19 +118,18 @@ x_test = sequence.pad_sequences(x_test, maxlen=maxlen)
 # Split the training data into a training and a validation set
 if validation_split > 0 or bootstrapping:
     train_indices, val_indices = split_dataset(x_train.shape[0], validation_split, bootstrap=bootstrapping, random=True)
-    x_train, x_val = x_train[train_indices], x_train[val_indices]
-    y_train, y_val = y_train[train_indices], y_train[val_indices]
     if hold_out_validation_split > 0.0:
-        holdout_size = int(x_val.shape[0] * hold_out_validation_split)
-        holdout_indices = np.random.choice(val_indices, holdout_size, replace=False)
-        val_indices = np.setdiff1d(val_indices, holdout_indices)
+        holdout_size = int(len(val_indices) * hold_out_validation_split)
+        holdout_indices = val_indices[:holdout_size]
+        val_indices = val_indices[holdout_size:]
         x_val_holdout, y_val_holdout = x_train[holdout_indices], y_train[holdout_indices]
-        x_val, y_val = x_train[val_indices], y_train[val_indices]
         configuration['holdout_indices'] = holdout_indices.tolist()
         # Make sure the three sets are disjoint
-        assert len(np.intersect1d(train_indices, val_indices)) == 0
         assert len(np.intersect1d(train_indices, holdout_indices)) == 0
         assert len(np.intersect1d(val_indices, holdout_indices)) == 0
+    assert len(np.intersect1d(train_indices, val_indices)) == 0
+    x_val, y_val = x_train[val_indices], y_train[val_indices]
+    x_train, y_train = x_train[train_indices], y_train[train_indices]
     configuration['train_indices'] = train_indices.tolist()
     configuration['val_indices'] = val_indices.tolist()
 else:

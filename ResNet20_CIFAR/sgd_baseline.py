@@ -144,19 +144,18 @@ if subtract_pixel_mean:
 # Split the training data into a training and a validation set
 if validation_split > 0 or bootstrapping:
     train_indices, val_indices = split_dataset(x_train.shape[0], validation_split, bootstrap=bootstrapping, random=True)
-    x_train, x_val = x_train[train_indices], x_train[val_indices]
-    y_train, y_val = y_train[train_indices], y_train[val_indices]
     if hold_out_validation_split > 0.0:
-        holdout_size = int(x_val.shape[0] * hold_out_validation_split)
-        holdout_indices = np.random.choice(val_indices, holdout_size, replace=False)
-        val_indices = np.setdiff1d(val_indices, holdout_indices)
-        x_val_holdout, _ = x_train[holdout_indices], y_train[holdout_indices]
-        x_val, y_val = x_train[val_indices], y_train[val_indices]
+        holdout_size = int(len(val_indices) * hold_out_validation_split)
+        holdout_indices = val_indices[:holdout_size]
+        val_indices = val_indices[holdout_size:]
+        x_val_holdout, y_val_holdout = x_train[holdout_indices], y_train[holdout_indices]
         configuration['holdout_indices'] = holdout_indices.tolist()
         # Make sure the three sets are disjoint
-        assert len(np.intersect1d(train_indices, val_indices)) == 0
         assert len(np.intersect1d(train_indices, holdout_indices)) == 0
         assert len(np.intersect1d(val_indices, holdout_indices)) == 0
+    assert len(np.intersect1d(train_indices, val_indices)) == 0
+    x_val, y_val = x_train[val_indices], y_train[val_indices]
+    x_train, y_train = x_train[train_indices], y_train[train_indices]
     configuration['train_indices'] = train_indices.tolist()
     configuration['val_indices'] = val_indices.tolist()
 else:
@@ -527,6 +526,7 @@ else:
 if checkpointing:
     # Load best model weights (already saved)
     model.load_weights(filepath)
+    print('Best model loaded from epoch: ', np.argmax(history.history['val_accuracy']) + 1)
 else:
     # Save the model
     model.save(filepath)
@@ -535,7 +535,16 @@ else:
 score, acc = model.evaluate(x_test, y_test, verbose=0)
 print('Test score:', score)
 print('Test accuracy:', acc)
-scores = {'test_loss': score, 'test_accuracy': acc, 'history': history.history}
+val_score, val_acc = model.evaluate(x_val, y_val, verbose=0)
+print('Val score:', val_score)
+print('Val accuracy:', val_acc)
+scores = {'test_loss': score, 'test_accuracy': acc, 'val_loss': val_score, 'val_accuracy': val_acc, 'history': history.history}
+if hold_out_validation_split > 0:
+    holdout_score, holdout_acc = model.evaluate(x_val_holdout, y_val_holdout, verbose=0)
+    print('Holdout score:', holdout_score)
+    print('Holdout accuracy:', holdout_acc)
+    scores['holdout_loss'] = holdout_score
+    scores['holdout_accuracy'] = holdout_acc
 # Save as dictionary
 fn = os.path.join(save_dir, model_name + '_scores.json')
 # Change all np.float32 to float
