@@ -10,7 +10,7 @@ from keras.callbacks import ReduceLROnPlateau
 from keras.preprocessing.image import ImageDataGenerator
 from keras.regularizers import l2
 from keras.models import Model
-from keras.datasets import cifar10
+from keras.datasets import cifar10, cifar100
 import numpy as np
 import argparse
 import os
@@ -47,6 +47,7 @@ parser.add_argument('--optimizer', type=str, default='sgd', help='optimizer')
 parser.add_argument('--momentum', type=float, default=0.9, help='momentum for SGD')
 parser.add_argument('--nesterov', action='store_true', help='use Nesterov momentum')
 parser.add_argument('--bootstrapping', action='store_true', help='use bootstrapping')
+parser.add_argument('--num_classes', type=int, default=10, help='number of classes for CIFAR (10/100)')
 
 args = parser.parse_args()
 
@@ -72,7 +73,7 @@ optimizer = args.optimizer
 momentum = args.momentum
 nesterov = args.nesterov
 bootstrapping = args.bootstrapping
-num_classes = 10
+num_classes = args.num_classes
 
 # Subtracting pixel mean improves accuracy
 subtract_pixel_mean = True
@@ -109,7 +110,7 @@ model_type = 'ResNet%dv%d' % (depth, version)
 # Prepare model saving directory.
 current_date = datetime.now().strftime('%Y%m%d_%H%M%S')
 save_dir = os.path.join(os.getcwd(), out_folder, current_date + f'_{experiment_id}')
-model_name = f'{experiment_id}_cifar10_{model_type}'
+model_name = f'{experiment_id}_cifar{str(num_classes)}_{model_type}'
 if not os.path.isdir(save_dir):
     os.makedirs(save_dir)
 filepath = os.path.join(save_dir, model_name + '.h5')
@@ -126,7 +127,13 @@ if gpu_devices:
 print(configuration)
 
 # Load the CIFAR10 data.
-(x_train, y_train), (x_test, y_test) = cifar10.load_data()
+if num_classes == 10:
+    dataloader = cifar10
+elif num_classes == 100:
+    dataloader = cifar100
+else:
+    raise ValueError('Unknown number of classes')
+(x_train, y_train), (x_test, y_test) = dataloader.load_data()
 
 # Input image dimensions.
 input_shape = x_train.shape[1:]
@@ -420,9 +427,9 @@ def resnet_v2(input_shape, depth, num_classes=10):
     return model
 
 if version == 2:
-    model = resnet_v2(input_shape=input_shape, depth=depth)
+    model = resnet_v2(input_shape=input_shape, depth=depth, num_classes=num_classes)
 else:
-    model = resnet_v1(input_shape=input_shape, depth=depth)
+    model = resnet_v1(input_shape=input_shape, depth=depth, num_classes=num_classes)
 
 if optimizer == 'adam':
     optimizer_ = Adam(learning_rate=lr_schedule(0))
