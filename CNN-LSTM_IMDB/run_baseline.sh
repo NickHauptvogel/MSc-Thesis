@@ -1,13 +1,13 @@
 #!/bin/bash
 
-#SBATCH -o bootstr_baseline_map_%a.out
+#SBATCH -o log_%a.out
 #SBATCH --time=00:20:00
 #SBATCH --gres=gpu:titanx:1
 #SBATCH --array=1-50
 
 # Declare output folder as variable
 folder="CNN-LSTM_IMDB/"
-out_folder="results/50_independent_wenzel_bootstr_hold_out_val"
+out_folder="results/50_independent_smalllr_bootstr_hold_out_val"
 max_ensemble_size=50
 
 #export NVIDIA_VISIBLE_DEVICES=all
@@ -31,7 +31,7 @@ python -m sgd_baseline \
     --checkpointing \
     --map_optimizer \
     --hold_out_validation_split=0.5 \
-    --epochs=10 \
+    --initial_lr=0.001 \
     --bootstrapping
     #--validation_split=0.2
 
