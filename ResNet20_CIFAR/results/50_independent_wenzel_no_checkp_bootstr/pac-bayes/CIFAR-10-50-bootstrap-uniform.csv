@@ -1,0 +1,2 @@
+repeat;n_train;n_test;d;c;mv_risk_maj_vote;mv_risk_softmax_avg;gibbs;n_min;disagreement;disagreement_t;tandem_risk;n2_min;n2_min_t;pbkl;c1;c2;tnd;ctd;dis;dis_t;sh;best_tree;worst_tree
+1;50000;10000;32;10;0.06930;0.06890;0.10266;18219.00000;0.10805;0.10805;0.05746;6520.00000;6520.00000;0.22446;-1.00000;-1.00000;0.27912;0.33579;-1.00000;-1.00000;-1.00000;0.09767;0.10919

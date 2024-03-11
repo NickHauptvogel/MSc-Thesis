@@ -124,7 +124,7 @@ if validation_split > 0 or bootstrapping:
         holdout_size = int(x_val.shape[0] * hold_out_validation_split)
         holdout_indices = np.random.choice(val_indices, holdout_size, replace=False)
         val_indices = np.setdiff1d(val_indices, holdout_indices)
-        x_val_holdout, _ = x_train[holdout_indices], y_train[holdout_indices]
+        x_val_holdout, y_val_holdout = x_train[holdout_indices], y_train[holdout_indices]
         x_val, y_val = x_train[val_indices], y_train[val_indices]
         configuration['holdout_indices'] = holdout_indices.tolist()
         # Make sure the three sets are disjoint
@@ -197,6 +197,7 @@ callbacks = []
 if checkpointing:
     checkpoint = ModelCheckpoint(filepath=filepath,
                                  monitor='val_accuracy',
+                                 save_weights_only=True,
                                  verbose=0,
                                  save_best_only=True)
     callbacks.append(checkpoint)
@@ -214,6 +215,7 @@ history = model.fit(x_train, y_train,
 if checkpointing:
     # Load best model weights (already saved)
     model.load_weights(filepath)
+    print('Best model loaded from epoch: ', np.argmax(history.history['val_accuracy']) + 1)
 else:
     # Save the model
     model.save(filepath)
@@ -222,7 +224,16 @@ else:
 score, acc = model.evaluate(x_test, y_test, verbose=0)
 print('Test score:', score)
 print('Test accuracy:', acc)
-scores = {'test_loss': score, 'test_accuracy': acc, 'history': history.history}
+val_score, val_acc = model.evaluate(x_val, y_val, verbose=0)
+print('Val score:', val_score)
+print('Val accuracy:', val_acc)
+scores = {'test_loss': score, 'test_accuracy': acc, 'val_loss': val_score, 'val_accuracy': val_acc, 'history': history.history}
+if hold_out_validation_split > 0:
+    holdout_score, holdout_acc = model.evaluate(x_val_holdout, y_val_holdout, verbose=0)
+    print('Holdout score:', holdout_score)
+    print('Holdout accuracy:', holdout_acc)
+    scores['holdout_loss'] = holdout_score
+    scores['holdout_accuracy'] = holdout_acc
 # Save as dictionary
 fn = os.path.join(save_dir, model_name + '_scores.json')
 # Change all np.float32 to float
