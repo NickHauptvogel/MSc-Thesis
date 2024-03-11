@@ -189,7 +189,7 @@ def ensemble_prediction(folder: str, max_ensemble_size: int, plot: bool, use_cas
 if __name__ == '__main__':
     # Configuration
     parser = argparse.ArgumentParser(description='Ensemble prediction')
-    parser.add_argument('--folder', type=str, default='CNN-LSTM_IMDB/results/50_independent_wenzel_bootstr_hold_out_val',
+    parser.add_argument('--folder', type=str, default='CNN-LSTM_IMDB/results/50_independent_smalllr_bootstr_hold_out_val',
                         help='Folder with the models')
     parser.add_argument('--max_ensemble_size', type=int, default=50,
                         help='Maximum ensemble size')
