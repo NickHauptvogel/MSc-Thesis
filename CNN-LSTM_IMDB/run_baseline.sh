@@ -7,7 +7,7 @@
 
 # Declare output folder as variable
 folder="CNN-LSTM_IMDB/"
-out_folder="results/50_independent_wenzel_0_2_hold_out_val"
+out_folder="results/50_independent_wenzel_bootstr_hold_out_val"
 max_ensemble_size=50
 
 #export NVIDIA_VISIBLE_DEVICES=all
@@ -32,8 +32,8 @@ python -m sgd_baseline \
     --map_optimizer \
     --hold_out_validation_split=0.5 \
     --epochs=10 \
-    --validation_split=0.2
-    #--bootstrapping \
+    --bootstrapping
+    #--validation_split=0.2
 
 
 # If id is last id in array, run ensemble prediction
