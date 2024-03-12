@@ -1,13 +1,13 @@
 #!/bin/bash
 
-#SBATCH -o baseline2_%a.out
+#SBATCH -o log_%a.out
 #SBATCH --time=02:00:00
 #SBATCH --gres=gpu:titanx:1
-#SBATCH --array=1-50
+#SBATCH --array=1-10
 
 # Declare output folder as variable
 folder="ResNet20_CIFAR/"
-out_folder="results/cifar100_50_independent_wenzel_no_checkp_bootstr"
+out_folder="results/10_snapshot_every_40_wenzel_0_2_val"
 max_ensemble_size=50
 
 #export NVIDIA_VISIBLE_DEVICES=all
