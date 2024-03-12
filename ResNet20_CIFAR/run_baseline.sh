@@ -32,7 +32,7 @@ python -m sgd_baseline \
     --validation_split=0.2 \
     --num_classes=10 \
     --checkpointing \
-    --checkpoint_every=40 \
+    --checkpoint_every=40
     #--initial_lr=0.1
     #--SSE_lr
     #--bootstrapping \
