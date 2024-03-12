@@ -3,14 +3,14 @@
 #export NVIDIA_VISIBLE_DEVICES=all
 #export CUDA_VISIBLE_DEVICES=0
 #export NVIDIA_DRIVER_CAPABILITIES=compute,utility
-#SBATCH -o epoch_budget_%a.out
+#SBATCH -o log_%a.out
 #SBATCH --time=20:00:00
 #SBATCH --gres=gpu:titanx:1
-#SBATCH --array=1-20
+#SBATCH --array=1-15
 
 # Declare output folder as variable
 folder="ResNet20_CIFAR/"
-out_folder="results/epoch_budget"
+out_folder="results/epoch_budget_2"
 
 nvidia-smi
 
@@ -33,9 +33,4 @@ do
         --data_augmentation \
         --nesterov \
         --validation_split=0.0
-        #--checkpointing
-        #--augm_shift=0.1 \
-        #--initial_lr=1e-3 \
-        #--l2_reg=1e-4 \
-        #--optimizer=adam \
 done

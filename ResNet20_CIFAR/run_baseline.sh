@@ -31,15 +31,12 @@ python -m sgd_baseline \
     --nesterov \
     --validation_split=0.2 \
     --num_classes=10 \
-    --checkpointing \
-    --checkpoint_every=40
+    #--test_time_augmentation
+    #--checkpointing
+    #--checkpoint_every=40
     #--initial_lr=0.1
     #--SSE_lr
-    #--bootstrapping \
-    #--augm_shift=0.1 \
-    #--initial_lr=1e-3 \
-    #--l2_reg=1e-4 \
-    #--optimizer=adam
+    #--bootstrapping
 
 # If id is last id in array, run ensemble prediction
 if [ $SLURM_ARRAY_TASK_ID -eq $max_ensemble_size ]
