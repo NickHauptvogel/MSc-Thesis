@@ -199,7 +199,7 @@ def ensemble_prediction(folder: str, max_ensemble_size: int, plot: bool, use_cas
 if __name__ == '__main__':
     # Configuration
     parser = argparse.ArgumentParser(description='Ensemble prediction')
-    parser.add_argument('--folder', type=str, default='ResNet20_CIFAR/results/11_snapshot_every_40_wenzel_0_2_val',
+    parser.add_argument('--folder', type=str, default='ResNet20_CIFAR/results/10_snapshot_every_40_wenzel_0_2_val',
                         help='Folder with the models')
     parser.add_argument('--max_ensemble_size', type=int, default=50,
                         help='Maximum ensemble size')

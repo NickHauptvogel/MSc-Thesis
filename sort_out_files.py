@@ -4,7 +4,7 @@ import os
 def sort_out_files():
     target_folder = 'CNN-LSTM_IMDB/results/50_independent_wenzel_no_checkp_val'
     out_files_folder = 'CNN-LSTM_IMDB'
-    target_folder = 'ResNet20_CIFAR/results/11_snapshot_every_40_wenzel_0_2_val'
+    target_folder = 'ResNet20_CIFAR/results/10_snapshot_every_40_wenzel_0_2_val'
     out_files_folder = 'ResNet20_CIFAR'
 
     # Get all .out files in out_files_folder

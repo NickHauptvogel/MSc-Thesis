@@ -7,7 +7,7 @@
 
 # Declare output folder as variable
 folder="ResNet20_CIFAR/"
-out_folder="results/10_snapshot_every_40_wenzel_0_2_val"
+out_folder="results/10_checkp_every_40_wenzel_0_2_val"
 max_ensemble_size=50
 
 #export NVIDIA_VISIBLE_DEVICES=all
@@ -33,8 +33,8 @@ python -m sgd_baseline \
     --num_classes=10 \
     --checkpointing \
     --checkpoint_every=40 \
-    --initial_lr=0.2 \
-    --SSE_lr
+    #--initial_lr=0.1
+    #--SSE_lr
     #--bootstrapping \
     #--augm_shift=0.1 \
     #--initial_lr=1e-3 \
