@@ -79,14 +79,14 @@ def load_all_predictions(folder: str, max_ensemble_size: int):
     return y_pred, accs, losses
 
 
-def ensemble_prediction(folder: str, max_ensemble_size: int, checkpoints_per_model:int, pac_bayes: bool, plot: bool, use_case: str):
+def ensemble_prediction(folder: str, max_ensemble_size: int, checkpoints_per_model:int, pac_bayes: bool, plot: bool, use_case: str, reps: int):
 
     num_independent_models = max_ensemble_size // checkpoints_per_model
 
     if use_case=='cifar10':
         wenzeL_acc = 0.9363
         wenzeL_loss = 0.217
-        ylim = (0.9, 0.95)
+        ylim = (0.8, 0.95)
         num_classes = 10
         _, (_, y_test) = cifar10.load_data()
         y_test = y_test[:, 0]
@@ -128,7 +128,7 @@ def ensemble_prediction(folder: str, max_ensemble_size: int, checkpoints_per_mod
             ensemble_accs_maj_vote = []
             ensemble_accs_softmax_average = []
             ensemble_losses = []
-            for i in tqdm(range(5)):
+            for i in tqdm(range(reps)):
 
                 # Choose randomly ensemble_size integers from 0 to num_independent_models
                 indices = np.random.choice(num_independent_models, ensemble_size, replace=False)
@@ -140,7 +140,7 @@ def ensemble_prediction(folder: str, max_ensemble_size: int, checkpoints_per_mod
 
                 weights = None
                 if 'tnd' in category or 'lam' in category:
-                    rhos, pac_results = optimize('cifar10', len(indices), 'DUMMY', 'iRProp', 1, 'DUMMY', folder, False, indices=indices)
+                    rhos, pac_results = optimize(use_case, len(indices), 'DUMMY', 'iRProp', 1, 'DUMMY', folder, False, indices=indices)
                     # Get the weights
                     if 'tnd' in category:
                         weights = rhos[1]
@@ -186,8 +186,15 @@ def ensemble_prediction(folder: str, max_ensemble_size: int, checkpoints_per_mod
         
         results[category] = (ensemble_accs_mean, ensemble_accs_std, ensemble_losses_mean, ensemble_losses_std)
 
+    # Save results
+    with open(os.path.join(folder, 'ensemble_results.pkl'), 'wb') as f:
+        pickle.dump(results, f)
+
     # Plot the results
-    plt.figure(figsize=(12, 8))
+    fig, ax = plt.subplots(1, 1, figsize=(12, 8))
+    ax.grid(which='major', color='#DDDDDD', linewidth=0.8, zorder=0)
+    ax.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.5)
+    ax.minorticks_on()
     
     for category in categories:
         ensemble_accs_mean, ensemble_accs_std, _, _ = results[category]
@@ -214,7 +221,10 @@ def ensemble_prediction(folder: str, max_ensemble_size: int, checkpoints_per_mod
     if plot:
         plt.show()
 
-    plt.figure(figsize=(12, 8))
+    fig, ax = plt.subplots(1, 1, figsize=(12, 8))
+    ax.grid(which='major', color='#DDDDDD', linewidth=0.8, zorder=0)
+    ax.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.5)
+    ax.minorticks_on()
 
     for category in categories:
         _, _, ensemble_losses_mean, ensemble_losses_std = results[category]
@@ -238,6 +248,9 @@ def ensemble_prediction(folder: str, max_ensemble_size: int, checkpoints_per_mod
     if plot:
         plt.show()
 
+
+    return results
+
 def main():
     # Configuration
     parser = argparse.ArgumentParser(description='Ensemble prediction')
@@ -249,6 +262,7 @@ def main():
     parser.add_argument('--pac-bayes', action='store_true', help='Use pac-bayes weights')
     parser.add_argument('--plot', action='store_true', help='Plot the results')
     parser.add_argument('--use_case', type=str, default='cifar10')
+    parser.add_argument('--reps', type=int, help='Number of repetitions', required=False, default=5)
 
     args = parser.parse_args()
     folder = args.folder
@@ -257,8 +271,16 @@ def main():
     pac_bayes = args.pac_bayes
     plot = args.plot
     use_case = args.use_case
+    reps = args.reps
 
-    ensemble_prediction(folder, max_ensemble_size, checkpoints_per_model, pac_bayes, plot, use_case)
+    #folder = 'CNN-LSTM_IMDB/results/10_snapshot_every_epoch_wenzel_0_2_val'
+    #max_ensemble_size = 50
+    #checkpoints_per_model = 5
+    #pac_bayes = True
+    #use_case = 'imdb'
+
+
+    ensemble_prediction(folder, max_ensemble_size, checkpoints_per_model, pac_bayes, plot, use_case, reps)
 
 
 if __name__ == '__main__':

@@ -1,12 +1,13 @@
 from __future__ import print_function
 
-from keras.optimizers import Adam, SGD
-from keras.datasets import cifar10
+from keras.optimizers import SGD
 import numpy as np
 import argparse
 import os
 import json
 import pickle
+from tqdm import tqdm
+from keras.preprocessing.image import ImageDataGenerator
 
 from ResNet20 import resnet_v1, resnet_v2
 
@@ -14,30 +15,12 @@ from ResNet20 import resnet_v1, resnet_v2
 import sys
 sys.path.append('..')
 
-from dataset_split import split_dataset
+from load_data import load_cifar
 
-def main(path):
+def posttrain_tta_predictions(path):
 
-    # Training parameters
     num_classes = 10
-
-    # Subtracting pixel mean improves accuracy
     subtract_pixel_mean = True
-
-    # Model parameter
-    # ----------------------------------------------------------------------------
-    #           |      | 200-epoch | Orig Paper| 200-epoch | Orig Paper| sec/epoch
-    # Model     |  n   | ResNet v1 | ResNet v1 | ResNet v2 | ResNet v2 | GTX1080Ti
-    #           |v1(v2)| %Accuracy | %Accuracy | %Accuracy | %Accuracy | v1 (v2)
-    # ----------------------------------------------------------------------------
-    # ResNet20  | 3 (2)| 92.16     | 91.25     | -----     | -----     | 35 (---)
-    # ResNet32  | 5(NA)| 92.46     | 92.49     | NA        | NA        | 50 ( NA)
-    # ResNet44  | 7(NA)| 92.50     | 92.83     | NA        | NA        | 70 ( NA)
-    # ResNet56  | 9 (6)| 92.71     | 93.03     | 93.01     | NA        | 90 (100)
-    # ResNet110 |18(12)| 92.65     | 93.39+-.16| 93.15     | 93.63     | 165(180)
-    # ResNet164 |27(18)| -----     | 94.07     | -----     | 94.54     | ---(---)
-    # ResNet1001| (111)| -----     | 92.39     | -----     | 95.08+-.14| ---(---)
-    # ---------------------------------------------------------------------------
     n = 3
 
     # Model version
@@ -50,6 +33,70 @@ def main(path):
     elif version == 2:
         depth = n * 9 + 2
 
+    # Load config file (Search for file that ends with config.json)
+    config_file = [f.path for f in os.scandir(path) if f.name.endswith('config.json')][0]
+    with open(config_file, 'r') as f:
+        configuration = json.load(f)
+
+    # Load the CIFAR10 data.
+    _, (x_test, _) = load_cifar(num_classes, subtract_pixel_mean, False)
+
+    # Input image dimensions.
+    input_shape = x_test.shape[1:]
+
+    l2_reg = configuration['l2_reg']
+    augm_shift = configuration['augm_shift']
+
+    if version == 2:
+        model = resnet_v2(input_shape=input_shape, l2_reg=l2_reg, depth=depth)
+    else:
+        model = resnet_v1(input_shape=input_shape, l2_reg=l2_reg, depth=depth)
+
+    model.compile(loss='categorical_crossentropy',
+                  optimizer=SGD(learning_rate=0),
+                  metrics=['accuracy'])
+
+    # Load best model weights
+    model_path = sorted([f.path for f in os.scandir(path) if f.name.endswith('.h5')])
+    if len(model_path) > 1:
+        print('Multiple model files found, using the last one')
+        model_path = model_path[-1]
+    else:
+        model_path = model_path[0]
+
+    model.load_weights(model_path)
+
+    datagen = ImageDataGenerator(
+        # randomly shift images horizontally
+        width_shift_range=augm_shift,
+        # randomly shift images vertically
+        height_shift_range=augm_shift,
+        # randomly flip images
+        horizontal_flip=True)
+
+    y_pred = model.predict(datagen.flow(x_test))
+
+    test_predictions_name = [f.name for f in os.scandir(path) if f.name.endswith('test_predictions.pkl')][0]
+    tta_predictions_name = test_predictions_name.replace('test', 'test_tta')
+    with open(os.path.join(path, tta_predictions_name), 'wb') as f:
+        pickle.dump(y_pred, f)
+
+
+def posttrain_val_predictions(path):
+
+    num_classes = 10
+    subtract_pixel_mean = True
+    n = 3
+
+    # Model version
+    # Orig paper: version = 1 (ResNet v1), Improved ResNet: version = 2 (ResNet v2)
+    version = 1
+
+    # Computed depth from supplied model parameter n
+    if version == 1:
+        depth = n * 6 + 2
+    elif version == 2:
+        depth = n * 9 + 2
 
     # Load config file (Search for file that ends with config.json)
     config_file = [f.path for f in os.scandir(path) if f.name.endswith('config.json')][0]
@@ -57,18 +104,10 @@ def main(path):
         configuration = json.load(f)
 
     # Load the CIFAR10 data.
-    (x_train, _), _ = cifar10.load_data()
+    (x_train, _), _ = load_cifar(num_classes, subtract_pixel_mean, False)
 
     # Input image dimensions.
     input_shape = x_train.shape[1:]
-
-    # Normalize data.
-    x_train = x_train.astype('float32') / 255
-
-    # If subtract pixel mean is enabled
-    if subtract_pixel_mean:
-        x_train_mean = np.mean(x_train, axis=0)
-        x_train -= x_train_mean
 
     # Split the training data into a training and a validation set
     if configuration.get('val_indices') is None:
@@ -95,8 +134,8 @@ def main(path):
                   optimizer=SGD(learning_rate=0),
                   metrics=['accuracy'])
 
-    # Load best model weights (already saved)
-    model_path = [f.path for f in os.scandir(path) if f.name.endswith('.h5')][0]
+    # Load best model weights
+    model_path = sorted([f.path for f in os.scandir(path) if f.name.endswith('.h5')])[0]
     model.load_weights(model_path)
 
     # Save predictions
@@ -108,11 +147,12 @@ def main(path):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Train a ResNet model on CIFAR10')
-    parser.add_argument('--path', type=str, default='results/50_independent_wenzel_no_checkp_bootstr', help='Folder with the models')
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--path', type=str, default='results/50_independent_wenzel_no_checkp_no_val', help='Folder with the models')
     args = parser.parse_args()
 
     # Get all subdirectories in path
-    subdirs = [f.path for f in os.scandir(args.path) if f.is_dir()]
-    for subdir in subdirs:
-        main(subdir)
+    subdirs = sorted([f.path for f in os.scandir(args.path) if f.is_dir()])
+    for subdir in tqdm(subdirs):
+        #posttrain_val_predictions(subdir)
+        posttrain_tta_predictions(subdir)
