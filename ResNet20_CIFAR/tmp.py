@@ -74,7 +74,7 @@ def posttrain_tta_predictions(path):
         # randomly flip images
         horizontal_flip=True)
 
-    y_pred = model.predict(datagen.flow(x_test))
+    y_pred = model.predict(datagen.flow(x_test, shuffle=False))
 
     test_predictions_name = [f.name for f in os.scandir(path) if f.name.endswith('test_predictions.pkl')][0]
     tta_predictions_name = test_predictions_name.replace('test', 'test_tta')
