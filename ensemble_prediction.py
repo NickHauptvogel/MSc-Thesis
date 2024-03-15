@@ -13,9 +13,38 @@ from tqdm import tqdm
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from MajorityVoteBounds.NeurIPS2020.optimize import optimize
 
-def load_all_predictions(folder: str, max_ensemble_size: int):
+
+def get_prediction(y_pred, y_test, indices, weights, num_classes):
+    # y_pred has format (test_samples, models, classes)
+    subset_y_pred = y_pred[:, indices, :]
+    # Get mean prediction
+    subset_y_pred_ensemble = np.average(subset_y_pred, axis=1, weights=weights)
+    # Majority voting (mode of the predictions)
+    if num_classes == 1:
+        subset_y_pred = subset_y_pred[:, :, 0]  # Just to remove the last dimension
+        subset_y_pred_ensemble = subset_y_pred_ensemble[:, 0]  # Just to remove the last dimension
+
+        subset_y_pred_argmax_per_model = (subset_y_pred > 0.5).astype(int)
+        subset_y_pred_softmax_average = (subset_y_pred_ensemble > 0.5).astype(int)
+        ensemble_loss = tf.keras.losses.BinaryCrossentropy()(y_test, subset_y_pred_ensemble).numpy()
+    else:
+        subset_y_pred_argmax_per_model = np.argmax(subset_y_pred, axis=2)
+        subset_y_pred_softmax_average = np.argmax(subset_y_pred_ensemble, axis=1)
+        ensemble_loss = tf.keras.losses.CategoricalCrossentropy()(tf.one_hot(y_test, num_classes),
+                                                                  subset_y_pred_ensemble).numpy()
+
+    subset_y_pred_maj_vote = np.array(
+        [np.argmax(np.bincount(subset_y_pred_argmax_per_model[i, :], weights=weights)) for i in
+         range(subset_y_pred_argmax_per_model.shape[0])], dtype=int)
+    ensemble_acc_maj_vote = np.mean(subset_y_pred_maj_vote == y_test)
+    ensemble_acc_softmax_average = np.mean(subset_y_pred_softmax_average == y_test)
+
+    return ensemble_acc_maj_vote, ensemble_acc_softmax_average, ensemble_loss
+
+
+def load_all_predictions(folder: str, max_ensemble_size: int, test_pred_file_name='test_predictions.pkl', all_pred_file_name='all_predictions.pkl'):
     # Check whether predictions are already saved
-    if not os.path.exists(os.path.join(folder, 'all_predictions.pkl')):
+    if not os.path.exists(os.path.join(folder, all_pred_file_name)):
         # Get all subdirectories
         subdirs = sorted([f.path for f in os.scandir(folder) if f.is_dir()])
         # Load the models
@@ -24,7 +53,7 @@ def load_all_predictions(folder: str, max_ensemble_size: int):
         predictions = []
         for subdir in subdirs:
             # Find prediction files
-            pred_files = sorted([f.path for f in os.scandir(subdir) if f.name.endswith('test_predictions.pkl')])
+            pred_files = sorted([f.path for f in os.scandir(subdir) if f.name.endswith(test_pred_file_name)])
             if len(pred_files) == 0:
                 print(f'No predictions found in {subdir}')
                 continue
@@ -60,7 +89,7 @@ def load_all_predictions(folder: str, max_ensemble_size: int):
         y_pred = np.array(predictions).transpose(1, 0, 2)
 
         # Save the predictions of all models as well as models
-        with open(os.path.join(folder, 'all_predictions.pkl'), 'wb') as f:
+        with open(os.path.join(folder, all_pred_file_name), 'wb') as f:
             pickle.dump(y_pred, f)
         with open(os.path.join(folder, 'accs.pkl'), 'wb') as f:
             pickle.dump(accs, f)
@@ -69,7 +98,7 @@ def load_all_predictions(folder: str, max_ensemble_size: int):
 
     else:
         # Load the predictions
-        with open(os.path.join(folder, 'all_predictions.pkl'), 'rb') as f:
+        with open(os.path.join(folder, all_pred_file_name), 'rb') as f:
             y_pred = pickle.load(f)
         with open(os.path.join(folder, 'accs.pkl'), 'rb') as f:
             accs = pickle.load(f)
@@ -79,14 +108,14 @@ def load_all_predictions(folder: str, max_ensemble_size: int):
     return y_pred, accs, losses
 
 
-def ensemble_prediction(folder: str, max_ensemble_size: int, checkpoints_per_model:int, pac_bayes: bool, plot: bool, use_case: str, reps: int):
+def ensemble_prediction(folder: str, max_ensemble_size: int, checkpoints_per_model:int, pac_bayes: bool, plot: bool, use_case: str, reps: int, include_lam: bool, tta: bool = False):
 
     num_independent_models = max_ensemble_size // checkpoints_per_model
 
     if use_case=='cifar10':
         wenzeL_acc = 0.9363
         wenzeL_loss = 0.217
-        ylim = (0.8, 0.95)
+        ylim = (0.9, 0.95)
         num_classes = 10
         _, (_, y_test) = cifar10.load_data()
         y_test = y_test[:, 0]
@@ -105,16 +134,23 @@ def ensemble_prediction(folder: str, max_ensemble_size: int, checkpoints_per_mod
     # Load the predictions
     y_pred, accs, losses = load_all_predictions(folder, max_ensemble_size)
 
+    if tta:
+        y_pred_tta, _, _ = load_all_predictions(folder, max_ensemble_size, 'test_tta_predictions.pkl', 'all_tta_predictions.pkl')
+
     results = {}
     categories = ['uniform_last_per_model']
+    if tta:
+        categories.append('uniform_tta_last_per_model')
     if checkpoints_per_model > 1:
         categories.append('uniform_all_per_model')
     if pac_bayes:
         categories.append('tnd_last_per_model')
-        categories.append('lam_last_per_model')
+        if include_lam:
+            categories.append('lam_last_per_model')
         if checkpoints_per_model > 1:
             categories.append('tnd_all_per_model')
-            categories.append('lam_all_per_model')
+            if include_lam:
+                categories.append('lam_all_per_model')
 
     for category in categories:
 
@@ -147,33 +183,17 @@ def ensemble_prediction(folder: str, max_ensemble_size: int, checkpoints_per_mod
                     elif 'lam' in category:
                         weights = rhos[0]
 
-                # y_pred has format (test_samples, models, classes)
-                subset_y_pred = y_pred[:, indices, :]
-                # Get mean prediction
-                subset_y_pred_ensemble = np.average(subset_y_pred, axis=1, weights=weights)
-                # Majority voting (mode of the predictions)
-                if num_classes == 1:
-                    subset_y_pred = subset_y_pred[:, :, 0] # Just to remove the last dimension
-                    subset_y_pred_ensemble = subset_y_pred_ensemble[:, 0] # Just to remove the last dimension
-
-                    subset_y_pred_argmax_per_model = (subset_y_pred > 0.5).astype(int)
-                    subset_y_pred_softmax_average = (subset_y_pred_ensemble > 0.5).astype(int)
-                    ensemble_loss = tf.keras.losses.BinaryCrossentropy()(y_test, subset_y_pred_ensemble).numpy()
+                if 'tta' in category:
+                    y_pred_ = y_pred_tta
                 else:
-                    subset_y_pred_argmax_per_model = np.argmax(subset_y_pred, axis=2)
-                    subset_y_pred_softmax_average = np.argmax(subset_y_pred_ensemble, axis=1)
-                    ensemble_loss = tf.keras.losses.CategoricalCrossentropy()(tf.one_hot(y_test, num_classes),
-                                                                              subset_y_pred_ensemble).numpy()
-    
-                subset_y_pred_maj_vote = np.array([np.argmax(np.bincount(subset_y_pred_argmax_per_model[i, :], weights=weights)) for i in range(subset_y_pred_argmax_per_model.shape[0])], dtype=int)
-                ensemble_acc_maj_vote = np.mean(subset_y_pred_maj_vote == y_test)
-                ensemble_acc_softmax_average = np.mean(subset_y_pred_softmax_average == y_test)
+                    y_pred_ = y_pred
+
+                ensemble_acc_maj_vote, ensemble_acc_softmax_average, ensemble_loss = get_prediction(y_pred_, y_test, indices, weights, num_classes)
     
                 ensemble_accs_maj_vote.append(ensemble_acc_maj_vote)
                 ensemble_accs_softmax_average.append(ensemble_acc_softmax_average)
                 ensemble_losses.append(ensemble_loss)
-    
-    
+
             ensemble_accs_mean.append((ensemble_size, np.mean(ensemble_accs_maj_vote), np.mean(ensemble_accs_softmax_average)))
             ensemble_accs_std.append((ensemble_size, np.std(ensemble_accs_maj_vote), np.std(ensemble_accs_softmax_average)))
             print('Mean Accuracy Majority Vote:', np.round(np.mean(ensemble_accs_maj_vote), 3), '(Softmax Average:', np.round(np.mean(ensemble_accs_softmax_average), 3), ') with', ensemble_size, 'models')
@@ -263,6 +283,8 @@ def main():
     parser.add_argument('--plot', action='store_true', help='Plot the results')
     parser.add_argument('--use_case', type=str, default='cifar10')
     parser.add_argument('--reps', type=int, help='Number of repetitions', required=False, default=5)
+    parser.add_argument('--include_lam', action='store_true', help='Include lambda in the ensemble')
+    parser.add_argument('--tta', action='store_true', help='Use test time augmentation predictions')
 
     args = parser.parse_args()
     folder = args.folder
@@ -272,15 +294,25 @@ def main():
     plot = args.plot
     use_case = args.use_case
     reps = args.reps
+    include_lam = args.include_lam
 
-    #folder = 'CNN-LSTM_IMDB/results/10_snapshot_every_epoch_wenzel_0_2_val'
-    #max_ensemble_size = 50
-    #checkpoints_per_model = 5
-    #pac_bayes = True
-    #use_case = 'imdb'
+    folder = 'CNN-LSTM_IMDB/results/50_independent_wenzel_0_2_hold_out_val'
+    max_ensemble_size = 50
+    checkpoints_per_model = 1
+    pac_bayes = True
+    use_case = 'imdb'
+    reps = 1
+
+    folder = 'ResNet20_CIFAR/results/50_independent_wenzel_no_checkp_no_val'
+    max_ensemble_size = 50
+    checkpoints_per_model = 1
+    pac_bayes = False
+    use_case = 'cifar10'
+    reps = 5
+    tta = True
 
 
-    ensemble_prediction(folder, max_ensemble_size, checkpoints_per_model, pac_bayes, plot, use_case, reps)
+    ensemble_prediction(folder, max_ensemble_size, checkpoints_per_model, pac_bayes, plot, use_case, reps, include_lam, tta)
 
 
 if __name__ == '__main__':

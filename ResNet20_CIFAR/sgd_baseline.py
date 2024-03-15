@@ -35,6 +35,7 @@ parser.add_argument('--validation_split', type=float, default=0.1, help='validat
 parser.add_argument('--checkpointing', action='store_true', help='save the best model during training')
 parser.add_argument('--checkpoint_every', type=int, default=-1, help='save the model every x epochs')
 parser.add_argument('--hold_out_validation_split', type=float, default=0.0, help='fraction of validation set to hold out for final eval')
+parser.add_argument('--model_type', type=str, default='ResNet20v1', help='model type')
 parser.add_argument('--data_augmentation', action='store_true', help='use data augmentation')
 # 0.1 in other implementations
 parser.add_argument('--augm_shift', type=float, default=4, help='augmentation shift (px for >1 or fraction <1)')
@@ -50,6 +51,7 @@ parser.add_argument('--bootstrapping', action='store_true', help='use bootstrapp
 parser.add_argument('--num_classes', type=int, default=10, help='number of classes for CIFAR (10/100)')
 parser.add_argument('--SSE_lr', action='store_true', help='learning rate for SSE. Use with checkpoint_every for M, initial_lr for reset learning rate and number of epochs for B')
 parser.add_argument('--test_time_augmentation', action='store_true', help='use test time augmentation')
+parser.add_argument('--store_models', action='store_true', help='store all models')
 parser.add_argument('--debug', action='store_true', help='debug mode')
 
 args = parser.parse_args()
@@ -68,6 +70,7 @@ validation_split = args.validation_split
 hold_out_validation_split = args.hold_out_validation_split
 checkpointing = args.checkpointing
 checkpoint_every = args.checkpoint_every
+model_type = args.model_type
 data_augmentation = args.data_augmentation
 augm_shift = args.augm_shift
 initial_lr = args.initial_lr
@@ -79,6 +82,7 @@ bootstrapping = args.bootstrapping
 num_classes = args.num_classes
 SSE_lr = args.SSE_lr
 test_time_augmentation = args.test_time_augmentation
+store_models = args.store_models
 debug = args.debug
 
 # Subtracting pixel mean improves accuracy
@@ -98,20 +102,15 @@ subtract_pixel_mean = True
 # ResNet164 |27(18)| -----     | 94.07     | -----     | 94.54     | ---(---)
 # ResNet1001| (111)| -----     | 92.39     | -----     | 95.08+-.14| ---(---)
 # ---------------------------------------------------------------------------
-n = 3
 
-# Model version
-# Orig paper: version = 1 (ResNet v1), Improved ResNet: version = 2 (ResNet v2)
-version = 1
-
-# Computed depth from supplied model parameter n
-if version == 1:
-    depth = n * 6 + 2
-elif version == 2:
-    depth = n * 9 + 2
-
-# Model name, depth and version
-model_type = 'ResNet%dv%d' % (depth, version)
+if model_type == 'ResNet20v1':
+    depth = 20
+    version = 1
+elif model_type == 'ResNet110v1':
+    depth = 110
+    version = 1
+else:
+    raise ValueError('Unknown model type: ' + model_type)
 
 # Prepare model saving directory.
 current_date = datetime.now().strftime('%Y%m%d_%H%M%S')
@@ -302,6 +301,9 @@ scores = {'history': history.history, 'test_loss': [], 'test_accuracy': [], 'val
 if hold_out_validation_split > 0:
     scores['holdout_loss'] = []
     scores['holdout_accuracy'] = []
+if test_time_augmentation:
+    scores['tta_test_loss'] = []
+    scores['tta_test_accuracy'] = []
 
 for file in checkpoint_files:
     print('\nLoading model:', file)
@@ -309,12 +311,8 @@ for file in checkpoint_files:
     # Load the model
     model.load_weights(os.path.join(save_dir, file))
     # Score trained model.
-    if test_time_augmentation:
-        score, acc = model.evaluate(datagen.flow(x_test, y_test), verbose=0)
-        y_pred = model.predict(datagen.flow(x_test))
-    else:
-        score, acc = model.evaluate(x_test, y_test, verbose=0)
-        y_pred = model.predict(x_test)
+    score, acc = model.evaluate(x_test, y_test, verbose=0)
+    y_pred = model.predict(x_test)
     print('Test score:', score)
     print('Test accuracy:', acc)
     scores['test_loss'].append(score)
@@ -324,13 +322,21 @@ for file in checkpoint_files:
     with open(fn, 'wb') as f:
         pickle.dump(y_pred, f)
 
+    if test_time_augmentation:
+        score, acc = model.evaluate(datagen.flow(x_test, y_test), verbose=0)
+        y_pred = model.predict(datagen.flow(x_test))
+        print('TTA Test score:', score)
+        print('TTA Test accuracy:', acc)
+        scores['test_tta_loss'].append(score)
+        scores['test_tta_accuracy'].append(acc)
+        # Save predictions
+        fn = os.path.join(save_dir, file_model_name + '_test_tta_predictions.pkl')
+        with open(fn, 'wb') as f:
+            pickle.dump(y_pred, f)
+
     if validation_split > 0 or bootstrapping:
-        if test_time_augmentation:
-            val_score, val_acc = model.evaluate(datagen.flow(x_val, y_val), verbose=0)
-            y_pred = model.predict(datagen.flow(x_val))
-        else:
-            val_score, val_acc = model.evaluate(x_val, y_val, verbose=0)
-            y_pred = model.predict(x_val)
+        val_score, val_acc = model.evaluate(x_val, y_val, verbose=0)
+        y_pred = model.predict(x_val)
         print('Val score:', val_score)
         print('Val accuracy:', val_acc)
         scores['val_loss'].append(val_score)
@@ -340,12 +346,8 @@ for file in checkpoint_files:
             pickle.dump(y_pred, f)
 
         if hold_out_validation_split > 0:
-            if test_time_augmentation:
-                holdout_score, holdout_acc = model.evaluate(datagen.flow(x_val_holdout, y_val_holdout), verbose=0)
-                y_pred = model.predict(datagen.flow(x_val_holdout))
-            else:
-                holdout_score, holdout_acc = model.evaluate(x_val_holdout, y_val_holdout, verbose=0)
-                y_pred = model.predict(x_val_holdout)
+            holdout_score, holdout_acc = model.evaluate(x_val_holdout, y_val_holdout, verbose=0)
+            y_pred = model.predict(x_val_holdout)
             print('Holdout score:', holdout_score)
             print('Holdout accuracy:', holdout_acc)
             scores['holdout_loss'].append(holdout_score)
@@ -361,3 +363,8 @@ for k, v in scores['history'].items():
     scores['history'][k] = [float(x) for x in v]
 with open(fn, 'w') as f:
     json.dump(scores, f, indent=4)
+
+if not store_models:
+    # Clean up the checkpoint files
+    for file in checkpoint_files:
+        os.remove(os.path.join(save_dir, file))

@@ -1,14 +1,14 @@
 #!/bin/bash
 
 #SBATCH -o log_%a.out
-#SBATCH --time=02:00:00
+#SBATCH --time=05:00:00
 #SBATCH --gres=gpu:titanx:1
-#SBATCH --array=1-10
+#SBATCH --array=1-30
 
 # Declare output folder as variable
 folder="ResNet20_CIFAR/"
-out_folder="results/10_checkp_every_40_wenzel_0_2_val"
-max_ensemble_size=50
+out_folder="results/cifar10/resnet110/30_independent_wenzel_no_checkp_no_val"
+max_ensemble_size=30
 
 #export NVIDIA_VISIBLE_DEVICES=all
 #export CUDA_VISIBLE_DEVICES=0
@@ -27,13 +27,16 @@ python -m sgd_baseline \
     --id=$(printf "%02d" $SLURM_ARRAY_TASK_ID) \
     --seed=$SLURM_ARRAY_TASK_ID \
     --out_folder=$out_folder \
+    --validation_split=0.0 \
+    --model_type="ResNet110v1" \
     --data_augmentation \
     --nesterov \
-    --validation_split=0.2 \
-    --num_classes=10 \
+    --num_classes=10
+    #--store_models
     #--test_time_augmentation
     #--checkpointing
     #--checkpoint_every=40
+    #--hold_out_validation_split=0.5
     #--initial_lr=0.1
     #--SSE_lr
     #--bootstrapping
