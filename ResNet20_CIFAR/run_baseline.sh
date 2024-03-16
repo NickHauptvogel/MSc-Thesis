@@ -7,7 +7,7 @@
 
 # Declare output folder as variable
 folder="ResNet20_CIFAR/"
-out_folder="results/cifar100/resnet110/30_independent_wenzel_no_checkp_no_val"
+out_folder="results/cifar100/resnet110/30_independent_wenzel_no_checkp_0_2_val"
 max_ensemble_size=30
 
 #export NVIDIA_VISIBLE_DEVICES=all
@@ -27,7 +27,7 @@ python -m sgd_baseline \
     --id=$(printf "%02d" $SLURM_ARRAY_TASK_ID) \
     --seed=$SLURM_ARRAY_TASK_ID \
     --out_folder=$out_folder \
-    --validation_split=0.0 \
+    --validation_split=0.2 \
     --model_type="ResNet110v1" \
     --data_augmentation \
     --nesterov \

@@ -1,6 +1,6 @@
 import numpy as np
 import tensorflow as tf
-from keras.datasets import imdb, cifar10
+from keras.datasets import imdb, cifar10, cifar100
 import os
 import json
 import matplotlib.pyplot as plt
@@ -42,68 +42,49 @@ def get_prediction(y_pred, y_test, indices, weights, num_classes):
     return ensemble_acc_maj_vote, ensemble_acc_softmax_average, ensemble_loss
 
 
-def load_all_predictions(folder: str, max_ensemble_size: int, test_pred_file_name='test_predictions.pkl', all_pred_file_name='all_predictions.pkl'):
-    # Check whether predictions are already saved
-    if not os.path.exists(os.path.join(folder, all_pred_file_name)):
-        # Get all subdirectories
-        subdirs = sorted([f.path for f in os.scandir(folder) if f.is_dir()])
-        # Load the models
-        accs = []
-        losses = []
-        predictions = []
-        for subdir in subdirs:
-            # Find prediction files
-            pred_files = sorted([f.path for f in os.scandir(subdir) if f.name.endswith(test_pred_file_name)])
-            if len(pred_files) == 0:
-                print(f'No predictions found in {subdir}')
-                continue
-            # Find the score file
-            score_file = [f.path for f in os.scandir(subdir) if f.name.endswith('scores.json')][0]
-            # Load the scores
-            with open(score_file, 'r') as f:
-                scores = json.load(f)
+def load_all_predictions(folder: str, max_ensemble_size: int, test_pred_file_name='test_predictions.pkl'):
+    # Get all subdirectories
+    subdirs = sorted([f.path for f in os.scandir(folder) if f.is_dir()])
+    # Load the models
+    accs = []
+    losses = []
+    predictions = []
+    for subdir in subdirs:
+        # Find prediction files
+        pred_files = sorted([f.path for f in os.scandir(subdir) if f.name.endswith(test_pred_file_name)])
+        if len(pred_files) == 0:
+            print(f'No predictions found in {subdir}')
+            continue
+        # Find the score file
+        score_file = [f.path for f in os.scandir(subdir) if f.name.endswith('scores.json')][0]
+        # Load the scores
+        with open(score_file, 'r') as f:
+            scores = json.load(f)
 
-            if isinstance(scores['test_accuracy'], list) and len(pred_files) != len(scores['test_accuracy']):
-                print(f'Number of predictions and scores does not match in {subdir}')
-                sys.exit(1)
+        if isinstance(scores['test_accuracy'], list) and len(pred_files) != len(scores['test_accuracy']):
+            print(f'Number of predictions and scores does not match in {subdir}')
+            sys.exit(1)
 
-            for i, pred_file in enumerate(pred_files):
-                print(pred_file)
-                # Load the predictions
-                with open(pred_file, 'rb') as f:
-                    y_pred = pickle.load(f)
-                predictions.append(y_pred)
-                if isinstance(scores['test_accuracy'], list):
-                    accs.append(scores['test_accuracy'][i])
-                    losses.append(scores['test_loss'][i])
-                else:
-                    accs.append(scores['test_accuracy'])
-                    losses.append(scores['test_loss'])
+        for i, pred_file in enumerate(pred_files):
+            print(pred_file)
+            # Load the predictions
+            with open(pred_file, 'rb') as f:
+                y_pred = pickle.load(f)
+            predictions.append(y_pred)
+            if isinstance(scores['test_accuracy'], list):
+                accs.append(scores['test_accuracy'][i])
+                losses.append(scores['test_loss'][i])
+            else:
+                accs.append(scores['test_accuracy'])
+                losses.append(scores['test_loss'])
 
-                if len(predictions) == max_ensemble_size:
-                    break
             if len(predictions) == max_ensemble_size:
                 break
+        if len(predictions) == max_ensemble_size:
+            break
 
-        # Concatenate all predictions to single array in the dimensions (test_samples, models, classes)
-        y_pred = np.array(predictions).transpose(1, 0, 2)
-
-        # Save the predictions of all models as well as models
-        with open(os.path.join(folder, all_pred_file_name), 'wb') as f:
-            pickle.dump(y_pred, f)
-        with open(os.path.join(folder, 'accs.pkl'), 'wb') as f:
-            pickle.dump(accs, f)
-        with open(os.path.join(folder, 'losses.pkl'), 'wb') as f:
-            pickle.dump(losses, f)
-
-    else:
-        # Load the predictions
-        with open(os.path.join(folder, all_pred_file_name), 'rb') as f:
-            y_pred = pickle.load(f)
-        with open(os.path.join(folder, 'accs.pkl'), 'rb') as f:
-            accs = pickle.load(f)
-        with open(os.path.join(folder, 'losses.pkl'), 'rb') as f:
-            losses = pickle.load(f)
+    # Concatenate all predictions to single array in the dimensions (test_samples, models, classes)
+    y_pred = np.array(predictions).transpose(1, 0, 2)
 
     return y_pred, accs, losses
 
@@ -113,16 +94,27 @@ def ensemble_prediction(folder: str, max_ensemble_size: int, checkpoints_per_mod
     num_independent_models = max_ensemble_size // checkpoints_per_model
 
     if use_case=='cifar10':
-        wenzeL_acc = 0.9363
-        wenzeL_loss = 0.217
-        ylim = (0.9, 0.95)
+        baseline_acc = 0.9363
+        baseline_loss = 0.217
+        baseline_name = 'Wenzel et al. (2020)'
+        ylim = (0.9, 0.97)
         num_classes = 10
         _, (_, y_test) = cifar10.load_data()
         y_test = y_test[:, 0]
 
+    elif use_case=='cifar100':
+        baseline_acc = None
+        baseline_loss = None
+        baseline_name = ''
+        ylim = (0.75, 0.8)
+        num_classes = 100
+        _, (_, y_test) = cifar100.load_data()
+        y_test = y_test[:, 0]
+
     elif use_case=='imdb':
-        wenzeL_acc = 0.8703
-        wenzeL_loss = 0.3044
+        baseline_acc = 0.8703
+        baseline_loss = 0.3044
+        baseline_name = 'Wenzel et al. (2020)'
         ylim = (0.83, 0.88)
         num_classes = 1
         max_features = 20000
@@ -135,7 +127,7 @@ def ensemble_prediction(folder: str, max_ensemble_size: int, checkpoints_per_mod
     y_pred, accs, losses = load_all_predictions(folder, max_ensemble_size)
 
     if tta:
-        y_pred_tta, _, _ = load_all_predictions(folder, max_ensemble_size, 'test_tta_predictions.pkl', 'all_tta_predictions.pkl')
+        y_pred_tta, _, _ = load_all_predictions(folder, max_ensemble_size, 'test_tta_predictions.pkl')
 
     results = {}
     categories = ['uniform_last_per_model']
@@ -207,8 +199,8 @@ def ensemble_prediction(folder: str, max_ensemble_size: int, checkpoints_per_mod
         results[category] = (ensemble_accs_mean, ensemble_accs_std, ensemble_losses_mean, ensemble_losses_std)
 
     # Save results
-    with open(os.path.join(folder, 'ensemble_results.pkl'), 'wb') as f:
-        pickle.dump(results, f)
+    #with open(os.path.join(folder, 'ensemble_results.pkl'), 'wb') as f:
+    #    pickle.dump(results, f)
 
     # Plot the results
     fig, ax = plt.subplots(1, 1, figsize=(12, 8))
@@ -231,8 +223,9 @@ def ensemble_prediction(folder: str, max_ensemble_size: int, checkpoints_per_mod
     plt.ylim(ylim)
     # Horizontal line for the accuracy of the best model
     plt.axhline(max(accs), color='orange', linestyle='--', label='Best individual model')
-    # Horizontal line for accuracy of Wen et al. (2020), interpolated from the figure at 0.9363
-    plt.axhline(wenzeL_acc, color='grey', linestyle='--', label='Wenzel et al. (2020)')
+    if baseline_acc is not None:
+        # Horizontal line for baseline accuracy
+        plt.axhline(baseline_acc, color='grey', linestyle='--', label=baseline_name)
     plt.title('Mean ensemble accuracy (softmax average)')
     plt.xticks(np.arange(ensemble_accs_mean[0][0], ensemble_accs_mean[-1][0] + 1, 4))
     plt.grid()
@@ -255,8 +248,9 @@ def ensemble_prediction(folder: str, max_ensemble_size: int, checkpoints_per_mod
                          np.array(ensemble_losses_mean)[:, 1] + np.array(ensemble_losses_std)[:, 1], alpha=0.3)
     # Horizontal line for the loss of the best model
     plt.axhline(min(losses), color='orange', linestyle='--', label='Best individual model')
-    # Horizontal line for loss of Wen et al. (2020), interpolated from the figure at 0.217
-    plt.axhline(wenzeL_loss, color='grey', linestyle='--', label='Wenzel et al. (2020)')
+    if baseline_loss is not None:
+        # Horizontal line for baseline loss
+        plt.axhline(baseline_loss, color='grey', linestyle='--', label=baseline_name)
     plt.xlabel('Ensemble size')
     plt.ylabel('Categorical cross-entropy')
     plt.title('Mean ensemble loss')
@@ -303,13 +297,13 @@ def main():
     use_case = 'imdb'
     reps = 1
 
-    folder = 'ResNet20_CIFAR/results/50_independent_wenzel_no_checkp_no_val'
-    max_ensemble_size = 50
+    folder = 'ResNet20_CIFAR/results/cifar100/resnet110/30_independent_wenzel_no_checkp_no_val'
+    max_ensemble_size = 30
     checkpoints_per_model = 1
     pac_bayes = False
-    use_case = 'cifar10'
+    use_case = 'cifar100'
     reps = 5
-    tta = True
+    tta = False
 
 
     ensemble_prediction(folder, max_ensemble_size, checkpoints_per_model, pac_bayes, plot, use_case, reps, include_lam, tta)

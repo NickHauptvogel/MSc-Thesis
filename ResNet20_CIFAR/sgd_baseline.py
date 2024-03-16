@@ -14,7 +14,7 @@ from datetime import datetime
 import json
 import pickle
 
-from ResNet20 import resnet_v1, resnet_v2
+from ResNet import resnet_v1, resnet_v2
 
 # Add parent directory to path
 import sys
