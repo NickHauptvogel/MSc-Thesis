@@ -1,14 +1,14 @@
 #!/bin/bash
 
-#SBATCH -o log_%a.out2
+#SBATCH -o log_%a.out4
 #SBATCH --time=05:00:00
 #SBATCH --gres=gpu:titanx:1
-#SBATCH --array=1-30
+#SBATCH --array=1-10
 
 # Declare output folder as variable
 folder="ResNet20_CIFAR/"
-out_folder="results/cifar100/resnet110/30_independent_wenzel_no_checkp_0_2_val"
-max_ensemble_size=30
+out_folder="results/cifar100/resnet110/10_checkp_every_40_wenzel_0_2_val"
+max_ensemble_size=10
 
 #export NVIDIA_VISIBLE_DEVICES=all
 #export CUDA_VISIBLE_DEVICES=0
@@ -32,7 +32,9 @@ python -m sgd_baseline \
     --data_augmentation \
     --nesterov \
     --num_classes=100 \
-    --initial_lr=0.01
+    --initial_lr=0.1 \
+    --checkpointing \
+    --checkpoint_every=40
     #--store_models
     #--test_time_augmentation
     #--checkpointing
