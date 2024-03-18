@@ -162,9 +162,9 @@ def plot_pac_bayes(outpath):
 
 
 if __name__ == '__main__':
-    plot_lr_loss('ResNet20_CIFAR/results/10_sse_every_40_wenzel_0_2_val/20240312_080615_01/')
-    plot_lr_loss('ResNet20_CIFAR/results/10_checkp_every_40_wenzel_0_2_val/20240312_102307_01/')
-    #plot_pac_bayes('CNN-LSTM_IMDB/results/10_snapshot_every_epoch_wenzel_0_2_val/pac-bayes/')
+    #plot_lr_loss('ResNet20_CIFAR/results/10_sse_every_40_wenzel_0_2_val/20240312_080615_01/')
+    #plot_lr_loss('ResNet20_CIFAR/results/10_checkp_every_40_wenzel_0_2_val/20240312_102307_01/')
+    plot_pac_bayes('ResNet20_CIFAR/results/cifar100/resnet110/10_checkp_every_40_wenzel_0_2_val/pac-bayes/')
     #plot_lr_loss('ResNet20_CIFAR/results/50_independent_wenzel_no_checkp_val/20240227_162729_01/')
     #plot_pac_bayes('ResNet20_CIFAR/results/50_independent_wenzel_no_checkp_val/pac-bayes/')
     #plot_pac_bayes('ResNet20_CIFAR/results/10_sse_every_40_wenzel_0_2_val/pac-bayes/')

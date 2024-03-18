@@ -6,6 +6,7 @@ from keras.optimizers import Adam, SGD
 from keras.callbacks import ModelCheckpoint, LearningRateScheduler
 from keras.callbacks import ReduceLROnPlateau
 from keras.preprocessing.image import ImageDataGenerator
+from keras.metrics import AUC, Precision, Recall
 import numpy as np
 import argparse
 import os
@@ -20,6 +21,7 @@ from ResNet import resnet_v1, resnet_v2
 import sys
 sys.path.append('..')
 
+from loss_functions import weighted_binary_cross_entropy
 from load_data import load_cifar
 from dataset_split import split_dataset
 from lr_schedules import cifar_schedule, sse_lr_schedule, step_decay_schedule
@@ -273,13 +275,21 @@ else:
     raise ValueError('Unknown optimizer')
 
 if num_classes == 1:
-    loss_ = 'binary_crossentropy'
+    # For now: Always reweigh with constant weight
+    positive_empirical_prob = np.mean(train_loader.classes)
+    weights = {
+        0: (1 / 2) * (1 / (1 - positive_empirical_prob)),
+        1: (1 / 2) * (1 / positive_empirical_prob)
+    }
+    loss_ = weighted_binary_cross_entropy(weights)
+    metrics_ = ['accuracy', AUC(), Precision(), Recall()]
 else:
     loss_ = 'categorical_crossentropy'
+    metrics_ = ['accuracy']
 
 model.compile(loss=loss_,
               optimizer=optimizer_,
-              metrics=['accuracy'])
+              metrics=metrics_)
 
 print(model_type)
 

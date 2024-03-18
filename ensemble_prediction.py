@@ -92,6 +92,7 @@ def load_all_predictions(folder: str, max_ensemble_size: int, test_pred_file_nam
 def ensemble_prediction(folder: str, max_ensemble_size: int, checkpoints_per_model:int, pac_bayes: bool, plot: bool, use_case: str, reps: int, include_lam: bool, tta: bool = False):
 
     num_independent_models = max_ensemble_size // checkpoints_per_model
+    ylim_loss = (0., 1.)
 
     if use_case=='cifar10':
         baseline_acc = 0.9363
@@ -207,9 +208,12 @@ def ensemble_prediction(folder: str, max_ensemble_size: int, checkpoints_per_mod
     ax.grid(which='major', color='#DDDDDD', linewidth=0.8, zorder=0)
     ax.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.5)
     ax.minorticks_on()
-    
+
+    min_mean = None
     for category in categories:
         ensemble_accs_mean, ensemble_accs_std, _, _ = results[category]
+        if min_mean is None or min_mean > np.min(ensemble_accs_mean[:, 2]):
+            min_mean = np.min(ensemble_accs_mean[:, 2])
     
         #plt.plot(ensemble_accs_mean[:, 0], ensemble_accs_mean[:, 1], label='Mean accuracy majority vote')
         plt.plot(ensemble_accs_mean[:, 0], ensemble_accs_mean[:, 2], label=f'{category}')
@@ -220,6 +224,7 @@ def ensemble_prediction(folder: str, max_ensemble_size: int, checkpoints_per_mod
                          ensemble_accs_mean[:, 2] + ensemble_accs_std[:, 2], alpha=0.3)
     plt.xlabel('Ensemble size')
     plt.ylabel('Accuracy')
+    ylim = (min(min_mean - 0.01, ylim[0]), ylim[1])
     plt.ylim(ylim)
     # Horizontal line for the accuracy of the best model
     plt.axhline(max(accs), color='orange', linestyle='--', label='Best individual model')
@@ -239,8 +244,11 @@ def ensemble_prediction(folder: str, max_ensemble_size: int, checkpoints_per_mod
     ax.grid(which='minor', color='#EEEEEE', linestyle=':', linewidth=0.5)
     ax.minorticks_on()
 
+    loss_max = None
     for category in categories:
         _, _, ensemble_losses_mean, ensemble_losses_std = results[category]
+        if loss_max is None or loss_max < np.max(np.array(ensemble_losses_mean)[:, 1]):
+            loss_max = np.max(np.array(ensemble_losses_mean)[:, 1])
 
         plt.plot(*zip(*ensemble_losses_mean), label=f'({category})')
         # Std as area around the mean
@@ -253,6 +261,10 @@ def ensemble_prediction(folder: str, max_ensemble_size: int, checkpoints_per_mod
         plt.axhline(baseline_loss, color='grey', linestyle='--', label=baseline_name)
     plt.xlabel('Ensemble size')
     plt.ylabel('Categorical cross-entropy')
+    ylim_loss = (ylim_loss[0], max(loss_max + 0.01, ylim_loss[1]))
+    if not np.isfinite(ylim_loss[1]):
+        ylim_loss = (ylim_loss[0], 1.0)
+    plt.ylim(ylim_loss)
     plt.title('Mean ensemble loss')
     plt.xticks(np.arange(ensemble_losses_mean[0][0], ensemble_losses_mean[-1][0] + 1, 2))
     plt.grid()
@@ -297,12 +309,12 @@ def main():
     use_case = 'imdb'
     reps = 1
 
-    folder = 'ResNet20_CIFAR/results/cifar10/resnet110/30_independent_wenzel_no_checkp_0_2_val'
+    folder = 'ResNet20_CIFAR/results/cifar100/resnet110/30_independent_wenzel_no_checkp_0_2_val'
     max_ensemble_size = 30
     checkpoints_per_model = 1
     pac_bayes = True
-    use_case = 'cifar10'
-    reps = 5
+    use_case = 'cifar100'
+    reps = 1
     tta = False
 
 
