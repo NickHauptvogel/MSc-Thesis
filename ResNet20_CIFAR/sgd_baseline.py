@@ -212,13 +212,13 @@ elif use_case == 'retinopathy':
             horizontal_flip=True)
     else:
         train_datagen = ImageDataGenerator(rescale=1./255)
-    train_loader = train_datagen.flow_from_directory(f'{dataset_path}/train', target_size=target_size, batch_size=batch_size, subset='training')
+    train_loader = train_datagen.flow_from_directory(f'{dataset_path}/train', target_size=target_size, batch_size=batch_size, subset='training', class_mode='binary')
 
     val_datagen = ImageDataGenerator(rescale=1. / 255, validation_split=hold_out_validation_split)
-    val_loader = val_datagen.flow_from_directory(f'{dataset_path}/validation', target_size=target_size, batch_size=batch_size, subset='training', shuffle=False)
+    val_loader = val_datagen.flow_from_directory(f'{dataset_path}/validation', target_size=target_size, batch_size=batch_size, subset='training', shuffle=False, class_mode='binary')
     val_loader_x_only = val_datagen.flow_from_directory(f'{dataset_path}/validation', target_size=target_size, batch_size=batch_size, subset='training', shuffle=False, class_mode=None)
     if hold_out_validation_split > 0:
-        val_holdout_loader = val_datagen.flow_from_directory(f'{dataset_path}/validation', target_size=target_size, batch_size=batch_size, subset='validation', shuffle=False)
+        val_holdout_loader = val_datagen.flow_from_directory(f'{dataset_path}/validation', target_size=target_size, batch_size=batch_size, subset='validation', shuffle=False, class_mode='binary')
         val_holdout_loader_x_only = val_datagen.flow_from_directory(f'{dataset_path}/validation', target_size=target_size, batch_size=batch_size, subset='validation', shuffle=False, class_mode=None)
 
     test_datagen = ImageDataGenerator(rescale=1. / 255)
@@ -231,9 +231,9 @@ elif use_case == 'retinopathy':
             height_shift_range=augm_shift,
             # randomly flip images
             horizontal_flip=True)
-        test_tta_loader = test_tta_data.flow_from_directory(f'{dataset_path}/test', target_size=target_size, batch_size=batch_size, shuffle=False)
+        test_tta_loader = test_tta_data.flow_from_directory(f'{dataset_path}/test', target_size=target_size, batch_size=batch_size, shuffle=False, class_mode='binary')
         test_tta_loader_x_only = test_tta_data.flow_from_directory(f'{dataset_path}/test', target_size=target_size, batch_size=batch_size, shuffle=False, class_mode=None)
-    test_loader = test_datagen.flow_from_directory(f'{dataset_path}/test', target_size=target_size, batch_size=batch_size, shuffle=False)
+    test_loader = test_datagen.flow_from_directory(f'{dataset_path}/test', target_size=target_size, batch_size=batch_size, shuffle=False, class_mode='binary')
     test_loader_x_only = test_datagen.flow_from_directory(f'{dataset_path}/test', target_size=target_size, batch_size=batch_size, shuffle=False, class_mode=None)
 
     # Set validation split such that it is used for predictions
