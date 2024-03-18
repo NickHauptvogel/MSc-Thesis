@@ -200,7 +200,7 @@ elif use_case == 'retinopathy':
     dataset_path = '../../Datasets/Diabetic_Retinopathy'
     # Load the retinopathy data.
     num_classes = 1
-    target_size = (512, 512)
+    target_size = (256, 256)
     if data_augmentation:
         train_datagen = ImageDataGenerator(
             rescale=1./255,
@@ -247,6 +247,10 @@ print('x_val samples:', val_loader.samples)
 if hold_out_validation_split > 0:
     print('x_val_holdout samples:', val_holdout_loader.samples)
 print('x_test samples:', test_loader.samples)
+
+x_train, y_train = next(train_loader)
+print('x_train shape:', x_train.shape)
+print('y_train shape:', y_train.shape)
 
 # Save configuration to json
 fn = os.path.join(save_dir, model_name + '_config.json')
@@ -328,7 +332,6 @@ history = model.fit(
     validation_data=val_loader,
     epochs=epochs,
     verbose=0,
-    workers=4,
     callbacks=callbacks)
 
 if not checkpointing:
