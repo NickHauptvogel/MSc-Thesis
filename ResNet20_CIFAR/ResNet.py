@@ -118,8 +118,12 @@ def resnet_v1(input_shape, depth, l2_reg, num_classes=10):
     # v1 does not use BN after last shortcut connection-ReLU
     x = AveragePooling2D(pool_size=8)(x)
     y = Flatten()(x)
+    if num_classes == 1:
+        last_activation = 'sigmoid'
+    else:
+        last_activation = 'softmax'
     outputs = Dense(num_classes,
-                    activation='softmax',
+                    activation=last_activation,
                     kernel_initializer='he_normal')(y)
 
     # Instantiate model.
@@ -219,8 +223,12 @@ def resnet_v2(input_shape, depth, l2_reg, num_classes=10):
     x = Activation('relu')(x)
     x = AveragePooling2D(pool_size=8)(x)
     y = Flatten()(x)
+    if num_classes == 1:
+        last_activation = 'sigmoid'
+    else:
+        last_activation = 'softmax'
     outputs = Dense(num_classes,
-                    activation='softmax',
+                    activation=last_activation,
                     kernel_initializer='he_normal')(y)
 
     # Instantiate model.

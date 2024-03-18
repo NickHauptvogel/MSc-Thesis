@@ -15,6 +15,7 @@ import json
 import pickle
 
 from ResNet import resnet_v1, resnet_v2
+from lr_schedules import cifar_schedule, sse_lr_schedule, step_decay_schedule
 
 # Add parent directory to path
 import sys
@@ -22,7 +23,6 @@ sys.path.append('..')
 
 from load_data import load_cifar
 from dataset_split import split_dataset
-from snapshot_lr_schedule import sse_lr_schedule
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--id', type=str, default='01', help='ID of the experiment')
@@ -48,8 +48,8 @@ parser.add_argument('--optimizer', type=str, default='sgd', help='optimizer')
 parser.add_argument('--momentum', type=float, default=0.9, help='momentum for SGD')
 parser.add_argument('--nesterov', action='store_true', help='use Nesterov momentum')
 parser.add_argument('--bootstrapping', action='store_true', help='use bootstrapping')
-parser.add_argument('--num_classes', type=int, default=10, help='number of classes for CIFAR (10/100)')
-parser.add_argument('--SSE_lr', action='store_true', help='learning rate for SSE. Use with checkpoint_every for M, initial_lr for reset learning rate and number of epochs for B')
+parser.add_argument('--use_case', type=str, default='cifar10', help='Use case. Supported: cifar10, cifar100, retinopathy')
+parser.add_argument('--lr_schedule', type=str, default='cifar', help='Learning rate schedule. Supported: cifar, sse, retinopathy')
 parser.add_argument('--test_time_augmentation', action='store_true', help='use test time augmentation')
 parser.add_argument('--store_models', action='store_true', help='store all models')
 parser.add_argument('--debug', action='store_true', help='debug mode')
@@ -79,14 +79,11 @@ optimizer = args.optimizer
 momentum = args.momentum
 nesterov = args.nesterov
 bootstrapping = args.bootstrapping
-num_classes = args.num_classes
-SSE_lr = args.SSE_lr
+use_case = args.use_case
+lr_schedule = args.lr_schedule
 test_time_augmentation = args.test_time_augmentation
 store_models = args.store_models
 debug = args.debug
-
-# Subtracting pixel mean improves accuracy
-subtract_pixel_mean = True
 
 # Model parameter
 # ----------------------------------------------------------------------------
@@ -109,13 +106,16 @@ if model_type == 'ResNet20v1':
 elif model_type == 'ResNet110v1':
     depth = 110
     version = 1
+elif model_type == 'ResNet50v1':
+    depth = 50
+    version = 1
 else:
     raise ValueError('Unknown model type: ' + model_type)
 
 # Prepare model saving directory.
 current_date = datetime.now().strftime('%Y%m%d_%H%M%S')
 save_dir = os.path.join(os.getcwd(), out_folder, current_date + f'_{experiment_id}')
-model_name = f'{experiment_id}_cifar{str(num_classes)}_{model_type}'
+model_name = f'{experiment_id}_{use_case}_{model_type}'
 if not os.path.isdir(save_dir):
     os.makedirs(save_dir)
 filepath = os.path.join(save_dir, model_name + '.h5')
@@ -131,72 +131,130 @@ if gpu_devices:
   configuration['GPU'] = details.get('device_name', 'Unknown GPU')
 print(configuration)
 
-# Load the CIFAR data.
-(x_train, y_train), (x_test, y_test) = load_cifar(num_classes=num_classes, subtract_pixel_mean=subtract_pixel_mean, debug=debug)
+if use_case == 'cifar10' or use_case == 'cifar100':
+    if use_case == 'cifar10':
+        num_classes = 10
+    else:
+        num_classes = 100
+    # Load the CIFAR data.
+    (x_train, y_train), (x_test, y_test) = load_cifar(num_classes=num_classes, subtract_pixel_mean=True, debug=debug)
+    if validation_split > 0 or bootstrapping:
+        train_indices, val_indices = split_dataset(x_train.shape[0], validation_split, bootstrap=bootstrapping, random=True)
+        if hold_out_validation_split > 0.0:
+            holdout_size = int(len(val_indices) * hold_out_validation_split)
+            holdout_indices = val_indices[:holdout_size]
+            val_indices = val_indices[holdout_size:]
+            x_val_holdout, y_val_holdout = x_train[holdout_indices], y_train[holdout_indices]
+            configuration['holdout_indices'] = holdout_indices.tolist()
+            # Make sure the three sets are disjoint
+            assert len(np.intersect1d(train_indices, holdout_indices)) == 0
+            assert len(np.intersect1d(val_indices, holdout_indices)) == 0
+        assert len(np.intersect1d(train_indices, val_indices)) == 0
+        x_val, y_val = x_train[val_indices], y_train[val_indices]
+        x_train, y_train = x_train[train_indices], y_train[train_indices]
+        configuration['train_indices'] = train_indices.tolist()
+        configuration['val_indices'] = val_indices.tolist()
+    else:
+        x_val, y_val = x_test, y_test
+        print('Using test set as validation set')
+        if checkpointing:
+            print("WARNING! YOU ARE VALIDATING ON THE TEST SET AND CHECKPOINTING IS ENABLED! SELECTION BIAS")
+            sys.exit(1)
 
-# Split the training data into a training and a validation set
-if validation_split > 0 or bootstrapping:
-    train_indices, val_indices = split_dataset(x_train.shape[0], validation_split, bootstrap=bootstrapping, random=True)
-    if hold_out_validation_split > 0.0:
-        holdout_size = int(len(val_indices) * hold_out_validation_split)
-        holdout_indices = val_indices[:holdout_size]
-        val_indices = val_indices[holdout_size:]
-        x_val_holdout, y_val_holdout = x_train[holdout_indices], y_train[holdout_indices]
-        configuration['holdout_indices'] = holdout_indices.tolist()
-        # Make sure the three sets are disjoint
-        assert len(np.intersect1d(train_indices, holdout_indices)) == 0
-        assert len(np.intersect1d(val_indices, holdout_indices)) == 0
-    assert len(np.intersect1d(train_indices, val_indices)) == 0
-    x_val, y_val = x_train[val_indices], y_train[val_indices]
-    x_train, y_train = x_train[train_indices], y_train[train_indices]
-    configuration['train_indices'] = train_indices.tolist()
-    configuration['val_indices'] = val_indices.tolist()
+    if data_augmentation:
+        train_datagen = ImageDataGenerator(
+            rescale=1./255,
+            # randomly shift images horizontally
+            width_shift_range=augm_shift,
+            # randomly shift images vertically
+            height_shift_range=augm_shift,
+            # randomly flip images
+            horizontal_flip=True)
+    else:
+        train_datagen = ImageDataGenerator(rescale=1./255)
+    train_loader = train_datagen.flow(x_train, y_train, batch_size=batch_size)
+
+    val_datagen = ImageDataGenerator(rescale=1. / 255, validation_split=hold_out_validation_split)
+    val_loader = val_datagen.flow(x_val, y_val, batch_size=batch_size, shuffle=False, subset='training')
+    val_loader_x_only = val_datagen.flow(x_val, batch_size=batch_size, shuffle=False, subset='training')
+    if hold_out_validation_split > 0:
+        val_holdout_loader = val_datagen.flow(x_val_holdout, y_val_holdout, batch_size=batch_size, shuffle=False, subset='validation')
+        val_holdout_loader_x_only = val_datagen.flow(x_val_holdout, batch_size=batch_size, shuffle=False, subset='validation')
+
+    test_datagen = ImageDataGenerator(rescale=1. / 255)
+    if test_time_augmentation:
+        test_tta_data = ImageDataGenerator(
+            rescale=1. / 255,
+            # randomly shift images horizontally
+            width_shift_range=augm_shift,
+            # randomly shift images vertically
+            height_shift_range=augm_shift,
+            # randomly flip images
+            horizontal_flip=True)
+        test_tta_loader = test_tta_data.flow(x_test, y_test, batch_size=batch_size, shuffle=False)
+        test_tta_loader_x_only = test_tta_data.flow(x_test, batch_size=batch_size, shuffle=False)
+    test_loader = test_datagen.flow(x_test, y_test, batch_size=batch_size, shuffle=False)
+    test_loader_x_only = test_datagen.flow(x_test, batch_size=batch_size, shuffle=False)
+
+elif use_case == 'retinopathy':
+    dataset_path = '../../Datasets/Diabetic_Retinopathy'
+    # Load the retinopathy data.
+    num_classes = 1
+    target_size = (512, 512)
+    if data_augmentation:
+        train_datagen = ImageDataGenerator(
+            rescale=1./255,
+            # randomly shift images horizontally
+            width_shift_range=augm_shift,
+            # randomly shift images vertically
+            height_shift_range=augm_shift,
+            # randomly flip images
+            horizontal_flip=True)
+    else:
+        train_datagen = ImageDataGenerator(rescale=1./255)
+    train_loader = train_datagen.flow_from_directory(f'{dataset_path}/train', target_size=target_size, batch_size=batch_size, subset='training')
+
+    val_datagen = ImageDataGenerator(rescale=1. / 255, validation_split=hold_out_validation_split)
+    val_loader = val_datagen.flow_from_directory(f'{dataset_path}/validation', target_size=target_size, batch_size=batch_size, subset='training', shuffle=False)
+    val_loader_x_only = val_datagen.flow_from_directory(f'{dataset_path}/validation', target_size=target_size, batch_size=batch_size, subset='training', shuffle=False, class_mode=None)
+    if hold_out_validation_split > 0:
+        val_holdout_loader = val_datagen.flow_from_directory(f'{dataset_path}/validation', target_size=target_size, batch_size=batch_size, subset='validation', shuffle=False)
+        val_holdout_loader_x_only = val_datagen.flow_from_directory(f'{dataset_path}/validation', target_size=target_size, batch_size=batch_size, subset='validation', shuffle=False, class_mode=None)
+
+    test_datagen = ImageDataGenerator(rescale=1. / 255)
+    if test_time_augmentation:
+        test_tta_data = ImageDataGenerator(
+            rescale=1. / 255,
+            # randomly shift images horizontally
+            width_shift_range=augm_shift,
+            # randomly shift images vertically
+            height_shift_range=augm_shift,
+            # randomly flip images
+            horizontal_flip=True)
+        test_tta_loader = test_tta_data.flow_from_directory(f'{dataset_path}/test', target_size=target_size, batch_size=batch_size, shuffle=False)
+        test_tta_loader_x_only = test_tta_data.flow_from_directory(f'{dataset_path}/test', target_size=target_size, batch_size=batch_size, shuffle=False, class_mode=None)
+    test_loader = test_datagen.flow_from_directory(f'{dataset_path}/test', target_size=target_size, batch_size=batch_size, shuffle=False)
+    test_loader_x_only = test_datagen.flow_from_directory(f'{dataset_path}/test', target_size=target_size, batch_size=batch_size, shuffle=False, class_mode=None)
+
+    # Set validation split such that it is used for predictions
+    validation_split = val_loader.samples / (val_loader.samples + train_loader.samples)
 else:
-    x_val, y_val = x_test, y_test
-    print('Using test set as validation set')
-    if checkpointing:
-        print("WARNING! YOU ARE VALIDATING ON THE TEST SET AND CHECKPOINTING IS ENABLED! SELECTION BIAS")
-        sys.exit(1)
+    raise ValueError('Unknown use case: ' + use_case)
 
-print('x_train shape:', x_train.shape)
-print('y_train shape:', y_train.shape)
-print('x_val shape:', x_val.shape)
-print('y_val shape:', y_val.shape)
+
+print('x_train samples:', train_loader.samples)
+print('x_val samples:', val_loader.samples)
 if hold_out_validation_split > 0:
-    print('x_val_holdout shape:', x_val_holdout.shape)
-    print('y_val_holdout shape:', y_val_holdout.shape)
+    print('x_val_holdout samples:', val_holdout_loader.samples)
+print('x_test samples:', test_loader.samples)
 
 # Save configuration to json
 fn = os.path.join(save_dir, model_name + '_config.json')
 with open(fn, 'w') as f:
     json.dump(configuration, f, indent=4)
 
-def lr_schedule(epoch):
-    """Learning Rate Schedule
-
-    Learning rate is scheduled to be reduced after 80, 120, 160, 180 epochs. Expressed relatively to 200 epochs as
-    8/20, 12/20, 16/20, 18/20.
-    Called automatically every epoch as part of callbacks during training.
-
-    # Arguments
-        epoch (int): The number of epochs
-
-    # Returns
-        lr (float32): learning rate
-    """
-    lr = initial_lr
-    if epoch > int(0.9 * epochs):
-        lr *= 0.5e-3
-    elif epoch > int(0.8 * epochs):
-        lr *= 1e-3
-    elif epoch > int(0.6 * epochs):
-        lr *= 1e-2
-    elif epoch > int(0.4 * epochs):
-        lr *= 1e-1
-    return lr
-
-# Input image dimensions.
-input_shape = x_train.shape[1:]
+# Input image dimensions from train loader
+input_shape = train_loader.image_shape
 
 if version == 2:
     model = resnet_v2(input_shape=input_shape, depth=depth, l2_reg=l2_reg, num_classes=num_classes)
@@ -210,10 +268,15 @@ elif optimizer == 'sgd':
 else:
     raise ValueError('Unknown optimizer')
 
-model.compile(loss='categorical_crossentropy',
+if num_classes == 1:
+    loss_ = 'binary_crossentropy'
+else:
+    loss_ = 'categorical_crossentropy'
+
+model.compile(loss=loss_,
               optimizer=optimizer_,
               metrics=['accuracy'])
-#model.summary()
+
 print(model_type)
 
 # Prepare callbacks
@@ -233,14 +296,23 @@ if checkpointing:
                                      save_best_only=True)
     callbacks.append(checkpoint)
 
-if SSE_lr:
+if lr_schedule == 'sse':
     if checkpoint_every < 1:
-        print('ERROR: checkpoint_every must be set to a positive integer when using SSE_lr')
+        print('ERROR: checkpoint_every must be set to a positive integer when using sse lr schedule')
         sys.exit(1)
     M = epochs // checkpoint_every
     lr_scheduler = LearningRateScheduler(lambda epoch: sse_lr_schedule(epoch, B=epochs, M=M, initial_lr=initial_lr))
-else:
-    lr_scheduler = LearningRateScheduler(lr_schedule)
+elif lr_schedule == 'cifar':
+    lr_scheduler = LearningRateScheduler(lambda epoch: cifar_schedule(epoch, initial_lr, epochs))
+elif lr_schedule == 'retinopathy':
+    # For now: Use values from the paper
+    decay_epochs = [
+        (int(start_epoch_str) * epochs) // 90
+        for start_epoch_str in ['30', '60']
+    ]
+    decay_ratio = 0.2
+    warmup_epochs = 1
+    lr_scheduler = LearningRateScheduler(lambda epoch: step_decay_schedule(epoch, initial_lr, decay_ratio, decay_epochs, warmup_epochs))
 
 #lr_reducer = ReduceLROnPlateau(factor=np.sqrt(0.1),
 #                               cooldown=0,
@@ -251,44 +323,23 @@ tqdm_callback = TqdmCallback(verbose=0)
 
 callbacks.extend([lr_scheduler, tqdm_callback])
 
-datagen = ImageDataGenerator(
-    # randomly shift images horizontally
-    width_shift_range=augm_shift,
-    # randomly shift images vertically
-    height_shift_range=augm_shift,
-    # randomly flip images
-    horizontal_flip=True)
-
-if not data_augmentation:
-    print('Not using data augmentation.')
-    # Run training, with or without data augmentation.
-    history = model.fit(x_train, y_train,
-        batch_size=batch_size,
-        epochs=epochs,
-        validation_data=(x_val, y_val),
-        shuffle=True,
-        verbose=0,
-        callbacks=callbacks)
-else:
-    print('Using real-time data augmentation.')
-    # This will do preprocessing and realtime data augmentation
-    history = model.fit(
-        datagen.flow(x_train, y_train, batch_size=batch_size),
-        validation_data=(x_val, y_val),
-        epochs=epochs,
-        verbose=0,
-        workers=4,
-        callbacks=callbacks)
+history = model.fit(
+    train_loader,
+    validation_data=val_loader,
+    epochs=epochs,
+    verbose=0,
+    workers=4,
+    callbacks=callbacks)
 
 if not checkpointing:
-    # Save the model
+    # Save the model in the end
     model.save(filepath)
 
 # Get all model checkpoint files
 checkpoint_files = sorted([f for f in os.listdir(save_dir) if f.startswith(model_name) and f.endswith('.h5')])
 if checkpoint_every > 0:
     # Clean up the checkpoint files to include every x epochs
-    for  i, file in enumerate(checkpoint_files):
+    for i, file in enumerate(checkpoint_files):
         if (i+1) % checkpoint_every != 0:
             os.remove(os.path.join(save_dir, file))
 
@@ -311,8 +362,8 @@ for file in checkpoint_files:
     # Load the model
     model.load_weights(os.path.join(save_dir, file))
     # Score trained model.
-    score, acc = model.evaluate(x_test, y_test, verbose=0)
-    y_pred = model.predict(x_test)
+    score, acc = model.evaluate(test_loader, verbose=0)
+    y_pred = model.predict(test_loader_x_only)
     print('Test score:', score)
     print('Test accuracy:', acc)
     scores['test_loss'].append(score)
@@ -323,8 +374,8 @@ for file in checkpoint_files:
         pickle.dump(y_pred, f)
 
     if test_time_augmentation:
-        score, acc = model.evaluate(datagen.flow(x_test, y_test), verbose=0)
-        y_pred = model.predict(datagen.flow(x_test))
+        score, acc = model.evaluate(test_tta_loader, verbose=0)
+        y_pred = model.predict(test_tta_loader_x_only)
         print('TTA Test score:', score)
         print('TTA Test accuracy:', acc)
         scores['test_tta_loss'].append(score)
@@ -335,8 +386,8 @@ for file in checkpoint_files:
             pickle.dump(y_pred, f)
 
     if validation_split > 0 or bootstrapping:
-        val_score, val_acc = model.evaluate(x_val, y_val, verbose=0)
-        y_pred = model.predict(x_val)
+        val_score, val_acc = model.evaluate(val_loader, verbose=0)
+        y_pred = model.predict(val_loader_x_only)
         print('Val score:', val_score)
         print('Val accuracy:', val_acc)
         scores['val_loss'].append(val_score)
@@ -346,8 +397,8 @@ for file in checkpoint_files:
             pickle.dump(y_pred, f)
 
         if hold_out_validation_split > 0:
-            holdout_score, holdout_acc = model.evaluate(x_val_holdout, y_val_holdout, verbose=0)
-            y_pred = model.predict(x_val_holdout)
+            holdout_score, holdout_acc = model.evaluate(val_holdout_loader, verbose=0)
+            y_pred = model.predict(val_holdout_loader_x_only)
             print('Holdout score:', holdout_score)
             print('Holdout accuracy:', holdout_acc)
             scores['holdout_loss'].append(holdout_score)
