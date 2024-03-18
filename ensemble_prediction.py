@@ -297,11 +297,11 @@ def main():
     use_case = 'imdb'
     reps = 1
 
-    folder = 'ResNet20_CIFAR/results/cifar100/resnet110/30_independent_wenzel_no_checkp_no_val'
+    folder = 'ResNet20_CIFAR/results/cifar10/resnet110/30_independent_wenzel_no_checkp_0_2_val'
     max_ensemble_size = 30
     checkpoints_per_model = 1
-    pac_bayes = False
-    use_case = 'cifar100'
+    pac_bayes = True
+    use_case = 'cifar10'
     reps = 5
     tta = False
 
