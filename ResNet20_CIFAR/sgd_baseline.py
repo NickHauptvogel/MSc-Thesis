@@ -15,7 +15,6 @@ import json
 import pickle
 
 from ResNet import resnet_v1, resnet_v2
-from lr_schedules import cifar_schedule, sse_lr_schedule, step_decay_schedule
 
 # Add parent directory to path
 import sys
@@ -23,6 +22,7 @@ sys.path.append('..')
 
 from load_data import load_cifar
 from dataset_split import split_dataset
+from lr_schedules import cifar_schedule, sse_lr_schedule, step_decay_schedule
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--id', type=str, default='01', help='ID of the experiment')
