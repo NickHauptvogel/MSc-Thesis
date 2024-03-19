@@ -97,7 +97,7 @@ if evaluate_model is not None:
     out_folder = evaluate_model
     experiment_id = configuration['id']
     seed = configuration['seed']
-    batch_size = 32
+    batch_size = configuration['batch_size']
     epochs = 0
     checkpointing = False
     checkpoint_every = -1
