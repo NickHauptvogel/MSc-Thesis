@@ -28,8 +28,8 @@ def load_cifar(num_classes, subtract_pixel_mean, debug):
         y_test = y_test[:100]
 
     # Normalize data.
-    x_train = x_train.astype('float32')
-    x_test = x_test.astype('float32')
+    x_train = x_train.astype('float32') / 255
+    x_test = x_test.astype('float32') / 255
 
     # If subtract pixel mean is enabled
     if subtract_pixel_mean:

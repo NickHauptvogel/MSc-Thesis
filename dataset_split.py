@@ -18,7 +18,7 @@ def split_dataset(train_samples, validation_split=0.0, random=True, bootstrap=Fa
         train_indices = indices[:-split]
         validation_indices = indices[-split:]
 
-    return train_indices, validation_indices
+    return train_indices.tolist(), validation_indices.tolist()
 
 
 if __name__ == '__main__':
