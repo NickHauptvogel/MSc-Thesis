@@ -1,12 +1,12 @@
 #!/bin/bash
 
-#SBATCH -o log_%a.out1
-#SBATCH --time=24:00:00
+#SBATCH -o log_%a.out2
+#SBATCH --time=4-00:00:00
 #SBATCH --gres=gpu:titanx:1
 #SBATCH --array=1-10
 
 # Declare output folder as variable
-out_folder="results/retinopathy/resnet50/10_independent_smalllr_full_val"
+out_folder="results/retinopathy/resnet50/10_independent_smalllr_full_val_512"
 max_ensemble_size=10
 
 #export NVIDIA_VISIBLE_DEVICES=all
@@ -26,7 +26,7 @@ python -m sgd_baseline \
     --id=$(printf "%02d" $SLURM_ARRAY_TASK_ID) \
     --seed=$SLURM_ARRAY_TASK_ID \
     --out_folder=$out_folder \
-    --batch_size=32 \
+    --batch_size=8 \
     --epochs=90 \
     --model_type="ResNet50v1" \
     --initial_lr=0.0023072 \

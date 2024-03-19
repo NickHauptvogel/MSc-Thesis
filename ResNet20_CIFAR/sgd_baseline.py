@@ -241,7 +241,7 @@ elif use_case == 'retinopathy':
     dataset_path = '../../Datasets/Diabetic_Retinopathy'
     # Load the retinopathy data.
     num_classes = 1
-    target_size = (256, 256)
+    target_size = (512, 512)
     if data_augmentation:
         train_datagen = ImageDataGenerator(
             rescale=1./255,
