@@ -47,6 +47,7 @@ parser.add_argument('--initial_lr', type=float, default=0.1, help='initial learn
 parser.add_argument('--l2_reg', type=float, default=0.002, help='l2 regularization')
 # Adam in other implementations
 parser.add_argument('--optimizer', type=str, default='sgd', help='optimizer')
+parser.add_argument('--accumulation_steps', type=int, default=1, help='gradient accumulation steps')
 parser.add_argument('--momentum', type=float, default=0.9, help='momentum for SGD')
 parser.add_argument('--nesterov', action='store_true', help='use Nesterov momentum')
 parser.add_argument('--bootstrapping', action='store_true', help='use bootstrapping')
@@ -75,6 +76,7 @@ augm_shift = args.augm_shift
 initial_lr = args.initial_lr
 l2_reg = args.l2_reg
 optimizer = args.optimizer
+accumulation_steps = args.accumulation_steps
 momentum = args.momentum
 nesterov = args.nesterov
 bootstrapping = args.bootstrapping
@@ -302,9 +304,9 @@ with open(fn, 'w') as f:
 input_shape = x_train.shape[1:]
 
 if version == 2:
-    model = resnet_v2(input_shape=input_shape, depth=depth, l2_reg=l2_reg, num_classes=num_classes)
+    model = resnet_v2(input_shape=input_shape, depth=depth, l2_reg=l2_reg, num_classes=num_classes, accum_steps=accumulation_steps)
 else:
-    model = resnet_v1(input_shape=input_shape, depth=depth, l2_reg=l2_reg, num_classes=num_classes)
+    model = resnet_v1(input_shape=input_shape, depth=depth, l2_reg=l2_reg, num_classes=num_classes, accum_steps=accumulation_steps)
 
 if optimizer == 'adam':
     optimizer_ = Adam(learning_rate=initial_lr)

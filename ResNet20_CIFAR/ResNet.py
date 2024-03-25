@@ -50,7 +50,7 @@ def resnet_layer(inputs,
     return x
 
 
-def resnet_v1(input_shape, depth, l2_reg, num_classes=10):
+def resnet_v1(input_shape, depth, l2_reg, num_classes=10, accum_steps=1):
     """ResNet Version 1 Model builder [a]
 
     Stacks of 2 x (3 x 3) Conv2D-BN-ReLU
@@ -128,10 +128,15 @@ def resnet_v1(input_shape, depth, l2_reg, num_classes=10):
 
     # Instantiate model.
     model = Model(inputs=inputs, outputs=outputs)
+    if accum_steps > 1:
+        from gradient_accumulator import GradientAccumulateModel
+        from gradient_accumulator.utils import replace_batchnorm_layers
+        model = replace_batchnorm_layers(model, accum_steps=accum_steps)
+        model = GradientAccumulateModel(accum_steps=accum_steps, inputs=model.input, outputs=model.output)
     return model
 
 
-def resnet_v2(input_shape, depth, l2_reg, num_classes=10):
+def resnet_v2(input_shape, depth, l2_reg, num_classes=10, accum_steps=1):
     """ResNet Version 2 Model builder [b]
 
     Stacks of (1 x 1)-(3 x 3)-(1 x 1) BN-ReLU-Conv2D or also known as
@@ -233,4 +238,9 @@ def resnet_v2(input_shape, depth, l2_reg, num_classes=10):
 
     # Instantiate model.
     model = Model(inputs=inputs, outputs=outputs)
+    if accum_steps > 1:
+        from gradient_accumulator import GradientAccumulateModel
+        from gradient_accumulator.utils import replace_batchnorm_layers
+        model = replace_batchnorm_layers(model, accum_steps=accum_steps)
+        model = GradientAccumulateModel(accum_steps=accum_steps, inputs=model.input, outputs=model.output)
     return model
