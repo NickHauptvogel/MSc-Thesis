@@ -1,12 +1,12 @@
 #!/bin/bash
 
-#SBATCH -o log_%a.out2
-#SBATCH --time=4-00:00:00
+#SBATCH -o log_%a.out4
+#SBATCH --time=6-00:00:00
 #SBATCH --gres=gpu:titanx:1
 #SBATCH --array=1-10
 
 # Declare output folder as variable
-out_folder="results/retinopathy/resnet50/10_independent_smalllr_full_val_512"
+out_folder="results/retinopathy/resnet50/10_independent_smalllr_full_val_512_fullbatch"
 max_ensemble_size=10
 
 #export NVIDIA_VISIBLE_DEVICES=all
@@ -31,7 +31,9 @@ python -m sgd_baseline \
     --model_type="ResNet50v1" \
     --initial_lr=0.0023072 \
     --l2_reg=0.00010674 \
-    --momentum=0.9901533 \
-    --nesterov \
+    --checkpointing \
+    --hold_out_validation_split=0.8 \
+    --optimizer=adam \
     --use_case="retinopathy" \
-    --lr_schedule="retinopathy"
+    --lr_schedule="retinopathy" \
+    --accumulation_steps=4
